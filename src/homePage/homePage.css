@@ -3,10 +3,27 @@
 **/
 .nav{
   background:#EEEEEE;
-  width:500;
-  height:50px;
+  width:100%;
+  height:80px;
 }
 
+
+.float-right {
+  display: flex;
+  float: left;
+  width: 49%;
+  overflow: hidden;
+  justify-content: space-between;
+}
+.searchbar {
+  width: 70%;
+  border-radius: 30px;
+  margin: 15px;
+  z-index: 3;
+}
+.searchbar:focus {
+  outline: none;
+}
 /**
 content class make all the content put onto the right half end
 **/
@@ -28,7 +45,16 @@ the below code makes all the button borderless
 this code snipt make components respnsive when mouse isover them
 **/
 .content>*:hover{
-  color: white;
-  background: black;
+  border-radius: 10px;
+  background: rgb(232, 232, 235);
+}
+
+/*left navigation or the filter page */
+.left-content {
+  height: 800px;
+  width: 342px;
+  border: 2px solid blue;
+  margin-top: 40px;
+  margin-left: 20px;
 }
 
