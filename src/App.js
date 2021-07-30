@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from "react";
 import Post from "./component/Post";
-import CommentJs from "./component/Comment";
+import Comment from "./component/Comment";
+import "./Styles/comment.css";
 import Detail from "./component/Detail";
 import AboutUs from "./component/AboutUs";
 import HomePage from "./component/HomePage";
@@ -20,7 +21,4 @@ export default function App () {
             {/*<HomeRegistrationForm/>*/}
             {/*<Login/>*/}
             {/*<SignUp/>*/}
-
-        </div>
-    )
-}
+export default App;
