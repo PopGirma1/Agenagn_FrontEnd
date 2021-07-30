@@ -1,27 +1,38 @@
-import React from 'react';
+import React, { Component } from "react";
 import Post from "./component/Post";
 import Comment from "./component/Comment";
-import './Styles/comment.css'
+import "./Styles/comment.css";
 import Detail from "./component/Detail";
 import AboutUs from "./component/AboutUs";
 import HomePage from "./component/HomePage";
 import Login from "./component/Login";
 import SignUp from "./component/SignUp";
-import Filter from "./component/Filter";
+//import Filter from "./component/Filter";
+import Home from "./homePage/Home";
 
-export default function App () {
-    return(
-        <div >
-          {/*  <Post/>*/}
+class App extends Component {
+	state = {};
 
-            {/*<Comment/>*/}
-            <Filter/>
-            {/*<Detail/>*/}
-            {/*<AboutUs/>*/}
-            {/*<HomePage/>*/}
-            {/*<Login/>*/}
-            {/*<SignUp/>*/}
+	findText = (text) => {
+		console.log(text);
+	};
 
-        </div>
-    )
+	render() {
+		return (
+			<div>
+				<Home findText={this.findText} />
+				{/*  <Post/>*/}
+
+				{/*<Comment/>*/}
+
+				{/*<Detail/>*/}
+				{/*<AboutUs/>*/}
+				{/*<HomePage/>*/}
+				{/*<Login/>*/}
+				{/*<SignUp/>*/}
+			</div>
+		);
+	}
 }
+
+export default App;
