@@ -51,8 +51,12 @@ Home.propType = {
 const styleForm = {
 	overflow: "hidden",
 	margin: "3em",
+	marginRight: "3em",
 	position: "absolute",
 	top: "50%",
+	width: "90%",
+	display: "flex",
+	justifiedContent: "space-around",
 };
 
 const styleSearchBox = {
