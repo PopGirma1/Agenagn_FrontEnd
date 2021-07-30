@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import propType from "prop-types";
+import Image from "./images/gojo.jpeg";
 
 class Home extends Component {
 	state = {
@@ -22,22 +23,30 @@ class Home extends Component {
 
 	render() {
 		return (
-			<form className="" onSubmit={this.onSubmit} style={styleForm}>
-				<input
-					type="text"
-					name="inputText"
-					value={this.state.inputText}
-					onChange={this.onChange}
-					placeholder="type house you want ..."
-					style={styleSearchBox}
+			<div className="container" style={stylingContainer}>
+				<img
+					src={Image}
+					alt="image not found "
+					style={stylingImage}
+					className="home-image"
 				/>
-				<input
-					type="submit"
-					value="Submit"
-					className="btn"
-					style={styleSubmitButton}
-				/>
-			</form>
+				<form className="form" onSubmit={this.onSubmit} style={styleForm}>
+					<input
+						type="text"
+						name="inputText"
+						value={this.state.inputText}
+						onChange={this.onChange}
+						placeholder="type house you want ..."
+						style={styleSearchBox}
+					/>
+					<input
+						type="submit"
+						value="Submit"
+						className="btn"
+						style={styleSubmitButton}
+					/>
+				</form>
+			</div>
 		);
 	}
 }
@@ -50,11 +59,9 @@ Home.propType = {
 
 const styleForm = {
 	overflow: "hidden",
-	margin: "3em",
-	marginRight: "3em",
-	position: "absolute",
-	top: "50%",
-	width: "90%",
+	marginRight: "auto",
+	marginLeft: "auto",
+	width: "50%",
 	display: "flex",
 	justifiedContent: "space-around",
 };
@@ -62,7 +69,10 @@ const styleForm = {
 const styleSearchBox = {
 	padding: "5px",
 	flex: "8",
-	boxShadow: "0 0 2px 8px rgba(0,0,0,0.5)",
+	boxShadow: "0 0 4px 16px rgba(0,0,0,0.5)",
+	borderRadius: "10px",
+	outline: "none",
+	border: "2px solid #333",
 };
 
 const styleSubmitButton = {
@@ -70,6 +80,23 @@ const styleSubmitButton = {
 	background: "#333",
 	color: "#fff",
 	margin: "0 2em",
+};
+
+const stylingImage = {
+	width: "25%",
+	height: "auto",
+	backgroundRepeat: "no-repeat",
+	display: "block",
+	marginLeft: "auto",
+	marginRight: "auto",
+	outline: "none",
+};
+
+const stylingContainer = {
+	width: "100%",
+	display: "flex",
+	flexDirection: "column",
+	justifiedContent: "space-around",
 };
 
 export default Home;
