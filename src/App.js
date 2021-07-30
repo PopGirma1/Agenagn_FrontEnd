@@ -7,32 +7,18 @@ import AboutUs from "./component/AboutUs";
 import HomePage from "./component/HomePage";
 import Login from "./component/Login";
 import SignUp from "./component/SignUp";
-//import Filter from "./component/Filter";
-import Home from "./homePage/Home";
+import Filter from "./component/Filter";
 
-class App extends Component {
-	state = {};
 
-	findText = (text) => {
-		console.log(text);
-	};
-
-	render() {
-		return (
-			<div>
-				<Home findText={this.findText} />
-				{/*  <Post/>*/}
-
-				{/*<Comment/>*/}
-
-				{/*<Detail/>*/}
-				{/*<AboutUs/>*/}
-				{/*<HomePage/>*/}
-				{/*<Login/>*/}
-				{/*<SignUp/>*/}
-			</div>
-		);
-	}
-}
-
+export default function App () {
+    return(
+        <div>
+            {/*<Post/>*/}
+            <Filter/>
+            {/*<CommentJs/>*/}
+            {/*<Detail/>*/}
+            {/*<AboutUs/>*/}
+            {/*<HomeRegistrationForm/>*/}
+            {/*<Login/>*/}
+            {/*<SignUp/>*/}
 export default App;
