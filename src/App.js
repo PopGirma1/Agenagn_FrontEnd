@@ -14,6 +14,7 @@ class App extends Component {
 	state = {};
 
 	findText = (text) => {
+		/**this method request to the database and and fetch data from it */
 		console.log(text);
 	};
 
