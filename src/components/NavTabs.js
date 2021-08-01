@@ -60,6 +60,7 @@ class NavTabs extends React.Component {
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>Courses</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
+                                <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
                             </List>
 
                         </Grid>
