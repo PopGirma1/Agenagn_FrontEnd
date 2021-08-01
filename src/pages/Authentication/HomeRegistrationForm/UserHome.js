@@ -16,8 +16,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import HouseIcon from '@material-ui/icons/House';
 
-import Checkout from './HomeRegistrationForm/Checkout'
-import Profile from './UserProfile/Profile'
+import Checkout from './Checkout'
+import Profile from '../../Home/UserProfile/Profile'
 
 const drawerWidth = 240;
 
