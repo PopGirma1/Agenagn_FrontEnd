@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import   '../Styles/comment.css';
- export default class CommentBox extends React.Component {
+import './Styles/comment.css';
+export default class CommentBox extends React.Component {
     constructor() {
         super();
 
@@ -70,9 +70,9 @@ import   '../Styles/comment.css';
         });
     }
     /*deleteComment(id){
-        this.setState({comments})
-    }
-*/
+            this.setState({comments})
+        }
+    */
     _getCommentsTitle(commentCount) {
         if (commentCount === 0) {
             return 'No comments yet';
@@ -100,19 +100,21 @@ class CommentForm extends React.Component {
     } // end render
 
     _handleSubmit(event) {
-        event.preventDefault();   // prevents page from reloading on submit
+        event.preventDefault(); // prevents page from reloading on submit
         let author = this._author;
         let body = this._body;
         this.props.addComment(author.value, body.value);
     }
 } // end CommentForm component
 
- class CommentBoxe extends React.Component {
+class CommentBoxe extends React.Component {
     render () {
         return(
             <div className="comment">
                 <p className="comment-header">{this.props.author}</p>
                 <p className="comment-body">- {this.props.body}</p>
+                13:15
+
                 <div className="comment-footer">
                     <a href="#" className="comment-footer-delete" onClick={()=>this._deleteComment(this.props.key)}>Delete CommentBox</a>
                 </div>
@@ -125,4 +127,3 @@ class CommentForm extends React.Component {
         alert("-- DELETE CommentBox Functionality COMMING SOON...");
     }
 }
-

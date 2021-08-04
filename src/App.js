@@ -1,39 +1,50 @@
-import React, { Component } from "react";
-import Post from "./component/Post";
-import Comment from "./component/Comment";
-import "./Styles/comment.css";
-import Detail from "./component/Detail";
-import AboutUs from "./component/AboutUs";
-import HomePage from "./component/HomePage";
-import Login from "./component/Login";
-import SignUp from "./component/SignUp";
-//import Filter from "./component/Filter";
-import Home from "./homePage/Home";
 
-class App extends Component {
-	state = {};
+import React from 'react';
+import {Link, Route, HashRouter, BrowserRouter} from "react-router-dom";
+import {withStyles, Container} from "@material-ui/core";
 
-	findText = (text) => {
-		/**this method request to the database and and fetch data from it */
-		console.log(text);
-	};
+import NavTabs from './components/NavTabs'
+import MainBody from './pages/Home'
+import Detail from './pages/Details/'
+import LoginRegister from './pages/Authentication/LoginRegister'
+import UserHome from './pages/Authentication/HomeRegistrationForm/UserHome'
+import Footer from './components/Footer'
+import Comment from './pages/Comment'
 
-	render() {
-		return (
-			<div>
-				<Home findText={this.findText} />
-				{/*  <Post/>*/}
+const useStyles = ((theme) => ({
+    root: {
 
-				{/*<Comment/>*/}
+    },
+    mainParts: {
+        marginTop: '100px'
+    },
+}));
 
-				{/*<Detail/>*/}
-				{/*<AboutUs/>*/}
-				{/*<HomePage/>*/}
-				{/*<Login/>*/}
-				{/*<SignUp/>*/}
-			</div>
-		);
-	}
+class App extends React.Component {
+    render() {
+        const {classes} = this.props;
+
+        return (
+            <div className={classes.root}>
+
+                <BrowserRouter basename={process.env.PUBLIC_URL}>
+                    <NavTabs/>
+                    <div className={classes.mainParts}>
+                        <Route  path='/' exact component={MainBody}/>
+                        <Route  path={process.env.PUBLIC_URL + '/detail'} component={Detail}/>
+                        <Route  path={process.env.PUBLIC_URL + '/login'} component={LoginRegister}/>
+                        <Route  path='/home' component={UserHome}/>
+                        <Route  path='/comment' component={Comment}/>
+                    </div>
+                </BrowserRouter >
+                <Footer/>
+
+            </div>
+        );
+    }
+
+
+
 }
 
-export default App;
+export default withStyles(useStyles)(App);
