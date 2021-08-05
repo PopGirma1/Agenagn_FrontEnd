@@ -1,6 +1,6 @@
 
 
-import signin from './Signin';
+import App from './App';
 
 /** 
 index js is the default react structuring 
