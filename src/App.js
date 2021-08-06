@@ -9,7 +9,7 @@ import LoginRegister from "./pages/Authentication/LoginRegister";
 import UserHome from "./pages/Authentication/HomeRegistrationForm/UserHome";
 import Footer from "./components/Footer";
 import Comment from "./pages/Comment";
-
+import DHeader from "./pages/Dashboard/Header";
 const useStyles = (theme) => ({
 	root: {},
 	mainParts: {
@@ -35,6 +35,10 @@ class App extends React.Component {
 							path={process.env.PUBLIC_URL + "/login"}
 							component={LoginRegister}
 						/>
+						<Route
+							path={process.env.PUBLIC_URL + "/header"}
+							component={DHeader}
+						/>
 						<Route path="/home" component={UserHome} />
 						<Route path="/comment" component={Comment} />
 					</div>
@@ -45,4 +49,4 @@ class App extends React.Component {
 	}
 }
 
-export default withStyles(useStyles)(App);
+export default withStyles(useStyles, { withTheme: true })(App);
