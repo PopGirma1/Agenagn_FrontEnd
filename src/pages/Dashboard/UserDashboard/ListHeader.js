@@ -17,6 +17,7 @@ const headingStyle = {
 	justifyContent: "space-between",
 	fontSize: "20px",
 	marginTop: "30px",
+	marginBottom: "30px",
 	background: "#eee",
 };
 
