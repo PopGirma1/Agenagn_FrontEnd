@@ -26,7 +26,7 @@ const useStyles = (theme) => ({
 	},
 });
 
-class Userdashboard extends Component {
+class UserDashboard extends Component {
 	state = {
 		view: {
 			display: "none",
@@ -81,7 +81,13 @@ class Userdashboard extends Component {
 	};
 
 	edit = (id) => {
-		console.log(id);
+		this.state.data.map((data) => {
+			if (data.id === id) {
+				this.setState({
+					view: { display: "flex" },
+				});
+			}
+		});
 	};
 
 	view = (id) => {
@@ -154,4 +160,4 @@ class Userdashboard extends Component {
 	}
 }
 
-export default withStyles(useStyles, { withTheme: true })(Userdashboard);
+export default withStyles(useStyles, { withTheme: true })(UserDashboard);
