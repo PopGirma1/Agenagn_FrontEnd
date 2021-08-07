@@ -8,6 +8,9 @@ class Itemlist extends Component {
 			<UserDashboardInfo
 				userData={datas}
 				key={datas.id}
+				reviewStatus={this.props.reviewStatus}
+				edit={this.props.edit}
+				view={this.props.view}
 				delete={this.props.delete}
 			/>
 		));
@@ -16,6 +19,5 @@ class Itemlist extends Component {
 
 Itemlist.PropTypes = {
 	data: PropTypes.array.isRequired,
-	delete: PropTypes.func.isRequired,
 };
 export default Itemlist;

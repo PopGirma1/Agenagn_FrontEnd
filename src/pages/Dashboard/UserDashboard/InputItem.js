@@ -23,9 +23,8 @@ class InputItem extends Component {
 	};
 
 	onSubmit = (e) => {
-		const { location, bedrooms } = this.state;
 		e.preventDefault();
-		this.props.Submit(location, bedrooms);
+		this.props.Submit(this.state.location, this.state.bedrooms);
 		this.setState({
 			location: "",
 			bedrooms: "",
@@ -37,6 +36,7 @@ class InputItem extends Component {
 			[e.target.name]: e.target.value,
 		});
 	};
+
 	render() {
 		const { classes } = this.props;
 		const { id } = this.props.userData;
@@ -55,7 +55,7 @@ class InputItem extends Component {
 						name="location"
 						value={this.state.location}
 						onChange={this.onChange}
-						style={{ marginRight: "3px" }}
+						style={{ margin: "0 3px", flex: "2" }}
 					/>
 					<TextField
 						id="filled-basic"
@@ -64,10 +64,22 @@ class InputItem extends Component {
 						name="bedrooms"
 						value={this.state.bedrooms}
 						onChange={this.onChange}
-						style={{ marginLeft: "3px" }}
+						style={{ margin: "0 2px", flex: "2" }}
+					/>
+					<TextField
+						id="filled-basic"
+						variant="filled"
+						type="submit"
+						value="Submit"
+						style={{
+							marginLeft: "3px",
+							flex: "1",
+							background: "#333",
+							fontStyle: "#fff",
+						}}
 					/>
 				</form>
-				<Button style={buttonStyle}>
+				<Button style={buttonStyle} onClick={this.props.cancel}>
 					<CloseIcon color="primary" style={styleClosingIcon} />
 				</Button>
 			</div>
@@ -83,6 +95,11 @@ const styling = {
 	margin: "auto",
 	display: "flex",
 };
+const buttonStyle = {
+	width: "8px",
+	height: "30px",
+	display: "block",
+};
 
 const stylingForm = {
 	display: "flex",
@@ -95,14 +112,11 @@ const styleClosingIcon = {
 	top: "0",
 	right: "0",
 };
-const buttonStyle = {
-	width: "8px",
-	height: "30px",
-};
 
 InputItem.PropTypes = {
 	userData: PropTypes.array.isRequired,
 	Submit: PropTypes.func.isRequired,
+	cancel: PropTypes.func.isRequired,
 };
 
 export default withStyles(useStyles, { withTheme: true })(InputItem);

@@ -7,6 +7,7 @@ import UserInfo from "./UserInfo";
 import Itemlist from "./Itemlist";
 import ListHeader from "./ListHeader";
 import InputItem from "./InputItem";
+import uuid from "uuid";
 
 const useStyles = (theme) => ({
 	root: {
@@ -27,27 +28,30 @@ const useStyles = (theme) => ({
 
 class Userdashboard extends Component {
 	state = {
+		view: {
+			display: "none",
+		},
 		data: [
 			{
 				id: 1,
 				location: "bole",
 				bedroom: 2,
 				listingStatus: "active",
-				reviewStatus: "submited",
+				reviewStatus: "submitted",
 			},
 			{
 				id: 2,
 				location: "bole",
 				bedroom: 2,
 				listingStatus: "active",
-				reviewStatus: "submited",
+				reviewStatus: "submitted",
 			},
 			{
 				id: 3,
 				location: "bole",
 				bedroom: 2,
 				listingStatus: "active",
-				reviewStatus: "submited",
+				reviewStatus: "submitted",
 			},
 		],
 	};
@@ -58,8 +62,44 @@ class Userdashboard extends Component {
 		});
 	};
 
-	Submit = (location, bedrooms) => {
-		console.log(location, bedrooms);
+	Submit = (locations, bedrooms) => {
+		const { id, location, bedroom, listingStatus, reviewStatus } = this.state;
+		const newList = {
+			id: uuid.v4(),
+			location: locations,
+			bedroom: bedrooms,
+			listingStatus: "active",
+			reviewStatus: "submitted",
+		};
+		this.setState({
+			data: [...this.state.data, newList],
+		});
+	};
+
+	reviewStatus = (id) => {
+		console.log(id);
+	};
+
+	edit = (id) => {
+		console.log(id);
+	};
+
+	view = (id) => {
+		console.log(id);
+	};
+
+	AddHouse = () => {
+		this.setState({
+			view: { display: "flex" },
+		});
+	};
+
+	cancel = () => {
+		this.setState({
+			view: {
+				display: "none",
+			},
+		});
 	};
 
 	render() {
@@ -75,15 +115,33 @@ class Userdashboard extends Component {
 						</span>
 
 						<span>
-							<Button color="primary" background="primary">
+							<Button
+								color="primary"
+								background="primary"
+								onClick={this.AddHouse}>
 								<Add color="primary" />
 								Add new house
 							</Button>
 						</span>
 					</div>
-					<ListHeader />
-					<Itemlist data={this.state.data} delete={this.delete} />
-					<InputItem userData={this.state.data} Submit={this.Submit} />
+
+					<div style={{ background: "#eee" }}>
+						<ListHeader />
+						<Itemlist
+							data={this.state.data}
+							reviewStatus={this.reviewStatus}
+							edit={this.edit}
+							view={this.view}
+							delete={this.delete}
+						/>
+					</div>
+					<div style={this.state.view}>
+						<InputItem
+							userData={this.state.data}
+							Submit={this.Submit}
+							cancel={this.cancel}
+						/>
+					</div>
 				</div>
 				<div>
 					<Typography variant="h6" className={classes.title}>

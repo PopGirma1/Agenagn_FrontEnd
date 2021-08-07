@@ -4,7 +4,7 @@ function ListHeader() {
 	return (
 		<div style={headingStyle}>
 			<span>Location</span>
-			<span>Bed Rom</span>
+			<span>Bed Rooms</span>
 			<span>Listing Status</span>
 			<span>Review status</span>
 			<span>Action</span>
@@ -19,6 +19,7 @@ const headingStyle = {
 	marginTop: "30px",
 	marginBottom: "30px",
 	background: "#eee",
+	textAlign: "left",
 };
 
 export default ListHeader;
