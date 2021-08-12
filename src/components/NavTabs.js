@@ -54,11 +54,11 @@ class NavTabs extends React.Component {
                             <SearchBar className={classes.searchBar}/>
                         </Grid>
 
-                        <Grid item sm={5} align='right'>	
+                        <Grid item sm={5} align='right'>
                                 <List>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>Courses</Button></ListItem>
+                                <ListItem><Button  href={process.env.PUBLIC_URL + '/register'}>Add Home</Button></ListItem>
+                                <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>Register</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
                             </List>

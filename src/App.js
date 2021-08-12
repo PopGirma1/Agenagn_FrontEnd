@@ -5,10 +5,12 @@ import {withStyles, Container} from "@material-ui/core";
 import NavTabs from './components/NavTabs'
 import MainBody from './pages/Home'
 import Detail from './pages/Details/'
-import LoginRegister from './pages/Authentication/LoginRegister'
+/*import LoginRegister from './pages/Authentication/LoginRegister'*/
+import SignUp from './pages/Authentication/SignUp/Signup'
 import UserHome from './pages/Authentication/HomeRegistrationForm/UserHome'
 import Footer from './components/Footer'
 import Comment from './pages/Comment'
+import About from "./pages/About/About";
 
 const useStyles = ((theme) => ({
     root: {
@@ -31,9 +33,10 @@ class App extends React.Component {
                     <div className={classes.mainParts}>
                         <Route  path='/' exact component={MainBody}/>
                         <Route  path={process.env.PUBLIC_URL + '/detail'} component={Detail}/>
-                        <Route  path={process.env.PUBLIC_URL + '/login'} component={LoginRegister}/>
+                        <Route  path={process.env.PUBLIC_URL + '/login'} component={SignUp}/>
                         <Route  path='/home' component={UserHome}/>
                         <Route  path='/comment' component={Comment}/>
+                        <Route  path='/About' About={About}/>
                     </div>
                 </BrowserRouter >
                 <Footer/>
