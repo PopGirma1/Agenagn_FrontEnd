@@ -9,6 +9,7 @@ import Detail from './pages/Details/'
 import SignUp from './pages/Authentication/SignUp/Signup'
 import ListHouse from "./pages/NewList/ListHouse";
 import UserHome from './pages/Authentication/HomeRegistrationForm/UserHome'
+import AddedHouse from './pages/AddedHouse/AddedHouse'
 import Footer from './components/Footer'
 import Comment from './pages/Comment'
 import About from "./pages/About/About";
@@ -37,6 +38,7 @@ class App extends React.Component {
                         <Route  path={process.env.PUBLIC_URL + '/detail'} component={Detail}/>
                         <Route  path={process.env.PUBLIC_URL + '/login'} component={SignUp}/>
                         <Route  path={process.env.PUBLIC_URL + '/ListHouse'} component={ListHouse}/>
+                        <Route  path={process.env.PUBLIC_URL + '/AddedHouse'} component={AddedHouse}/>
                         <Route  path='/home' component={UserHome}/>
                         <Route  path='/comment' component={Comment}/>
                         <Route  path='/About' About={About}/>

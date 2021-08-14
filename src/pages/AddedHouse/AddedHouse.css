@@ -1,0 +1,27 @@
+.mainSection{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.mainSection > div {
+    background-color: #f1f1f1;
+    margin: 1px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+
+
+.textfieldInput{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 110px;
+    justify-content: space-between;
+}

@@ -124,8 +124,6 @@ function ListHouse(props) {
                         </ButtonGroup>
                     </h5>
 
-
-
                 </div>
                 <div>
                     <label className={'Header'}> Account Info</label>
