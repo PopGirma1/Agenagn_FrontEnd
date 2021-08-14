@@ -57,7 +57,7 @@ function Signup(props) {
                 </div>
 
 
-                <Button variant="contained" color="primary" href="#contained-buttons" type={'button'}>SignUp </Button>
+                <Button variant="contained" color="primary" href="#contained-buttons" type={'button'}  style={{ width:'100px'}} >SignUp </Button>
 
                 <div className={'goToLogin'}>
                     <label> Already have an account ?  </label>

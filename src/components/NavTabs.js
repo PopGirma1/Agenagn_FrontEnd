@@ -50,20 +50,25 @@ class NavTabs extends React.Component {
                             <Typography variant='h4'>Agenagn</Typography>
 
                         </Grid>
-                        <Grid item sm={4} >
-                            <SearchBar className={classes.searchBar}/>
-                        </Grid>
 
-                        <Grid item sm={5} align='right'>
-                                <List>
+                        <Grid item sm={6} align='right'>
+                            <List>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/register'}>Add Home</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>Register</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
+                                <ListItem><Button  href={process.env.PUBLIC_URL + '/ListHouse'}>List House </Button></ListItem>
                             </List>
 
                         </Grid>
+
+
+                        <Grid item sm={2} >
+                            <SearchBar className={classes.searchBar}/>
+                        </Grid>
+
+
                     </Grid>
 
 
