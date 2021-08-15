@@ -17,7 +17,7 @@ class Itemlist extends Component {
 	}
 }
 
-Itemlist.PropTypes = {
+Itemlist.propTypes = {
 	data: PropTypes.array.isRequired,
 };
 export default Itemlist;

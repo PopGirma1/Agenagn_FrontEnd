@@ -10,7 +10,6 @@ import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
 
 import React, { Component } from "react";
 import FeedBack from "./FeedBack";
@@ -21,6 +20,17 @@ const useStyles = (theme) => ({
 		margin: "2em",
 		gridTemplateColumns: "5fr 2fr",
 		gridColumnGap: "80px",
+	},
+
+	paragraphStyling: {
+		"& ..MuiInputLabel-root": {
+			lineHeight: "1.5",
+			padding: "20px",
+			margin: "20px",
+			textTransform: "full-width",
+			fontFamily: "Times New Roman",
+			boxSizing: "border-box",
+		},
 	},
 });
 class AboutUs extends Component {
@@ -39,7 +49,8 @@ class AboutUs extends Component {
 						<Typography variant="h4">Agenagn</Typography>
 						<Typography
 							variant="h6"
-							style={{ margin: "2em", lineHeight: "1.5" }}>
+							style={{ margin: "2em", lineHeight: "1.5" }}
+							className={classes.paragraphStyling}>
 							Agenagn is a solution for looking for house available for rent.
 							The system connects strangers who looking for house rent and
 							administrator of the system. The service capable of showing the
@@ -56,8 +67,6 @@ class AboutUs extends Component {
 							for now. But, for sure Agenagn will expand to the rest of
 							Ethiopia.
 						</Typography>
-
-						<AlignItemsList />
 					</div>
 				</div>
 				<div className="feedback">
@@ -69,86 +78,3 @@ class AboutUs extends Component {
 }
 
 export default withStyles(useStyles, { withTheme: true })(AboutUs);
-
-const useStyless = makeStyles((theme) =>
-	createStyles({
-		root: {
-			display: "flex",
-			margin: "auto",
-		},
-		inline: {
-			display: "inline",
-		},
-	})
-);
-
-const AlignItemsList = ({}) => {
-	const classes = useStyless();
-
-	return (
-		<List className={classes.root}>
-			<ListItem alignItems="flex-start">
-				<ListItemAvatar>
-					<Avatar alt="Girmay Tadese" src="/static/images/avatar/1.jpg" />
-				</ListItemAvatar>
-				<ListItemText
-					primary="Girmay Tadese"
-					secondary={
-						<React.Fragment>
-							<Typography
-								component="span"
-								variant="body2"
-								className={classes.inline}
-								color="textPrimary">
-								email
-							</Typography>
-							{" email"}
-						</React.Fragment>
-					}
-				/>
-			</ListItem>
-			<Divider variant="inset" component="li" />
-			<ListItem alignItems="flex-start">
-				<ListItemAvatar>
-					<Avatar alt="Kalab Amare" src="/static/images/avatar/2.jpg" />
-				</ListItemAvatar>
-				<ListItemText
-					primary="Kalab Amare"
-					secondary={
-						<React.Fragment>
-							<Typography
-								component="span"
-								variant="body2"
-								className={classes.inline}
-								color="textPrimary">
-								email
-							</Typography>
-							{" email"}
-						</React.Fragment>
-					}
-				/>
-			</ListItem>
-			<Divider variant="inset" component="li" />
-			<ListItem alignItems="flex-start">
-				<ListItemAvatar>
-					<Avatar alt="Desalegn Mihret" src="/static/images/avatar/3.jpg" />
-				</ListItemAvatar>
-				<ListItemText
-					primary="Desalegn Mihret"
-					secondary={
-						<React.Fragment>
-							<Typography
-								component="span"
-								variant="body2"
-								className={classes.inline}
-								color="textPrimary">
-								email
-							</Typography>
-							{" desalegnmihret97@gmail.com"}
-						</React.Fragment>
-					}
-				/>
-			</ListItem>
-		</List>
-	);
-};

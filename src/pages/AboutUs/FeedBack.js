@@ -12,12 +12,25 @@ import * as yup from "yup";
 
 import DoneIcon from "@material-ui/icons/Done";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
 	root: {
-		display: "flex",
-		margin: "auto",
+		"& > *": {
+			margin: theme.spacing(1),
+			width: "25ch",
+		},
+		"& .MuiFilledInput-root": {
+			background: "#eee",
+		},
 	},
-}));
+	buttonStyle: {
+		"& .MuiFilledInput-root": {
+			background: "rgb(100, 10, 255)",
+			color: "#fff",
+			align: "center ",
+			borderRadius: "10px",
+		},
+	},
+});
 
 const schema = yup.object().shape({
 	email: yup.string().required().email(),
@@ -72,7 +85,7 @@ class FeedBack extends Component {
 					<TextField
 						id="filled-basic"
 						label="email"
-						variant="filled"
+						variant="outlined"
 						name="email"
 						value={this.state.email}
 						onChange={this.onChange}
@@ -85,11 +98,17 @@ class FeedBack extends Component {
 					<TextareaAutosize
 						minRows={10}
 						aria-label="maximum height"
-						placeholder="Put your comment here"
+						placeholder="write a comment"
 						name="feedback"
 						onChange={this.onChange}
 						value={this.state.feedback}
-						style={{ outline: "none", width: "80%", margin: "2em 0" }}
+						style={{
+							outline: "none",
+							width: "80%",
+							margin: "2em 0",
+							background: "#eee",
+						}}
+						className={classes.commentFieldStyling}
 					/>
 					{/* <DoneIcon color="primary" style={this.state.view.feedback} /> */}
 
@@ -100,9 +119,15 @@ class FeedBack extends Component {
 						value="Submit"
 						style={{
 							background: "#aaa",
-							width: "80%",
+							width: "40%",
 							margin: "2em 0",
+							background: "blue",
+							color: "#fff",
+							borderRadius: "10px",
+							float: "right",
+							marginRight: "5em",
 						}}
+						className={classes.buttonStyle}
 					/>
 				</form>
 			</div>
