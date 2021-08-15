@@ -32,7 +32,6 @@ div > button{
 
 
 .textfieldInput{
-
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;

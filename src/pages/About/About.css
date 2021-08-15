@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
+
 }
 .mainSection > div {
     background-color: #f1f1f1;
@@ -12,7 +13,6 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    width: 1000px;
 }
 
 
@@ -33,14 +33,4 @@
 }
 .InputLabel{
     margin-top: 20px;
-}
-
-.btnSubmit{
-    background-color: #dddddd;
-    margin-left: 70%;
-    font-size: 24px;
-}
-
-h5{
-    margin: 20px;
 }

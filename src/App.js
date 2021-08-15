@@ -39,9 +39,9 @@ class App extends React.Component {
                         <Route  path={process.env.PUBLIC_URL + '/login'} component={SignUp}/>
                         <Route  path={process.env.PUBLIC_URL + '/ListHouse'} component={ListHouse}/>
                         <Route  path={process.env.PUBLIC_URL + '/AddedHouse'} component={AddedHouse}/>
+                        <Route  path={process.env.PUBLIC_URL + '/ABout'} component={About}/>
                         <Route  path='/home' component={UserHome}/>
                         <Route  path='/comment' component={Comment}/>
-                        <Route  path='/About' About={About}/>
 
                     </div>
                 </BrowserRouter >

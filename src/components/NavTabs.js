@@ -51,12 +51,12 @@ class NavTabs extends React.Component {
 
                         </Grid>
 
-                        <Grid item sm={6} align='right'>
+                        <Grid item sm={7} align='right'>
                             <List>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/AddedHouse'}>Add Home</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>Register</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
+                                <ListItem><Button  href={process.env.PUBLIC_URL + '/About'}>About</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
                                 <ListItem><Button  href={process.env.PUBLIC_URL + '/ListHouse'}>List House </Button></ListItem>
                             </List>

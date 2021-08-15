@@ -4,18 +4,12 @@ import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 function Signup(props) {
-
-
-
-
     return (
         <div className='flex-container'>
 
 
             <div>
                 <img src={window.location.origin + '/asset/Img/signup.jpg'} width={'400px'} height={'600px'} />
-
-
             </div>
 
 
@@ -57,7 +51,7 @@ function Signup(props) {
                 </div>
 
 
-                <Button variant="contained" color="primary" href="#contained-buttons" type={'button'}  style={{ width:'100px'}} >SignUp </Button>
+                <Button variant="contained" color="primary" href="#contained-buttons" type={'button'}>SignUp </Button>
 
                 <div className={'goToLogin'}>
                     <label> Already have an account ?  </label>
@@ -67,13 +61,7 @@ function Signup(props) {
                     }} > Login </button>
 
                 </div>
-
-
             </div>
-
-
-
-
         </div>
     );
 }
