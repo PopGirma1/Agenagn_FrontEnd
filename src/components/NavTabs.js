@@ -1,6 +1,7 @@
 import React from 'react'
 import {AppBar, Button, Grid, Link, List, ListItem, Toolbar, Typography, withStyles} from "@material-ui/core/index";
 import SearchBar from "material-ui-search-bar/lib/index";
+import {Redirect} from "react-router-dom";
 
 const useStyles = ((theme) => ({
     root: {
@@ -38,6 +39,37 @@ const useStyles = ((theme) => ({
 }));
 
 class NavTabs extends React.Component {
+    onLogoutclicked = () =>{
+        localStorage.clear();
+        return <Redirect to='/'/>
+
+    };
+
+    isAuthnticated = () => {
+        if(this.props.getToken()){
+            return (
+                <List>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/addhouse'}>Add House</Button></ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/userdashboard'}>Dashboard</Button></ListItem>
+                    <ListItem><Button  href='/' onClick={this.onLogoutclicked}>logout</Button></ListItem>
+                </List>
+
+            )
+        }else{
+            return (
+                <List>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>login</Button></ListItem>
+                </List>
+
+            )
+        }
+    };
 
     render() {
         const {classes} = this.props;
@@ -54,15 +86,8 @@ class NavTabs extends React.Component {
                             <SearchBar className={classes.searchBar}/>
                         </Grid>
 
-                        <Grid item sm={5} align='right'>	
-                                <List>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>Courses</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
-                            </List>
-
+                        <Grid item sm={5} align='right'>
+                            {this.isAuthnticated()}
                         </Grid>
                     </Grid>
 
@@ -77,3 +102,5 @@ class NavTabs extends React.Component {
 }
 
 export default withStyles(useStyles)(NavTabs);
+
+

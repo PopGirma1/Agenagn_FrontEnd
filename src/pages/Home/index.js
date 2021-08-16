@@ -12,6 +12,7 @@ import {
     Typography,
     withStyles
 } from '@material-ui/core';
+import backEndApi from "../../services/api";
 
 const useStyles = ((theme) => ({
     root: {
@@ -25,33 +26,40 @@ const useStyles = ((theme) => ({
 }));
 
 class MainBody extends React.Component {
+    state = {houseDocs: [], };
 
+    componentDidMount = async () => {
+        const {data} = await backEndApi.get('./homepage');
+        console.log(data);
+        this.setState({houseDocs: data})
+    };
     render() {
-        const cards = [1, 2, 3, 4, 5, 6, 7];
+        const local = 'http://localhost:5000';
+
         const {classes} = this.props;
 
         return (
 
             <Container maxWidth='md'>
                 <Grid container spacing={4}>
-                    {cards.map((card) => (
-                        <Grid item key={card} xs={12} sm={6} md={4}>
+                    {this.state.houseDocs.map((home) => (
+                        <Grid item key={home._id} xs={12} sm={6} md={4}>
                             <Card className={classes.root}>
                                 <CardActionArea>
                                     <CardMedia
                                         className={classes.media}
-                                        image={process.env.PUBLIC_URL + '/img/2.jpg'}
+                                        image={local + '/images/products/' + home.encodedImageUrl + '.png'}
                                         title="Contemplative Reptile"
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="body1" component="h2">
-                                            Ayat Condominium
+                                            {home.location}
                                         </Typography>
 
                                         <Typography variant='body2' color='textSecondary'>Bed Room: <Typography
-                                            variant='p' color='textPrimary'>3</Typography></Typography>
+                                            variant='p' color='textPrimary'>{home.bed_room}</Typography></Typography>
                                         <Typography variant='body2' color='textSecondary'>Monthly Rent: <Typography
-                                            variant='p' color='textPrimary'>6500 birr</Typography></Typography>
+                                            variant='p' color='textPrimary'>{home.monthly_payment} birr</Typography></Typography>
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions>
@@ -75,3 +83,5 @@ class MainBody extends React.Component {
 }
 
 export default withStyles(useStyles)(MainBody);
+
+
