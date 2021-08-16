@@ -6,7 +6,37 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = (theme) => ({
+	statuses: {
+		borderRadius: "30px",
+		background: "#888890",
+		width: "150px",
+		height: "auto",
+		textAlign: "center",
+	},
+	bodyStyle: {
+		background: "#E5E5E5",
+		display: "grid",
+		gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+		fontSize: "20px",
+		marginTop: "30px",
+
+		textAlign: "center",
+		paddingBottom: "30px",
+	},
+	styleView: {
+		background: "#E5E5E5",
+		borderRadius: "30px",
+	},
+	styleDelete: {
+		borderRadius: "30px",
+		background: "#F299ff",
+	},
+	styleEdit: {
+		background: "#33232",
+		borderRadius: "30px",
+	},
+});
 
 class UserDashboardInfo extends Component {
 	render() {
@@ -14,41 +44,37 @@ class UserDashboardInfo extends Component {
 		const { id, location, bedroom, listingStatus, reviewStatus } =
 			this.props.userData;
 		return (
-			<div style={{ background: "#eee" }}>
-				<div style={headingStyle}>
-					<span>{location}</span>
-					<span>{bedroom}</span>
-					<Button>{listingStatus}</Button>
-					<Button onClick={this.props.reviewStatus.bind(this, id)}>
-						{reviewStatus}
+			<div className={classes.bodyStyle}>
+				<span>{location}</span>
+				<span>{bedroom}</span>
+				<span className={classes.statuses}>{listingStatus}</span>
+				<span className={classes.statuses}>{reviewStatus}</span>
+				<span>
+					<Button
+						onClick={this.props.edit.bind(this, id)}
+						size="small"
+						className={classes.styleEdit}>
+						<EditIcon color="primary" />
 					</Button>
-					<span>
-						<Button onClick={this.props.edit.bind(this, id)}>
-							<EditIcon color="primary" />
-						</Button>
-						<Button onClick={this.props.delete.bind(this, id)}>
-							<DeleteIcon color="secondary" />
-						</Button>
-						<Button onClick={this.props.view.bind(this.id)}>
-							<VisibilityIcon />
-						</Button>
-					</span>
-				</div>
+					<Button
+						onClick={this.props.delete.bind(this, id)}
+						size="small"
+						className={classes.styleDelete}>
+						<DeleteIcon color="secondary" />
+					</Button>
+					<Button
+						onClick={this.props.view.bind(this.id)}
+						size="small"
+						className={classes.styleView}>
+						<VisibilityIcon />
+					</Button>
+				</span>
 			</div>
 		);
 	}
 }
-const headingStyle = {
-	display: "flex",
-	justifyContent: "space-between",
-	fontSize: "20px",
-	marginTop: "30px",
-	background: "#eee",
-	itemAlign: "center",
-};
 
 UserDashboardInfo.PropTypes = {
-	reviewStatus: PropTypes.func.isRequired,
 	edit: PropTypes.func.isRequired,
 	delete: PropTypes.func.isRequired,
 	view: PropTypes.func.isRequired,

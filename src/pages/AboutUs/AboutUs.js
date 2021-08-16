@@ -23,14 +23,12 @@ const useStyles = (theme) => ({
 	},
 
 	paragraphStyling: {
-		"& ..MuiInputLabel-root": {
-			lineHeight: "1.5",
-			padding: "20px",
-			margin: "20px",
-			textTransform: "full-width",
-			fontFamily: "Times New Roman",
-			boxSizing: "border-box",
-		},
+		lineHeight: "1.5",
+		padding: "20px",
+		margin: "20px",
+		textTransform: "full-width",
+		fontFamily: "Times New Roman",
+		boxSizing: "border-box",
 	},
 });
 class AboutUs extends Component {

@@ -24,6 +24,17 @@ const useStyles = (theme) => ({
 
 		justifyContent: "space-between",
 	},
+	bodyStyling: {
+		/**here is the style of all the user dashboard page  */
+		borderRadius: "20px",
+		height: "200%",
+		background: "#E5E5E5",
+	},
+	buttonStyling: {
+		background: "#3F51B5",
+		color: "#ffffff",
+		borderRadius: "10px",
+	},
 });
 
 class UserDashboard extends Component {
@@ -121,21 +132,17 @@ class UserDashboard extends Component {
 						</span>
 
 						<span>
-							<Button
-								color="primary"
-								background="primary"
-								onClick={this.AddHouse}>
-								<Add color="primary" />
+							<Button onClick={this.AddHouse} className={classes.buttonStyling}>
+								<Add />
 								Add new house
 							</Button>
 						</span>
 					</div>
 
-					<div style={{ background: "#eee" }}>
+					<div className={classes.bodyStyling}>
 						<ListHeader />
 						<Itemlist
 							data={this.state.data}
-							reviewStatus={this.reviewStatus}
 							edit={this.edit}
 							view={this.view}
 							delete={this.delete}

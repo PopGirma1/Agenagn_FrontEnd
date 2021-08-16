@@ -9,18 +9,17 @@ import { makeStyles, withStyles } from "@material-ui/styles";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		root: {
-			width: "100%",
-			maxWidth: "36ch",
-			background: "#eee",
-		},
-		inline: {
-			display: "inline",
-		},
-	})
-);
+const useStyles = (theme) => ({
+	root: {
+		background: "#E5E5E5",
+		borderRadius: "10px",
+		paddingLeft: "2em",
+		display: "grid",
+		gridTemplateRow: "1fr 1fr",
+		height: "189px",
+		marginTop: "20px",
+	},
+});
 
 class UserInfo extends Component {
 	state = {
@@ -50,37 +49,15 @@ class UserInfo extends Component {
 					<PersonOutlineIcon style={{ marginRight: "10px" }} />
 					<ListItemText
 						primary="Name"
-						secondary={
-							<React.Fragment>
-								<Typography
-									component="span"
-									variant="body2"
-									className={classes.inline}
-									color="textPrimary">
-									{"   "}
-								</Typography>
-								{userName}
-							</React.Fragment>
-						}
+						secondary={<React.Fragment>{userName}</React.Fragment>}
 					/>
 				</ListItem>
-				<Divider variant="inset" component="li" />
+				{/* <Divider variant="inset" component="li" /> */}
 				<ListItem alignItems="flex-start">
 					<MailOutlineIcon style={{ marginRight: "10px" }} />
 					<ListItemText
 						primary="Email"
-						secondary={
-							<React.Fragment>
-								<Typography
-									component="span"
-									variant="body2"
-									className={classes.inline}
-									color="textPrimary">
-									{"  "}
-								</Typography>
-								{email}
-							</React.Fragment>
-						}
+						secondary={<React.Fragment>{email}</React.Fragment>}
 					/>
 				</ListItem>
 			</List>

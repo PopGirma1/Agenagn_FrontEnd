@@ -13,13 +13,16 @@ function ListHeader() {
 }
 
 const headingStyle = {
-	display: "flex",
-	justifyContent: "space-between",
+	display: "grid",
+	gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+	gridTemplateRows: "auto",
 	fontSize: "20px",
 	marginTop: "30px",
 	marginBottom: "30px",
-	background: "#eee",
-	textAlign: "left",
+	background: "#E5E5E5",
+	textAlign: "center",
+	paddingTop: "40px",
+	borderRadius: "15px",
 };
 
 export default ListHeader;

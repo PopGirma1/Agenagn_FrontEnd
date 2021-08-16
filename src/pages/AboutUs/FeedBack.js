@@ -24,11 +24,36 @@ const useStyles = (theme) => ({
 	},
 	buttonStyle: {
 		"& .MuiFilledInput-root": {
-			background: "rgb(100, 10, 255)",
-			color: "#fff",
-			align: "center ",
+			background: "#3F51B5",
+			color: "#ffffff",
 			borderRadius: "10px",
+			borderStyle: "none",
+			focus: "none",
+			/**the input field property always override here  */
 		},
+
+		borderStyle: "none",
+		align: "center ",
+
+		margin: "2em 0",
+
+		float: "right",
+		marginRight: "5em",
+		width: "40%",
+	},
+	emailBoxStyling: {
+		width: "80%",
+		margin: "2em 0",
+		"& .MuiFilledInput-root": {
+			/**to override the primary color of the material ui component */
+			background: "#E7E7E7",
+		},
+	},
+	commentFieldStyling: {
+		outline: "none",
+		width: "80%",
+		margin: "2em 0",
+		background: "#E7E7E7",
 	},
 });
 
@@ -89,25 +114,19 @@ class FeedBack extends Component {
 						name="email"
 						value={this.state.email}
 						onChange={this.onChange}
-						style={{ width: "80%", margin: "2em 0" }}
+						className={classes.emailBoxStyling}
 					/>
 					{/* <DoneIcon color="primary" style={this.state.view.email} /> */}
 					<div>
 						<span style={{ color: "red" }}>{this.state.error}</span>
 					</div>
 					<TextareaAutosize
-						minRows={10}
+						minRows={15}
 						aria-label="maximum height"
 						placeholder="write a comment"
 						name="feedback"
 						onChange={this.onChange}
 						value={this.state.feedback}
-						style={{
-							outline: "none",
-							width: "80%",
-							margin: "2em 0",
-							background: "#eee",
-						}}
 						className={classes.commentFieldStyling}
 					/>
 					{/* <DoneIcon color="primary" style={this.state.view.feedback} /> */}
@@ -117,16 +136,7 @@ class FeedBack extends Component {
 						variant="filled"
 						type="submit"
 						value="Submit"
-						style={{
-							background: "#aaa",
-							width: "40%",
-							margin: "2em 0",
-							background: "blue",
-							color: "#fff",
-							borderRadius: "10px",
-							float: "right",
-							marginRight: "5em",
-						}}
+						size="small"
 						className={classes.buttonStyle}
 					/>
 				</form>
