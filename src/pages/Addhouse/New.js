@@ -383,7 +383,7 @@ class NewListing extends React.Component {
 
         this.setState({phoneNumber: date})
     };
-    onProductNetworkChanged = (e) => {
+    onSquareMeterChanged = (e) => {
 
         if (e.target.value.length === 0) {
             document.getElementById('networkError').style.display = 'block';
@@ -392,7 +392,7 @@ class NewListing extends React.Component {
             document.getElementById('networkError').style.display = 'none';
 
         }
-        this.setState({productNetwork: e.target.value})
+        this.setState({squareMeter: e.target.value})
     };
     onNoteToReviewerChanged = (e) => {
         /*if (e.target.value.length === 0) {
@@ -547,11 +547,11 @@ class NewListing extends React.Component {
 
                         </div>
                         <div className={classes.inputsContainer}>
-                            <Typography variant='body2'>Product Network</Typography>
+                            <Typography variant='body2'>Square meters</Typography>
                             <input type="text" placeholder='Enter product Network' className={classes.input}
-                                   onChange={this.onProductNetworkChanged}/>
+                                   onChange={this.onSquareMeterChanged}/>
                             <Typography variant='body2' id='networkError' className={classes.inputError}>You have to
-                                enter product network.</Typography>
+                                enter square meters.</Typography>
 
                         </div>
                         <div className={classes.inputsContainer}>

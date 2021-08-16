@@ -41,35 +41,34 @@ const useStyles = theme => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        background: '#3A6351',
+        background: '#3F51B5',
         borderRadius: '5px',
         width: '406px',
         height: '50px',
         margin: theme.spacing(3, 0, 2),
         "&:hover": {
-            background: 'rgba(64,98,64,0.8)',
+            background: 'rgba(53,68,152,0.79)',
         }
     },
     textField: {
         marginBottom: '15px',
-        background: "#F2EDD7",
         borderRadius: '5px',
         borderTopLeftRadius: '10px',
         borderBottomLeftRadius: '10px',
         width: '406px',
         border: '0px solid #FFF',
         borderLeftWidth: '7px',
-        borderLeftColor: '#E48257',
+        borderLeftColor: 'rgba(215,215,215,0.87)',
         "& input": {
-            background: '#F2EDD7',
-            border: '0px solid red',
-            borderRadius: '5px'
+            color: "rgba(57,50,50,0.25)",
+            border: '0px solid #eee',
+            borderRadius: '30px',
         }
 
     },
 
     inputAdornment: {
-        background: '#E48257',
+        background: 'rgba(215,215,215,0.87)',
         borderRadius: '7px 0px 0px 7px',
 
     },
@@ -80,7 +79,7 @@ const useStyles = theme => ({
         marginBottom: '-20px'
     },
     loginImgHolder: {
-        backgroundColor: "rgba(228,130,87,0.21)",
+        backgroundColor: "rgba(185,194,226,0.66)",
 
         borderRadius: '15px', marginBottom: 'auto'
     }
