@@ -99,7 +99,7 @@ class UserHome extends React.Component {
                         <Divider/>
                         <Box mt={8}></Box>
                         <List>
-                            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                            {['House view count','All mail', 'update'].map((text, index) => (
                                 <ListItem button>
                                     <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
                                     <ListItemText primary={text}/>

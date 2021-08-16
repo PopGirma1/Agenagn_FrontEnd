@@ -11,8 +11,6 @@ function Signup(props) {
             <div>
                 <img src={window.location.origin + '/asset/Img/signup.jpg'} width={'400px'} height={'600px'} />
             </div>
-
-
             <div>
                 <label>Sign up Page </label>
                 <div className={'textfieldInput'}>
