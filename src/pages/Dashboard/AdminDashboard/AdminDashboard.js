@@ -5,6 +5,8 @@ import { Typography } from "@material-ui/core";
 
 import ListHeader from "./ListHeader";
 import AdminFilter from "./AdminFilter";
+import FilterBy from "./FilterBy";
+const classNames = require("classnames");
 
 const useStyles = (theme) => ({
 	parent: {
@@ -16,7 +18,7 @@ const useStyles = (theme) => ({
 		gridGap: "80px",
 	},
 	mainBody: {
-		height: "300%",
+		height: "100%",
 
 		marginTop: "30px",
 		marginBottom: "30px",
@@ -27,18 +29,20 @@ const useStyles = (theme) => ({
 	},
 	adminFilterStyling: {
 		width: "90%",
-		height: "100%",
+		height: "30%",
 		borderRadius: "20px",
 
 		padding: "2em",
 		background: "#EEEEEE",
 		marginTop: "30px",
+		marginBottom: "20%",
 	},
 });
 
 class AdminDashboard extends Component {
 	render() {
 		const { classes } = this.props;
+
 		return (
 			<div className={classes.parent}>
 				<div className={classes.root}>
@@ -49,8 +53,9 @@ class AdminDashboard extends Component {
 					<div className={classes.mainBody}>
 						<ListHeader />
 					</div>
-					<div className={classes.adminFilterStyling}>
-						<AdminFilter />
+					<div>
+						<AdminFilter adminFilter={classes.adminFilterStyling} />
+						<FilterBy mainContent={classes.adminFilterStyling} />
 					</div>
 				</div>
 			</div>

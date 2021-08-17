@@ -35,7 +35,7 @@ class AdminFilter extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<div className={classes.rootParent}>
+			<div className={this.props.adminFilter}>
 				<FormControl component="fieldset">
 					<RadioGroup
 						aria-label="gender"
