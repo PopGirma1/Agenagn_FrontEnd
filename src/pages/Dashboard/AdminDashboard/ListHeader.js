@@ -17,12 +17,7 @@ const headingStyle = {
 	gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
 	gridTemplateRows: "auto",
 	fontSize: "20px",
-	marginTop: "30px",
-	marginBottom: "30px",
-	background: "#E5E5E5",
 	textAlign: "center",
-	paddingTop: "40px",
-	borderRadius: "15px",
 };
 
 export default ListHeader;

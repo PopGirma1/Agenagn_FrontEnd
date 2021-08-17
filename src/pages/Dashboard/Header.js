@@ -1,17 +1,17 @@
 import React from "react";
-import UserDashboard from "./UserDashboard/UserDashboard";
+// import UserDashboard from "./UserDashboard/UserDashboard";
 // import AboutUs from "../AboutUs/AboutUs";
+
 import {
 	AppBar,
 	Button,
 	Grid,
-	Link,
 	List,
 	ListItem,
 	Toolbar,
-	Typography,
 	withStyles,
 } from "@material-ui/core/index";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
 //import SearchBar from "@material-ui-search-bar/lib/index";
 
 const useStyles = (theme) => ({
@@ -70,8 +70,9 @@ class DashboardHeader extends React.Component {
 						</Grid>
 					</Toolbar>
 				</AppBar>
-				<UserDashboard />
-				{/* <AboutUs /> */}
+				<AdminDashboard />
+				{/* <UserDashboard />
+				<AboutUs /> */}
 			</div>
 		);
 	}

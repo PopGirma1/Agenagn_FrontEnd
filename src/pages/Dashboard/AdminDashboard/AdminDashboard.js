@@ -1,32 +1,38 @@
 import { withStyles } from "@material-ui/core";
 
 import React, { Component } from "react";
-import { useStyles, withStyles, Typography } from "@material-ui/styles";
-import classNames from "classnames";
+import { Typography } from "@material-ui/core";
+
 import ListHeader from "./ListHeader";
 import AdminFilter from "./AdminFilter";
 
 const useStyles = (theme) => ({
+	parent: {
+		marginLeft: "5%",
+	},
 	root: {
 		display: "grid",
 		gridTemplateColumns: "5fr 2fr",
 		gridGap: "80px",
 	},
 	mainBody: {
-		background: "#EEEEEE",
-		borderRadius: "20px",
-		display: "grid",
-		gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
-		margin: "2em",
-		textAlign: "center",
-		height: "200%",
+		height: "300%",
+
+		marginTop: "30px",
+		marginBottom: "30px",
+		background: "#E5E5E5",
+
+		paddingTop: "30px",
+		borderRadius: "15px",
 	},
-	adminFilter: {
-		background: "#EEEEEE",
+	adminFilterStyling: {
+		width: "90%",
+		height: "100%",
 		borderRadius: "20px",
-		margin: "1em",
-		display: "flex",
-		justifiedContent: "space-between",
+
+		padding: "2em",
+		background: "#EEEEEE",
+		marginTop: "30px",
 	},
 });
 
@@ -34,16 +40,16 @@ class AdminDashboard extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<div>
-				<div className={classes.root} style={headerStyling}>
-					<Typography variant="h2">All Listing Reviews</Typography>
-					<Typography variant="h2">Listing Filters</Typography>
+			<div className={classes.parent}>
+				<div className={classes.root}>
+					<Typography variant="h4">All Listing Reviews</Typography>
+					<Typography variant="h4">Listing Filters</Typography>
 				</div>
-				<div className={classNames.root}>
+				<div className={classes.root}>
 					<div className={classes.mainBody}>
 						<ListHeader />
 					</div>
-					<div className={classes.adminFilter}>
+					<div className={classes.adminFilterStyling}>
 						<AdminFilter />
 					</div>
 				</div>
@@ -51,11 +57,5 @@ class AdminDashboard extends Component {
 		);
 	}
 }
-
-const headerStyling = {
-	textAlign: "left",
-	marginTop: "50px",
-	marginBottom: "10px",
-};
 
 export default withStyles(useStyles, { withTheme: true })(AdminDashboard);
