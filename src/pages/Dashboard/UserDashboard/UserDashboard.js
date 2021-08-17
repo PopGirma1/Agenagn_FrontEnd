@@ -4,7 +4,7 @@ import { TextField, Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { Typography } from "@material-ui/core";
 import UserInfo from "./UserInfo";
-import Itemlist from "./Itemlist";
+import ItemList from "./ItemList";
 import ListHeader from "./ListHeader";
 import InputItem from "./InputItem";
 import uuid from "uuid";
@@ -141,7 +141,7 @@ class UserDashboard extends Component {
 
 					<div className={classes.bodyStyling}>
 						<ListHeader />
-						<Itemlist
+						<ItemList
 							data={this.state.data}
 							edit={this.edit}
 							view={this.view}

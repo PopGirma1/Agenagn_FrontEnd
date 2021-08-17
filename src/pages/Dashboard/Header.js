@@ -1,5 +1,5 @@
 import React from "react";
-import Userdashboard from "./UserDashboard/Userdashboard";
+import UserDashboard from "./UserDashboard/UserDashboard";
 // import AboutUs from "../AboutUs/AboutUs";
 import {
 	AppBar,
@@ -70,7 +70,7 @@ class DashboardHeader extends React.Component {
 						</Grid>
 					</Toolbar>
 				</AppBar>
-				<Userdashboard />
+				<UserDashboard />
 				{/* <AboutUs /> */}
 			</div>
 		);
