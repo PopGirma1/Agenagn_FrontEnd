@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import UserDashboardInfo from "./UserDashboardInfo";
 import PropTypes from "prop-types";
 
-class Itemlist extends Component {
+class ItemList extends Component {
 	render() {
 		return this.props.data.map((datas) => (
 			<UserDashboardInfo
@@ -17,7 +17,7 @@ class Itemlist extends Component {
 	}
 }
 
-Itemlist.propTypes = {
+ItemList.propTypes = {
 	data: PropTypes.array.isRequired,
 };
-export default Itemlist;
+export default ItemList;

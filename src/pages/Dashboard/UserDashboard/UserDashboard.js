@@ -6,7 +6,7 @@ import { Typography } from "@material-ui/core";
 import UserInfo from "./UserInfo";
 import ItemList from "./ItemList";
 import ListHeader from "./ListHeader";
-import InputItem from "./InputItem";
+
 import uuid from "uuid";
 
 const useStyles = (theme) => ({
@@ -73,24 +73,6 @@ class UserDashboard extends Component {
 		});
 	};
 
-	Submit = (locations, bedrooms) => {
-		const { id, location, bedroom, listingStatus, reviewStatus } = this.state;
-		const newList = {
-			id: uuid.v4(),
-			location: locations,
-			bedroom: bedrooms,
-			listingStatus: "active",
-			reviewStatus: "submitted",
-		};
-		this.setState({
-			data: [...this.state.data, newList],
-		});
-	};
-
-	reviewStatus = (id) => {
-		console.log(id);
-	};
-
 	edit = (id) => {
 		this.state.data.map((data) => {
 			if (data.id === id) {
@@ -103,20 +85,6 @@ class UserDashboard extends Component {
 
 	view = (id) => {
 		console.log(id);
-	};
-
-	AddHouse = () => {
-		this.setState({
-			view: { display: "flex" },
-		});
-	};
-
-	cancel = () => {
-		this.setState({
-			view: {
-				display: "none",
-			},
-		});
 	};
 
 	render() {
@@ -148,13 +116,7 @@ class UserDashboard extends Component {
 							delete={this.delete}
 						/>
 					</div>
-					<div style={this.state.view}>
-						<InputItem
-							userData={this.state.data}
-							Submit={this.Submit}
-							cancel={this.cancel}
-						/>
-					</div>
+					<div style={this.state.view}></div>
 				</div>
 				<div>
 					<Typography variant="h6" className={classes.title}>

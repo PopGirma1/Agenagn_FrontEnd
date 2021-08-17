@@ -10,10 +10,20 @@ const useStyles = (theme) => ({
 	statuses: {
 		borderRadius: "30px",
 		background: "#888890",
-		width: "150px",
+		width: "200px",
 		height: "auto",
 		textAlign: "center",
 	},
+	actionRequiredStatus: {
+		background: "#FFB0B0",
+		width: "200px",
+		borderRadius: "30px",
+	},
+	pendingStatus: {
+		borderRadius: "30px",
+		background: "#D7D6D6",
+	},
+	//the above three styles use as conditional as per status from the admin page
 	bodyStyle: {
 		background: "#E5E5E5",
 		display: "grid",
@@ -25,16 +35,20 @@ const useStyles = (theme) => ({
 		paddingBottom: "30px",
 	},
 	styleView: {
-		background: "#E5E5E5",
-		borderRadius: "30px",
+		background: "#959595",
+		borderRadius: "10px",
 	},
 	styleDelete: {
-		borderRadius: "30px",
-		background: "#F299ff",
+		borderRadius: "10px",
+		background: "#F2AAff",
 	},
 	styleEdit: {
-		background: "#33232",
-		borderRadius: "30px",
+		background: "#a5a5a5",
+		borderRadius: "10px",
+	},
+	actionStyling: {
+		display: "flex",
+		justifyContent: "space-evenly",
 	},
 });
 
@@ -48,8 +62,8 @@ class UserDashboardInfo extends Component {
 				<span>{location}</span>
 				<span>{bedroom}</span>
 				<span className={classes.statuses}>{listingStatus}</span>
-				<span className={classes.statuses}>{reviewStatus}</span>
-				<span>
+				<span className={classes.actionRequiredStatus}>{reviewStatus}</span>
+				<span className={classes.actionStyling}>
 					<Button
 						onClick={this.props.edit.bind(this, id)}
 						size="small"
