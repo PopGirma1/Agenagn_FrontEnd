@@ -11,34 +11,58 @@ const useStyles = (theme) => ({
 		gridGap: "20px",
 		marginBottom: "80px",
 	},
+	selectStyling: {
+		background: "#EEEEEE",
+		border: "none",
+		outline: "none",
+		display: "inline-block",
+	},
+	checkboxStyling: {
+		border: "none",
+		background: "#C4C4C4",
+		outline: "none",
+		display: "inline-block",
+	},
 });
 
 class FilterBy extends Component {
+	state = {
+		isChecked: false,
+	};
+
+	onChange = (e) => {
+		this.setState({
+			[e.target.name]: e.target.value,
+		});
+	};
 	render() {
 		const { classes } = this.props;
 		return (
 			<div>
 				<div>
-					<Typography variant="h3">Filter By</Typography>
+					<Typography variant="h4">Filter By</Typography>
 				</div>
 				<div className={this.props.mainContent}>
 					<div className={classes.divStyling}>
 						<Typography variant="h5">Location of condominium</Typography>
-						<select></select>
+						<select className={classes.selectStyling}></select>
 					</div>
 					<div className={classes.divStyling}>
 						<Typography variant="h5">Number of Bed Room</Typography>
-						<select></select>
+						<select className={classes.selectStyling}></select>
 					</div>
 					<div className={classes.divStyling}>
 						<Typography variant="h5">Monthly Rent</Typography>
-						<select></select>
+						<select className={classes.selectStyling}></select>
 					</div>
 					<div className={classes.divStyling}>
 						<Typography variant="h5">Guest House</Typography>
 						<Checkbox
-							inputProps={{ "aria-label": "uncontrolled-checkbox" }}
+							name="checkbox"
+							value={this.state.isCheckbox}
 							size="large"
+							onChange={this.onChange}
+							className={classes.checkboxStyling}
 						/>
 					</div>
 				</div>

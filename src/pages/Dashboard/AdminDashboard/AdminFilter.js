@@ -27,9 +27,9 @@ class AdminFilter extends Component {
 		rejected: false,
 	};
 
-	onChange = () => {
+	onChange = (e) => {
 		this.setState({
-			[this.target.name]: this.target.value,
+			[e.target.name]: e.target.value,
 		});
 	};
 	render() {
@@ -70,7 +70,7 @@ class AdminFilter extends Component {
 							<Typography variant="h5">Rejected</Typography>
 							<FormControlLabel
 								value={this.state.rejected}
-								disabled
+								name="rejected"
 								control={<Radio name="rejected" />}
 							/>
 						</div>
