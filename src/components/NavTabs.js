@@ -20,7 +20,7 @@ const useStyles = ((theme) => ({
 
             "& a:hover": {
                 textDecoration: 'none',
-
+                color:'red',
             },
 
         },
@@ -42,7 +42,6 @@ class NavTabs extends React.Component {
     onLogoutclicked = () =>{
         localStorage.clear();
         return <Redirect to='/'/>
-
     };
 
     isAuthnticated = () => {
@@ -63,7 +62,7 @@ class NavTabs extends React.Component {
                     <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button  href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
                     <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
-                    <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/Contact'}>Contact</Button></ListItem>
                     <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>login</Button></ListItem>
                 </List>
 
@@ -80,38 +79,19 @@ class NavTabs extends React.Component {
                     <Grid container >
                         <Grid item sm={3} >
                             <Typography variant='h4'>Agenagn</Typography>
-
                         </Grid>
 
-<<<<<<< HEAD
-                        <Grid item sm={7} align='right'>
-                            <List>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/AddedHouse'}>Add Home</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>Register</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/About'}>About</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
-                                <ListItem><Button  href={process.env.PUBLIC_URL + '/ListHouse'}>List House </Button></ListItem>
-                            </List>
-
-=======
-                        <Grid item sm={5} align='right'>
-                            {this.isAuthnticated()}
->>>>>>> 8b33aa3957aea824e7fb74e704c5400ca5665e91
-                        </Grid>
-
-
-                        <Grid item sm={2} >
+                        <Grid item sm={4} >
                             <SearchBar className={classes.searchBar}/>
                         </Grid>
 
-
+                        <Grid item sm={5} align='right'>
+                            {this.isAuthnticated()}
+                        </Grid>
                     </Grid>
-
-
-
                 </Toolbar>
             </AppBar>
+
 
         );
     }
@@ -119,8 +99,5 @@ class NavTabs extends React.Component {
 }
 
 export default withStyles(useStyles)(NavTabs);
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 8b33aa3957aea824e7fb74e704c5400ca5665e91

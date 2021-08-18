@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import backEndApi from '../../services/api'
 import {Redirect} from "react-router-dom";
 
-const SignupImage = process.env.PUBLIC_URL + '/img/signup.png';
+const SignupImage = process.env.PUBLIC_URL + '/img/signup.jpg';
 
 const useStyles = theme => ({
     root: {
