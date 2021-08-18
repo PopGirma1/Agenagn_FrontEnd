@@ -1,30 +1,25 @@
-
-import React from 'react';
-import {Link, Route, HashRouter, BrowserRouter} from "react-router-dom";
-import {withStyles, Container} from "@material-ui/core";
-import NavTabs from './components/NavTabs'
-import MainBody from './pages/Home'
-import Detail from './pages/Details/'
-import LoginRegister from './pages/Authentication/Login'
-import UserHome from './pages/Authentication/HomeRegistrationForm/UserHome'
-import Footer from './components/Footer'
-import Contact from './pages/Contact/Contact'
+import React from "react";
+import { Link, Route, HashRouter, BrowserRouter } from "react-router-dom";
+import { withStyles, Container } from "@material-ui/core";
+import NavTabs from "./components/NavTabs";
+import MainBody from "./pages/Home";
+import Detail from "./pages/Details/";
+import LoginRegister from "./pages/Authentication/Login";
+import UserHome from "./pages/Authentication/HomeRegistrationForm/UserHome";
+import Footer from "./components/Footer";
+//import Contact from './pages/Contact/Contact'
 import Signup from "./pages/Authentication/Signup";
-import RegisterHouse from './pages/Addhouse/New'
+import RegisterHouse from "./pages/Addhouse/New";
 import About from "./pages/About/About";
 
-const useStyles = ((theme) => ({
-    root: {
-
-    },
-    mainParts: {
-        marginTop: '100px'
-    },
-}));
-
+const useStyles = (theme) => ({
+	root: {},
+	mainParts: {
+		marginTop: "100px",
+	},
+});
 
 class App extends React.Component {
-
 	render() {
 		const { classes } = this.props;
 
@@ -50,7 +45,6 @@ class App extends React.Component {
 			</div>
 		);
 	}
-
 }
 
 export default withStyles(useStyles)(App);
