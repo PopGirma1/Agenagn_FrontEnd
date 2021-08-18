@@ -40,17 +40,16 @@ const useStyles = (theme) => ({
 import React from 'react';
 import {Link, Route, HashRouter, BrowserRouter} from "react-router-dom";
 import {withStyles, Container} from "@material-ui/core";
-
 import NavTabs from './components/NavTabs'
 import MainBody from './pages/Home'
 import Detail from './pages/Details/'
-/*import LoginRegister from './pages/Authentication/LoginRegister'*/
 import LoginRegister from './pages/Authentication/Login'
 import UserHome from './pages/Authentication/HomeRegistrationForm/UserHome'
 import Footer from './components/Footer'
-import Comment from './pages/Comment'
+import Contact from './pages/Contact/Contact'
 import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
+import About from "./pages/About/About";
 
 const useStyles = ((theme) => ({
     root: {
@@ -151,27 +150,18 @@ class App extends React.Component {
                         <Route  path={process.env.PUBLIC_URL + '/detail'} component={Detail}/>
                         {/*<Route  path={process.env.PUBLIC_URL + '/login'} component={LoginRegister}/>*/}
                         <Route path='/login' exact> <LoginRegister setToken={this.setToken}
-                                                           getToken={this.getToken}/></Route>
+                                                                   getToken={this.getToken}/></Route>
                         <Route  path='/userdashboard' component={UserHome}/>
                         <Route  path='/register' component={Signup}/>
                         <Route  path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
-                        <Route  path='/comment' component={Comment}/>
+                        <Route  path='/Contact' component={Contact}/>
+                        <Route  path='/About' component={About}/>
                     </Container>
                 </BrowserRouter >
                 <Footer/>
-
             </div>
         );
     }
-
-
->>>>>>> 8b33aa3957aea824e7fb74e704c5400ca5665e91
 }
 
-<<<<<<< HEAD
-export default withStyles(useStyles, { withTheme: true })(App);
-||||||| d0415c4
 export default withStyles(useStyles)(App);
-=======
-export default withStyles(useStyles)(App);
->>>>>>> 8b33aa3957aea824e7fb74e704c5400ca5665e91

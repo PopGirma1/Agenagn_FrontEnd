@@ -21,7 +21,7 @@ const useStyles = ((theme) => ({
 
             "& a:hover": {
                 textDecoration: 'none',
-
+                color:'red',
             },
 
         },
@@ -48,7 +48,6 @@ class NavTabs extends React.Component {
     onLogoutclicked = () =>{
         localStorage.clear();
         return <Redirect to='/'/>
-
     };
 
     isAuthnticated = () => {
@@ -69,7 +68,7 @@ class NavTabs extends React.Component {
                     <ListItem><Button  href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button  href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
                     <ListItem><Button  href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
-                    <ListItem><Button  href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
+                    <ListItem><Button  href={process.env.PUBLIC_URL + '/Contact'}>Contact</Button></ListItem>
                     <ListItem><Button  href={process.env.PUBLIC_URL + '/login'}>login</Button></ListItem>
                 </List>
 
@@ -86,8 +85,8 @@ class NavTabs extends React.Component {
                     <Grid container >
                         <Grid item sm={3} >
                             <Typography variant='h4'>Agenagn</Typography>
-
                         </Grid>
+
                         <Grid item sm={4} >
                             <SearchBar className={classes.searchBar}/>
                         </Grid>
@@ -96,11 +95,9 @@ class NavTabs extends React.Component {
                             {this.isAuthnticated()}
                         </Grid>
                     </Grid>
-
-
-
                 </Toolbar>
             </AppBar>
+
 
         );
     }
