@@ -48,7 +48,7 @@ class MainBody extends React.Component {
                                 <CardActionArea>
                                     <CardMedia
                                         className={classes.media}
-                                        image={local + '/images/products/' + home.encodedImageUrl + '.png'}
+                                        image={local + '/images/products/' + home.encodedImageUrl + '.jpg'}
                                         title="Contemplative Reptile"
                                     />
                                     <CardContent>

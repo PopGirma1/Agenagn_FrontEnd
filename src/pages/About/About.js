@@ -1,21 +1,19 @@
 import {
     withStyles,
     Typography,
-    makeStyles,
-    createStyles,
 } from "@material-ui/core";
-
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-
 import React, { Component } from "react";
 import FeedBack from "./FeedBack";
 import Avatar from "@material-ui/core/Avatar";
-
+import { bounce } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
 const useStyles = (theme) => ({
+
+    bounce: {
+        animation: 'x 1s',
+        animationName: Radium.keyframes(bounce, 'bounce')
+    }
+,
     root: {
         display: "grid",
         margin: "2em",
@@ -110,7 +108,7 @@ class About extends Component {
                         </Typography>
                     </div>
                     <div>
-                        <Typography variant="h6">Desalegn </Typography>
+                        <Typography variant="h6" >Desalegn </Typography>
                         <Avatar alt="Remy Sharp" src="/asset/Img/cmd.jpg"  className={classes.large}/>
                         <Typography
                             variant="h6"
@@ -118,7 +116,9 @@ class About extends Component {
                             className={classes.paragraphStyling}>
                             Software Engineer
                         </Typography>
+
                     </div>
+
 
                 </div>
             </div>
