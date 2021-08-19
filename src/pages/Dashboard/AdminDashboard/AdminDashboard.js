@@ -6,6 +6,7 @@ import { Typography } from "@material-ui/core";
 import ListHeader from "./ListHeader";
 import AdminFilter from "./AdminFilter";
 import FilterBy from "./FilterBy";
+import HouseSubmitted from "./HouseSubmitted";
 const classNames = require("classnames");
 
 const useStyles = (theme) => ({
@@ -37,6 +38,13 @@ const useStyles = (theme) => ({
 		marginTop: "30px",
 		marginBottom: "20%",
 	},
+	headingStyle: {
+		display: "grid",
+		gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+		gridTemplateRows: "auto",
+
+		textAlign: "center",
+	},
 });
 
 class AdminDashboard extends Component {
@@ -51,7 +59,8 @@ class AdminDashboard extends Component {
 				</div>
 				<div className={classes.root}>
 					<div className={classes.mainBody}>
-						<ListHeader />
+						<ListHeader headingStyle={classes.headingStyle} />
+						<HouseSubmitted dataStyling={classes.headingStyle} />
 					</div>
 					<div>
 						<AdminFilter adminFilter={classes.adminFilterStyling} />

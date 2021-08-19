@@ -12,7 +12,7 @@ import uuid from "uuid";
 const useStyles = (theme) => ({
 	root: {
 		display: "grid",
-		margin: "30px",
+		// margin: "30px",
 		gridTemplateColumns: "3fr 1fr",
 		gridColumnGap: "80px",
 	},

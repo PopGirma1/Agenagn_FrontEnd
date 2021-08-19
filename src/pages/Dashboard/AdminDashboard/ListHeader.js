@@ -1,23 +1,16 @@
 import React from "react";
+import { Typography } from "@material-ui/core";
 
 function ListHeader() {
 	return (
-		<div style={headingStyle}>
-			<span>Location</span>
-			<span>Bed Rooms</span>
-			<span>Monthly Rent</span>
-			<span>Submitted Date</span>
-			<span>Review status</span>
+		<div className={this.props.headingStyle}>
+			<Typography variant="h5">Location</Typography>
+			<Typography variant="h5">Bed Rooms</Typography>
+			<Typography variant="h5">Monthly Rent</Typography>
+			<Typography variant="h5">Submitted Date</Typography>
+			<Typography variant="h5">Review status</Typography>
 		</div>
 	);
 }
-
-const headingStyle = {
-	display: "grid",
-	gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
-	gridTemplateRows: "auto",
-	fontSize: "20px",
-	textAlign: "center",
-};
 
 export default ListHeader;
