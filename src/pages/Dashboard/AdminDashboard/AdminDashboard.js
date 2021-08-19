@@ -22,10 +22,10 @@ const useStyles = (theme) => ({
 		height: "100%",
 
 		marginTop: "30px",
-		marginBottom: "30px",
+
 		background: "#E5E5E5",
 
-		paddingTop: "30px",
+		paddingTop: "20px",
 		borderRadius: "15px",
 	},
 	adminFilterStyling: {
@@ -42,12 +42,41 @@ const useStyles = (theme) => ({
 		display: "grid",
 		gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
 		gridTemplateRows: "auto",
-
+		padding: "2em",
 		textAlign: "center",
 	},
 });
 
 class AdminDashboard extends Component {
+	state = {
+		data: [
+			{
+				id: 1,
+				location: "bole",
+				bedroom: 2,
+				monthlyRent: 4000,
+				submittedDate: new Date(),
+			},
+			{
+				id: 2,
+				location: "bole",
+				bedroom: 2,
+				monthlyRent: 6000,
+				submittedDate: new Date(),
+			},
+			{
+				id: 3,
+				location: "bole",
+				bedroom: 2,
+				monthlyRent: 7000,
+				submittedDate: new Date(),
+			},
+		],
+	};
+
+	onClick = () => {
+		console.log("is approved");
+	};
 	render() {
 		const { classes } = this.props;
 
@@ -60,7 +89,11 @@ class AdminDashboard extends Component {
 				<div className={classes.root}>
 					<div className={classes.mainBody}>
 						<ListHeader headingStyle={classes.headingStyle} />
-						<HouseSubmitted dataStyling={classes.headingStyle} />
+						<HouseSubmitted
+							dataStyling={classes.headingStyle}
+							houseData={this.state.data}
+							onClick={this.onClick}
+						/>
 					</div>
 					<div>
 						<AdminFilter adminFilter={classes.adminFilterStyling} />
