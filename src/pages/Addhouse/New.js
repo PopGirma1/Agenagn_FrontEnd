@@ -424,7 +424,7 @@ class NewListing extends React.Component {
             return <Redirect to='/'/>
         }
         return (
-            <div className={classes.root}>
+            <div className={classes.root} id={'AddHouse'}>
                 <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>New
                     Listing</Typography>
 
@@ -538,9 +538,7 @@ class NewListing extends React.Component {
                                 <DatePicker
                                     selected={this.state.phoneNumber}
                                     className={[classes.input]}
-                                    onChange={this.onAvailabilityChanged}
-
-                                />
+                                    onChange={this.onAvailabilityChanged} name={"Date"}/>
                             </div>
                             <Typography variant='body2' id='availabilityError' className={classes.inputError}>You have to
                                 Set Launch Data.</Typography>
@@ -549,7 +547,7 @@ class NewListing extends React.Component {
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2'>Product Network</Typography>
                             <input type="text" placeholder='Enter product Network' className={classes.input}
-                                   onChange={this.onProductNetworkChanged}/>
+                                   onChange={this.onProductNetworkChanged} />
                             <Typography variant='body2' id='networkError' className={classes.inputError}>You have to
                                 enter product network.</Typography>
 
@@ -557,10 +555,9 @@ class NewListing extends React.Component {
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2' style={{marginTop: '10px'}}>Note To Reviewer</Typography>
                             <textarea placeholder='Write note to reviewer' className={classes.textarea}
-                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}/>
+                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}} />
                             <Typography variant='body2' id='noteToReviewerError' className={classes.inputError}>You have
                                 to enter a note to a reviewer</Typography>
-
                         </div>
                         <br/><br/><br/><br/>
                         <div align='right'>

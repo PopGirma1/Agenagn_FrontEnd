@@ -39,11 +39,6 @@ const useStyles = ((theme) => ({
 
 }));
 
-
-
-
-
-
 class NavTabs extends React.Component {
     onLogoutclicked = () =>{
         localStorage.clear();

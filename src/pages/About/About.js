@@ -51,7 +51,7 @@ class About extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div>
+            <div  id={'container'}>
             <div className={classes.root}>
                 <div style={{ background: "#eee" }}>
                     <div
