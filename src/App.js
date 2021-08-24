@@ -13,6 +13,8 @@ import Comment from './pages/Comment'
 import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
 
+import IndexPage from "./pages/IndexPage/IndexPage";
+
 const useStyles = ((theme) => ({
     root: {
 
@@ -59,6 +61,7 @@ class App extends React.Component {
                         <Route  path='/register' component={Signup}/>
                         <Route  path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
                         <Route  path='/comment' component={Comment}/>
+                        <Route  path='/go' component={IndexPage}/>
                     </Container>
                 </BrowserRouter >
                 <Footer/>
