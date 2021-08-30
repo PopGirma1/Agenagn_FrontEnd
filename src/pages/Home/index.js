@@ -13,26 +13,34 @@ import {
     withStyles
 } from '@material-ui/core';
 import backEndApi from "../../services/api";
+import Search from "./Search";
 
 const useStyles = ((theme) => ({
     root: {
-        maxWidth: 345,
+        [theme.breakpoints.down('sm')]:{
+            padding:0,
+            margin:0,
+        }
     },
     media: {
         paddingTop: '56.25%',
     },
-    card: {}
+    card: {},
+
 
 }));
 
 class MainBody extends React.Component {
-    state = {houseDocs: [], };
+    state = {houseDocs: [],};
 
     componentDidMount = async () => {
-        const {data} = await backEndApi.get('./homepage');
+        console.log(this.props.match.params.q);
+        let q = new URLSearchParams(this.props.history.location.search).get('q');
+        const {data} = await backEndApi.get('./search', {params:{q:q}});
         console.log(data);
         this.setState({houseDocs: data})
     };
+
     render() {
         const local = 'http://localhost:5000';
 
@@ -40,7 +48,10 @@ class MainBody extends React.Component {
 
         return (
 
-            <Container maxWidth='md'>
+            <Container maxWidth='md' className={classes.root}>
+                {/*<Search/>*/}
+
+
                 <Grid container spacing={4}>
                     {this.state.houseDocs.map((home) => (
                         <Grid item key={home._id} xs={12} sm={6} md={4}>
@@ -59,7 +70,8 @@ class MainBody extends React.Component {
                                         <Typography variant='body2' color='textSecondary'>Bed Room: <Typography
                                             variant='p' color='textPrimary'>{home.bed_room}</Typography></Typography>
                                         <Typography variant='body2' color='textSecondary'>Monthly Rent: <Typography
-                                            variant='p' color='textPrimary'>{home.monthly_payment} birr</Typography></Typography>
+                                            variant='p'
+                                            color='textPrimary'>{home.monthly_payment} birr</Typography></Typography>
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions>
