@@ -14,23 +14,25 @@ import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
 
 import IndexPage from "./pages/IndexPage/IndexPage";
+import Dashboard from "./pages/dashboard/Dashboard";
+import EditHouse from "./pages/Addhouse/EditHouse";
+import Search from "./pages/Home/Search";
 
 const useStyles = ((theme) => ({
-    root: {
-
-    },
+    root: {},
     mainParts: {
         marginTop: '100px'
     },
 }));
 
 class App extends React.Component {
-    state = {token: ''};
+    state = {token: '', searchKeyword:''};
     setToken = (token) => {
         localStorage.setItem('token', JSON.stringify(token));
 
         this.setState({token: token})
     };
+
 
     getToken = () => {
         const tokenString = localStorage.getItem('token');
@@ -52,18 +54,25 @@ class App extends React.Component {
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <NavTabs getToken={this.getToken}/>
                     <Container className={classes.mainParts}>
-                        <Route  path='/' exact component={MainBody}/>
-                        <Route  path={process.env.PUBLIC_URL + '/detail'} component={Detail}/>
+                        <Route path='/' exact> <Search  /></Route>
+                        <Route path='/search' exact component={(props)=><MainBody {...props} />}/>
+                        <Route path={process.env.PUBLIC_URL + '/detail'} component={Detail}/>
                         {/*<Route  path={process.env.PUBLIC_URL + '/login'} component={LoginRegister}/>*/}
                         <Route path='/login' exact> <LoginRegister setToken={this.setToken}
-                                                           getToken={this.getToken}/></Route>
-                        <Route  path='/userdashboard' component={UserHome}/>
-                        <Route  path='/register' component={Signup}/>
-                        <Route  path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
-                        <Route  path='/comment' component={Comment}/>
-                        <Route  path='/go' component={IndexPage}/>
+                                                                   getToken={this.getToken}/></Route>
+                        <Route path='/signup' exact> <Signup setToken={this.setToken} getToken={this.getToken}/></Route>
+                        {/*<Route  path='/userdashboard' component={UserHome}/>*/}
+                        <Route path='/dashboard' exact> <Dashboard getToken={this.getToken}/></Route>
+
+                        <Route path='/register' component={Signup}/>
+                        <Route path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
+                        <Route path='/edithouse/:id' exact
+                               component={(props) => <EditHouse {...props} getToken={this.getToken}/>}/>
+
+                        <Route path='/comment' component={Comment}/>
+                        <Route path='/go' component={IndexPage}/>
                     </Container>
-                </BrowserRouter >
+                </BrowserRouter>
                 <Footer/>
 
             </div>
