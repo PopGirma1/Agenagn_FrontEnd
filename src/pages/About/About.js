@@ -116,10 +116,7 @@ class About extends Component {
                             className={classes.paragraphStyling}>
                             Software Engineer
                         </Typography>
-
                     </div>
-
-
                 </div>
             </div>
         );
