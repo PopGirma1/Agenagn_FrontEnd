@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 import backEndApi from '../../services/api'
 
-const loginImage = process.env.PUBLIC_URL + '/img/signup.png';
+const loginImage = process.env.PUBLIC_URL + '/img/signup.jpg';
 const useStyles = theme => ({
     root: {
 
@@ -252,7 +252,7 @@ class Login extends React.Component {
 
                                         <Grid item md={6}>
                                             <Box mt={4} style={{fontWeight: '800'}}>Don't have an account?
-                                                <Link href="/signup" variant="body2">
+                                                <Link href="/Signup" variant="body2">
                                                     {" Sign Up"}
                                                 </Link></Box>
                                         </Grid>
