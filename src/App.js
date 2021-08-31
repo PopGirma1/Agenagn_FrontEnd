@@ -14,7 +14,7 @@ import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
 
 import IndexPage from "./pages/IndexPage/IndexPage";
-import Dashboard from "./pages/dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard/";
 import EditHouse from "./pages/Addhouse/EditHouse";
 import Search from "./pages/Home/Search";
 

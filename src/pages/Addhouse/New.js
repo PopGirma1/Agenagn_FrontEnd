@@ -6,6 +6,7 @@ import {Redirect} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import backEndApi from '../../services/api'
+import moment from "moment";
 
 const useStyles = theme => ({
     root: {
@@ -331,29 +332,17 @@ class NewListing extends React.Component {
             document.getElementById('monthlyPaymentError').style.display = 'none';
         }
 
-        this.setState({monthly_payment: e.target.value})
+        this.setState({monthlyPayment: e.target.value})
     };
     onBedroomChanged = (e) => {
-        const changeToInt = parseInt(e.target.value);
-        if (e.target.value.length === 0 || changeToInt > 100) {
+        if (e.target.value.length === 'Select Bed Rooms') {
             document.getElementById('bedRoomError').style.display = 'block';
 
         } else {
             document.getElementById('bedRoomError').style.display = 'none';
 
         }
-        this.setState({bed_room: e.target.value})
-    };
-    onGuestHouseChanged = (e) => {
-
-        if (e.target.value.length === 0) {
-            document.getElementById('guestHouseError').style.display = 'block';
-
-        } else {
-            document.getElementById('guestHouseError').style.display = 'none';
-
-        }
-        this.setState({guestHouse: e.target.value})
+        this.setState({bedRoom: e.target.value})
     };
     onPhoneNumberChanged = (e) => {
 
@@ -366,13 +355,12 @@ class NewListing extends React.Component {
         }
 
 
-        this.setState({phone_number: e.target.value})
+        this.setState({phoneNumber: e.target.value})
 
 
     };
     onAvailabilityChanged = (date) => {
 
-        console.log(date);
         if (date === null) {
             document.getElementById('availabilityError').style.display = 'block';
 
@@ -381,7 +369,7 @@ class NewListing extends React.Component {
 
         }
 
-        this.setState({phoneNumber: date})
+        this.setState({availabilityDate: date})
     };
     onSquareMeterChanged = (e) => {
 
@@ -394,16 +382,6 @@ class NewListing extends React.Component {
         }
         this.setState({squareMeter: e.target.value})
     };
-    onNoteToReviewerChanged = (e) => {
-        /*if (e.target.value.length === 0) {
-            document.getElementById('noteToReviewerError').style.display = 'block';
-
-        } else {
-            document.getElementById('noteToReviewerError').style.display = 'none';
-
-        }*/
-        this.setState({noteToReviewer: e.target.value})
-    };
     onDropZoneChange = (e) => {
         if (e[0]) {
             document.getElementById('dropZoneImage').style.display = 'none';
@@ -412,6 +390,18 @@ class NewListing extends React.Component {
         /*this.setState({file:e.target.files[0]});*/
         this.setState({file: e[0]});
 
+    };
+    onGuestHouseChanged = (e) => {
+
+        if (e.target.value.length === 0) {
+            document.getElementById('guestHouseError').style.display = 'block';
+
+        } else {
+            document.getElementById('guestHouseError').style.display = 'none';
+
+        }
+
+        this.setState({guestHouse: e.target.value === 'yes'})
     };
 
     render() {
@@ -432,30 +422,38 @@ class NewListing extends React.Component {
                     <Grid item xs={12} md={6}>
                         <form>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Product Name</Typography>
+                                <Typography variant='body2'>Location of the Condominium</Typography>
                                 <input type="text" name='Myname' placeholder='Enter Location of the condominium'
                                        className={classes.input}
-                                       onChange={this.onLocationChanged}/>
+                                       onChange={this.onLocationChanged}
+                                       value={this.state.location}
+
+                                />
                                 <Typography variant='body2' id='locationError' className={classes.inputError}>You have
                                     to
                                     entered Location of your condominium.</Typography>
 
                             </div>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Product short Description</Typography>
-                                <textarea className={classes.textarea} placeholder='Enter short description...'
-                                          style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}/>
-                                <Typography variant='body2' align='right' id='remainingCharacter'
-                                            style={{color: '#9e9e9e'}}>({this.characterCounter} Characters
-                                    Remaining)</Typography>
-                                <Typography variant='body2' id='descriptionError' className={classes.inputError}>You
-                                    have to write a description not less than 144 character.</Typography>
+                                <Typography variant='body2'>Bed Rooms</Typography>
+                                <select className={classes.input} value={this.state.bedRoom} onChange={this.onBedroomChanged}>
+                                    <option value="Select Bed Rooms" disabled selected>Select Bed Rooms
+                                    </option>
+                                    <option value='1'>0</option>
+                                    <option value='1'>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+
+                                </select>
+
+                                <Typography type='number' variant='body2' id='bedRoomError' className={classes.inputError}>You have
+                                    to enter number of bed rooms.</Typography>
 
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Floor</Typography>
 
-                                <select className={classes.input} onChange={this.onFloorchanged}>
+                                <select className={classes.input} value={this.state.floor} onChange={this.onFloorchanged}>
                                     <option value="Select Floor" disabled selected>Select Floor
                                     </option>
                                     <option value='1'>1</option>
@@ -472,6 +470,8 @@ class NewListing extends React.Component {
                                 <Typography variant='body2'>Monthly Payment</Typography>
                                 <input type="number" min='0' placeholder='$ 00' className={[classes.input]}
                                        onChange={this.onMonthlyPaymentChanged}
+                                       value={this.state.monthlyPayment}
+
 
                                 />
                                 <Typography variant='body2' id='monthlyPaymentError' className={classes.inputError}>you
@@ -480,35 +480,36 @@ class NewListing extends React.Component {
 
                             </div>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Bed Rooms</Typography>
-                                <input type="number" min='0' max='100' placeholder='00 %' className={[classes.input]}
-                                       onChange={this.onBedroomChanged}/>
-                                <Typography type='number' variant='body2' id='bedRoomError' className={classes.inputError}>You have
-                                    to enter number of bed rooms.</Typography>
-
-                            </div>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>is it Guest House</Typography>
-                                <input type="text" placeholder='is it Guest House' className={classes.input}
-                                       onChange={this.onGuestHouseChanged}/>
-                                <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
-                                    specific if it is guesthouse.</Typography>
-
-
-                            </div>
-                            <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>phone number</Typography>
                                 <input type="text" placeholder='Enter your phone number' className={classes.input}
-                                       onChange={this.onPhoneNumberChanged}/>
+                                       onChange={this.onPhoneNumberChanged}
+                                       value={this.state.phoneNumber}
+
+                                />
                                 <Typography variant='body2' id='phoneNumberError' className={classes.inputError}>You
                                     have
                                     to enter your phone number.</Typography>
 
 
                             </div>
+                            <div className={classes.inputsContainer}>
+                                <Typography variant='body2'>Short description</Typography>
+                                <textarea className={classes.textarea} placeholder='Enter short description...'
+                                          style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}
+                                          value={this.state.description}
+                                />
+                                <Typography variant='body2' align='right' id='remainingCharacter'
+                                            style={{color: '#9e9e9e'}}>({this.characterCounter} Characters
+                                    Remaining)</Typography>
+                                <Typography variant='body2' id='descriptionError' className={classes.inputError}>You
+                                    have to write a description not less than 144 character.</Typography>
+
+                            </div>
+
                         </form>
                     </Grid>
                     <Grid item xs={12} md={6}>
+
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2'>Upload Listing Icon</Typography>
 
@@ -525,9 +526,9 @@ class NewListing extends React.Component {
                                     {/*<DropzoneArea getPreviewIcon={this.handlePreviewIcon}
                                                   dropzoneText="Drag and drop a jpg, png or webp Icon, Or click to add"/>*/}
                                 </Grid>
-                                <Typography variant='body2' id='dropZoneImage' className={classes.inputError}>You have
+                                {/* <Typography variant='body2' id='dropZoneImage' className={classes.inputError}>You have
                                     to
-                                    upload an image.</Typography>
+                                    upload an image.</Typography>*/}
                             </Grid>
                         </div>
                         <div className={[classes.inputsContainer]}>
@@ -536,9 +537,11 @@ class NewListing extends React.Component {
                                    onChange={this.onAvailabilityChanged}/>*/}
                             <div className={classes.dataPicker}>
                                 <DatePicker
-                                    selected={this.state.phoneNumber}
+                                    dateFormat="dd-MM-yyyy"
+                                    selected={this.state.productLaunchDate}
                                     className={[classes.input]}
                                     onChange={this.onAvailabilityChanged}
+                                    value={moment(this.state.availabilityDate).format("DD-MM-YYYY")}
 
                                 />
                             </div>
@@ -549,33 +552,54 @@ class NewListing extends React.Component {
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2'>Square meters</Typography>
                             <input type="text" placeholder='Enter product Network' className={classes.input}
-                                   onChange={this.onSquareMeterChanged}/>
+                                   onChange={this.onSquareMeterChanged}
+                                   value={this.state.editavailabilityDate}
+
+                            />
                             <Typography variant='body2' id='networkError' className={classes.inputError}>You have to
                                 enter square meters.</Typography>
 
                         </div>
                         <div className={classes.inputsContainer}>
+                            <Typography variant='body2'>is it Guest House</Typography>
+                            <label htmlFor="guestYes">Yes</label>
+                            <input type="radio" value='yes' id='guestYes' checked={this.state.guestHouse==='yes'}  name='guestRadio' placeholder='is it Guest House'
+                                   onChange={this.onGuestHouseChanged}
+
+                            />
+                            <label htmlFor="guestNo">No</label>
+
+                            <input type="radio" value='no' id='guestNo'  name='guestRadio'
+                                   onChange={this.onGuestHouseChanged}
+                                   checked={this.state.guestHouse==='no'}
+
+                            />
+                            <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
+                                specific if it is guesthouse.</Typography>
+
+
+                        </div>
+
+                        {/*<div className={classes.inputsContainer}>
                             <Typography variant='body2' style={{marginTop: '10px'}}>Note To Reviewer</Typography>
                             <textarea placeholder='Write note to reviewer' className={classes.textarea}
-                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}/>
+                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}
+                                      value={this.state.editedNoteToReviewer}
+
+                            />
                             <Typography variant='body2' id='noteToReviewerError' className={classes.inputError}>You have
                                 to enter a note to a reviewer</Typography>
 
-                        </div>
+                        </div>*/}
+
                         <br/><br/><br/><br/>
                         <div align='right'>
-                            <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
-                                paddingLeft: '50px', paddingRight: '50px', background: '#9e9e9e',
-                                borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
-                            }}>Save As Draft</Button>
-                            <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
-                                paddingLeft: '50px', paddingRight: '50px', background: '#9e9e9e',
-                                borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
-                            }}> Submit For Review</Button>
+                            {this.choseButton()}
                         </div>
                     </Grid>
 
                 </Grid>
+
             </div>
         );
     }

@@ -139,6 +139,7 @@ class EditHouse extends React.Component {
         phoneNumber:'',
         guestHouse:'',
 
+        availabilityDate:'',
         editedEncodedAvatarUrl: '',
         listingStatus: '',
         reviewStatus: '',
@@ -157,12 +158,13 @@ class EditHouse extends React.Component {
         console.log(data);
         this.setState({
             originalHouseId: data._id,
+            ownerEmail:data.ownerEmail,
             location: data.location,
             bedRoom: parseInt(data.bed_room),
             monthlyPayment: parseInt(data.monthly_payment),
             floor: parseInt(data.floor),
             phoneNumber: parseInt(data.phone_number),
-            guestHouse: data.guest_house,
+            guestHouse: data.guest_house?'yes':'no',
             description: data.description,
 
             listingStatus : data.listingStatus,
@@ -175,24 +177,6 @@ class EditHouse extends React.Component {
 
     };
 
-    /*handlePreviewIcon = (fileObject, classes) => {
-        const {type} = fileObject.file;
-        const iconProps = {
-            className: classes.image,
-        };
-
-        if (type.startsWith("video/")) return <Theaters {...iconProps} />;
-
-        switch (type) {
-            case "application/msword":
-            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                return <Description {...iconProps} />;
-            case "application/pdf":
-                return <PictureAsPdf {...iconProps} />;
-            default:
-                return <AttachFile {...iconProps} />
-        }
-    };*/
 
     onFormSubmit = (e) => {
         e.preventDefault();
@@ -227,9 +211,14 @@ class EditHouse extends React.Component {
             ownerEmail: this.state.ownerEmail,
             location: this.state.location,
             description: this.state.description,
-            bed_room : this.state.bedRoom,
-            guest_house: this.state.guestHouse,
-            monthly_payment: parseInt(this.state.monthlyPayment),
+            bedRoom : parseInt(this.state.bedRoom),
+            floor: parseInt(this.state.floor),
+            monthlyPayment: parseInt(this.state.monthlyPayment),
+            phoneNumber: parseInt(this.state.phoneNumber),
+            guest_house: this.state.guestHouse === 'yes',
+
+
+            availabilityDate:this.state.availabilityDate,
             listingStatus: this.listingStatusFilter(e),
             reviewStatus: this.reviewStatusFilter(e)
         };
@@ -240,60 +229,47 @@ class EditHouse extends React.Component {
         if (!this.state.description) {
             document.getElementById('descriptionError').style.display = 'block';
 
-        } else if (this.characterCounter > 1) {
+        } else if (this.state.description.length < 1) {
             document.getElementById('descriptionError').style.display = 'block';
         }
         if (!this.state.floor) {
             document.getElementById('floorError').style.display = 'block';
 
         }
-        if (!this.state.monthly_payment) {
+        if (!this.state.monthlyPayment) {
             document.getElementById('monthlyPaymentError').style.display = 'block';
 
         }
-        if (!this.state.bed_room) {
+        if (!this.state.bedRoom) {
             document.getElementById('bedRoomError').style.display = 'block';
+
+        }
+        if (!this.state.availabilityDate) {
+            document.getElementById('availabilityError').style.display = 'block';
 
         }
         if (!this.state.guestHouse) {
             document.getElementById('guestHouseError').style.display = 'block';
 
         }
-        if (!this.state.phoneNumber) {
-            document.getElementById('availabilityError').style.display = 'block';
+       /* if (!this.state.phoneNumber) {
+            document.getElementById('phoneNumber').style.display = 'block';
 
-        }
+        }*/
 
-        if (!this.state.file) {
+        /*if (!this.state.file) {
             document.getElementById('dropZoneImage').style.display = 'block';
-        }
+        }*/
 
         if (this.state.location && this.state.description &&
-            this.state.floor && this.state.monthly_payment
+            this.state.floor && this.state.monthlyPayment
             && this.state.guestHouse
-            && this.state.bed_room
-            && this.state.phoneNumber && this.state.file && this.characterCounter < 1
-            && parseInt(this.state.bed_room) < 100) {
+            && this.state.bedRoom
+            && this.state.availabilityDate
+            && this.state.phoneNumber && this.state.description.length > 1
+            && parseInt(this.state.bedRoom) < 100) {
 
             this.submitEditHouseApiRequest(product);
-
-
-
-
-
-            //this.imageUploadApiRequest();
-            /*axios.all([
-                axios.post(`/my-url`, {
-                    myVar: 'myValue'
-                }),
-                axios.post(`/my-url2`, {
-                    myVar: 'myValue'
-                })
-            ])
-                .then(axios.spread((data1, data2) => {
-                    // output of req.
-                    console.log('data1', data1, 'data2', data2)
-                }));*/
 
         } else {
             //for not yet validated
@@ -491,18 +467,17 @@ class EditHouse extends React.Component {
             document.getElementById('monthlyPaymentError').style.display = 'none';
         }
 
-        this.setState({monthly_payment: e.target.value})
+        this.setState({monthlyPayment: e.target.value})
     };
     onBedroomChanged = (e) => {
-        const changeToInt = parseInt(e.target.value);
-        if (e.target.value.length === 0 || changeToInt > 100) {
+        if (e.target.value.length === 'Select Bed Rooms') {
             document.getElementById('bedRoomError').style.display = 'block';
 
         } else {
             document.getElementById('bedRoomError').style.display = 'none';
 
         }
-        this.setState({bed_room: e.target.value})
+        this.setState({bedRoom: e.target.value})
     };
     onGuestHouseChanged = (e) => {
 
@@ -513,7 +488,8 @@ class EditHouse extends React.Component {
             document.getElementById('guestHouseError').style.display = 'none';
 
         }
-        this.setState({guestHouse: e.target.value})
+
+        this.setState({guestHouse: e.target.value==='yes'?'yes':'no'})
     };
     onPhoneNumberChanged = (e) => {
 
@@ -526,7 +502,7 @@ class EditHouse extends React.Component {
         }
 
 
-        this.setState({phone_number: e.target.value})
+        this.setState({phoneNumber: e.target.value})
 
 
     };
@@ -541,7 +517,7 @@ class EditHouse extends React.Component {
 
         }
 
-        this.setState({phoneNumber: date})
+        this.setState({availabilityDate: date})
     };
     onSquareMeterChanged = (e) => {
 
@@ -565,10 +541,10 @@ class EditHouse extends React.Component {
         this.setState({noteToReviewer: e.target.value})
     };
     onDropZoneChange = (e) => {
-        if (e[0]) {
+        /*if (e[0]) {
             document.getElementById('dropZoneImage').style.display = 'none';
 
-        }
+        }*/
         /*this.setState({file:e.target.files[0]});*/
         this.setState({file: e[0]});
 
@@ -586,13 +562,13 @@ class EditHouse extends React.Component {
         return (
             <div className={classes.root}>
                 <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>Edit
-                    Listing</Typography>
+                    House</Typography>
 
                 <Grid container className={classes.firstGrid} spacing={4}>
                     <Grid item xs={12} md={6}>
                         <form>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Product Name</Typography>
+                                <Typography variant='body2'>Location of the Condominium</Typography>
                                 <input type="text" name='Myname' placeholder='Enter Location of the condominium'
                                        className={classes.input}
                                        onChange={this.onLocationChanged}
@@ -605,23 +581,25 @@ class EditHouse extends React.Component {
 
                             </div>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Product short Description</Typography>
-                                <textarea className={classes.textarea} placeholder='Enter short description...'
-                                          style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}
-                                          value={this.state.description}
-                                />
-                                <Typography variant='body2' align='right' id='remainingCharacter'
-                                            style={{color: '#9e9e9e'}}>({this.characterCounter} Characters
-                                    Remaining)</Typography>
-                                <Typography variant='body2' id='descriptionError' className={classes.inputError}>You
-                                    have to write a description not less than 144 character.</Typography>
+                                <Typography variant='body2'>Bed Rooms</Typography>
+                                <select className={classes.input} value={this.state.bedRoom} onChange={this.onBedroomChanged}>
+                                    <option value="Select Bed Rooms" disabled selected>Select Bed Rooms
+                                    </option>
+                                    <option value='1'>0</option>
+                                    <option value='1'>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+
+                                </select>
+
+                                <Typography type='number' variant='body2' id='bedRoomError' className={classes.inputError}>You have
+                                    to enter number of bed rooms.</Typography>
 
                             </div>
-
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Floor</Typography>
 
-                                <select className={classes.input} onChange={this.onFloorchanged}>
+                                <select className={classes.input} value={this.state.floor} onChange={this.onFloorchanged}>
                                     <option value="Select Floor" disabled selected>Select Floor
                                     </option>
                                     <option value='1'>1</option>
@@ -648,29 +626,6 @@ class EditHouse extends React.Component {
 
                             </div>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Bed Rooms</Typography>
-                                <input type="number" min='0' max='100' placeholder='00 %' className={[classes.input]}
-                                       onChange={this.onBedroomChanged}
-                                       value={this.state.bedRoom}
-
-                                />
-                                <Typography type='number' variant='body2' id='bedRoomError' className={classes.inputError}>You have
-                                    to enter number of bed rooms.</Typography>
-
-                            </div>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>is it Guest House</Typography>
-                                <input type="text" placeholder='is it Guest House' className={classes.input}
-                                       onChange={this.onGuestHouseChanged}
-                                       value={this.state.guestHouse}
-
-                                />
-                                <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
-                                    specific if it is guesthouse.</Typography>
-
-
-                            </div>
-                            <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>phone number</Typography>
                                 <input type="text" placeholder='Enter your phone number' className={classes.input}
                                        onChange={this.onPhoneNumberChanged}
@@ -683,6 +638,20 @@ class EditHouse extends React.Component {
 
 
                             </div>
+                            <div className={classes.inputsContainer}>
+                                <Typography variant='body2'>Short description</Typography>
+                                <textarea className={classes.textarea} placeholder='Enter short description...'
+                                          style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}
+                                          value={this.state.description}
+                                />
+                                <Typography variant='body2' align='right' id='remainingCharacter'
+                                            style={{color: '#9e9e9e'}}>({this.characterCounter} Characters
+                                    Remaining)</Typography>
+                                <Typography variant='body2' id='descriptionError' className={classes.inputError}>You
+                                    have to write a description not less than 144 character.</Typography>
+
+                            </div>
+
                         </form>
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -703,9 +672,9 @@ class EditHouse extends React.Component {
                                     {/*<DropzoneArea getPreviewIcon={this.handlePreviewIcon}
                                                   dropzoneText="Drag and drop a jpg, png or webp Icon, Or click to add"/>*/}
                                 </Grid>
-                                <Typography variant='body2' id='dropZoneImage' className={classes.inputError}>You have
+                               {/* <Typography variant='body2' id='dropZoneImage' className={classes.inputError}>You have
                                     to
-                                    upload an image.</Typography>
+                                    upload an image.</Typography>*/}
                             </Grid>
                         </div>
                         <div className={[classes.inputsContainer]}>
@@ -718,7 +687,7 @@ class EditHouse extends React.Component {
                                     selected={this.state.productLaunchDate}
                                     className={[classes.input]}
                                     onChange={this.onAvailabilityChanged}
-                                    value={moment(this.state.editedProductLaunchDate).format("DD-MM-YYYY")}
+                                    value={moment(this.state.availabilityDate).format("DD-MM-YYYY")}
 
                                 />
                             </div>
@@ -730,7 +699,7 @@ class EditHouse extends React.Component {
                             <Typography variant='body2'>Square meters</Typography>
                             <input type="text" placeholder='Enter product Network' className={classes.input}
                                    onChange={this.onSquareMeterChanged}
-                                   value={this.state.editedProductNetwork}
+                                   value={this.state.editavailabilityDate}
 
                             />
                             <Typography variant='body2' id='networkError' className={classes.inputError}>You have to
@@ -738,6 +707,26 @@ class EditHouse extends React.Component {
 
                         </div>
                         <div className={classes.inputsContainer}>
+                            <Typography variant='body2'>is it Guest House</Typography>
+                            <label htmlFor="guestYes">Yes</label>
+                            <input type="radio" value='yes' id='guestYes' checked={this.state.guestHouse==='yes'}  name='guestRadio' placeholder='is it Guest House'
+                                   onChange={this.onGuestHouseChanged}
+
+                            />
+                            <label htmlFor="guestNo">No</label>
+
+                            <input type="radio" value='no' id='guestNo'  name='guestRadio'
+                                   onChange={this.onGuestHouseChanged}
+                                   checked={this.state.guestHouse==='no'}
+
+                            />
+                            <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
+                                specific if it is guesthouse.</Typography>
+
+
+                        </div>
+
+                        {/*<div className={classes.inputsContainer}>
                             <Typography variant='body2' style={{marginTop: '10px'}}>Note To Reviewer</Typography>
                             <textarea placeholder='Write note to reviewer' className={classes.textarea}
                                       onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}
@@ -747,7 +736,8 @@ class EditHouse extends React.Component {
                             <Typography variant='body2' id='noteToReviewerError' className={classes.inputError}>You have
                                 to enter a note to a reviewer</Typography>
 
-                        </div>
+                        </div>*/}
+
                         <br/><br/><br/><br/>
                         <div align='right'>
                             {this.choseButton()}

@@ -37,8 +37,15 @@ const useStyles = ((theme) => ({
         },
         [theme.breakpoints.down('sm')]: {
             fontSize:'20px',
+
         }
     },
+    textAndInput:{
+        display:'flex', alignItems:'center', width:'80%', flexDirection:'column', height:'70vh',
+        [theme.breakpoints.down('sm')]: {
+           width:'100%',
+        }
+    }
 
 
 }));
@@ -74,7 +81,7 @@ function Search(props) {
             justifyContent: 'center',
 
         }}>
-            <div style={{display:'flex', alignItems:'center', width:'100%', flexDirection:'column', height:'70vh'}}>
+            <div className={classes.textAndInput}  >
                 <h1 style={{fontSize: '40px'}}><span style={{color: '#ee662d'}}>A</span>genagn</h1>
                 <form className={classes.searchBarHolder} onSubmit={onFormSubmit}>
                     <input type="text" value={keyword} placeholder="Ayat Condominium" className={classes.searchBar} onChange={onInputChange}/>
