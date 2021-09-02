@@ -21,8 +21,4 @@ describe("renders the home page",()=>{
         cy.get('[id="filled-basic"]').should("exist")
     })
 
-    it("check if it has a value ", ()=>{
-        cy.visit("/About")
-        cy.get('[id="filled-basic"]').should('have.type', 'submit')
-    })
 });

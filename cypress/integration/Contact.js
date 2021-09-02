@@ -1,13 +1,12 @@
-describe("renders the home page",()=>{
-    it("finds the (send message) text" , ()=>{
+describe("We are searching for you! Let’s get in touch!",()=>{
+    it("We are searching for you! Let’s get in touch!" , ()=>{
         cy.visit("/Contact");
-        cy.get('.bt-submit').contains('Send Message') // Yield el in .bt-submit containing 'Send Message'
+        cy.contains("We are searching for you! Let’s get in touch!");
     })
 
-    it("finds the input type email ", ()=>{
 
-        cy.visit("/Contact");
-        cy.get('h4').contains('Wants to contact US? feel free');
-
-    })
 });
+
+
+
+
