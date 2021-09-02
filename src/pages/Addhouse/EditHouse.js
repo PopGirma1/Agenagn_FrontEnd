@@ -5,7 +5,8 @@ import {Redirect} from "react-router-dom";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import backEndApi from '../../services/api'
+import backEndApi from '../../services/api';
+import moment from "moment";
 
 const useStyles = theme => ({
     root: {
@@ -25,7 +26,7 @@ const useStyles = theme => ({
         },
     },
     firstGrid: {
-        background: '#EEEEEE',
+        background: '#F2EDD7',
         boxShadow: '-9px 18px 16px rgba(0, 0, 0, 0.05)',
         borderRadius: '5px',
     },
@@ -36,8 +37,8 @@ const useStyles = theme => ({
         width: '100%',
         height: '40px',
         borderRadius: '5px',
-        border: '0.5px solid #9e9e9e',
-        background: '#EEEEEE',
+        border: '0.5px solid #E48257',
+        background: '#F2EDD7',
         "&::-webkit-input-placeholder": {
             color: 'rgba(57,50,50,0.3)'
         },
@@ -68,8 +69,8 @@ const useStyles = theme => ({
         padding: '10px',
         resize: 'none',
         width: '100%',
-        background: '#EEEEEE',
-        border: '0.5px solid #9e9e9e',
+        background: '#F2EDD7',
+        border: '0.5px solid rgba(228, 130, 87, 0.8)',
         borderRadius: '5px',
         height: '120px',
         "&::-webkit-input-placeholder": {
@@ -94,12 +95,12 @@ const useStyles = theme => ({
     },
     dropZone: {
         "& .MuiDropzoneArea-root": {
-            background: '#EEEEEE',
+            background: '#F2EDD7',
             marginBottom: '30px',
             maxHeight: '243',
             height: '210px',
             minHeight: '200px',
-            border: '.5px solid #9e9e9e',
+            border: '.5px solid rgba(228, 130, 87, 0.8)',
 
         },
         "& .MuiTypography-h5": {
@@ -108,13 +109,13 @@ const useStyles = theme => ({
         },
         "& .MuiDropzoneArea-text": {
             marginTop: '130px',
-            color: '#9e9e9e'
+            color: '#E48257'
         },
         "& .MuiSvgIcon-root": {
             display: 'flex',
             marginTop: '-100px',
             marginLeft: '110px',
-            color: "#9e9e9e"
+            color: "#E48257"
         }
     },
     inputError: {
@@ -124,24 +125,55 @@ const useStyles = theme => ({
     },
 });
 
-class NewListing extends React.Component {
+class EditHouse extends React.Component {
     state = {
 
+        originalHouseId: '',
+        ownerEmail: '',
         location: '',
-        bed_room: '',
-        monthly_payment: '',
-        floor: '',
-        phone_number: '',
-        guest_house: '',
         description: '',
 
-        file: null,
+        bedRoom:'',
+        monthlyPayment:'',
+        floor:'',
+        phoneNumber:'',
+        guestHouse:'',
+
+        editedEncodedAvatarUrl: '',
+        listingStatus: '',
+        reviewStatus: '',
+
         errorMessage: '',
+        file: null,
+
         isRedirectToHomepage: false,
+        submitValue: '',
 
     };
     characterCounter = 144;
 
+    componentDidMount = async () => {
+        const {data} = await backEndApi.get('./edithouse', {params: {id: this.props.match.params.id}})
+        console.log(data);
+        this.setState({
+            originalHouseId: data._id,
+            location: data.location,
+            bedRoom: parseInt(data.bed_room),
+            monthlyPayment: parseInt(data.monthly_payment),
+            floor: parseInt(data.floor),
+            phoneNumber: parseInt(data.phone_number),
+            guestHouse: data.guest_house,
+            description: data.description,
+
+            listingStatus : data.listingStatus,
+            reviewStatus :  data.reviewStatus,
+
+            editedEncodedAvatarUrl: data.encodedAvatarUrl,
+            file:null, /*['http://localhost:5000/images/products/' + data.encodedAvatarUrl + ".jpg"]*/
+
+        });
+
+    };
 
     /*handlePreviewIcon = (fileObject, classes) => {
         const {type} = fileObject.file;
@@ -168,37 +200,38 @@ class NewListing extends React.Component {
         this.validateForm(e);
     };
     listingStatusFilter = (e) => {
-        if (e.currentTarget.value === "Pending") {
+        console.log(e.currentTarget.value, this.state.listingStatus)
+        if (e.currentTarget.value === "NA" && this.state.listingStatus === "Submitted") {
+            return "Draft"
+        } else if (e.currentTarget.value === "Pending" && this.state.listingStatus === "Draft") {
             return "Submitted"
-        }else{
-        return "Draft"
+        }/*else if (e.currentTarget.value === "Inactive" && this.state.listingStatus === "Active"){
+            return "Inactive"
+        }else if (e.currentTarget.value === "Active" && this.state.listingStatus === "Inactive"){
+            return "Active"
+        }*/ else {
+            return this.state.listingStatus
         }
+    };
+    reviewStatusFilter = (e) => {
 
+        return e.currentTarget.value;
     };
     validateForm = (e) => {
 
 
-        /*const jvLinkParse = () =>{
-            if(!(this.state.phone_number.indexOf('http://') > -1)){
-                return "http://" + this.state.phone_number
-            }else{
-                return this.state.phone_number
-            }
-        };
-        console.log(jvLinkParse());*/
+
 
         const product = {
-
+            originalId: this.state.originalHouseId,
+            ownerEmail: this.state.ownerEmail,
             location: this.state.location,
-            bedRoom: parseInt(this.state.bed_room),
-            monthlyPayment: parseInt(this.state.monthly_payment),
-            floor: parseInt(this.state.floor),
-            phoneNumber: parseInt(this.state.phone_number),
-            guestHouse: this.state.guest_house,
             description: this.state.description,
-
-            listingStatus : this.listingStatusFilter(e),
-            reviewStatus :  e.currentTarget.value
+            bed_room : this.state.bedRoom,
+            guest_house: this.state.guestHouse,
+            monthly_payment: parseInt(this.state.monthlyPayment),
+            listingStatus: this.listingStatusFilter(e),
+            reviewStatus: this.reviewStatusFilter(e)
         };
 
         if (!this.state.location) {
@@ -241,10 +274,11 @@ class NewListing extends React.Component {
             && this.state.bed_room
             && this.state.phoneNumber && this.state.file && this.characterCounter < 1
             && parseInt(this.state.bed_room) < 100) {
-            //Api request or form submit to backend.
+
+            this.submitEditHouseApiRequest(product);
 
 
-            this.submitNewListingApiRequest(product);
+
 
 
             //this.imageUploadApiRequest();
@@ -263,43 +297,169 @@ class NewListing extends React.Component {
 
         } else {
             //for not yet validated
+            console.log("Form Not Validated")
 
         }
 
 
     };
 
-    submitNewListingApiRequest = async (newLaunchDetails) => {
+    submitEditHouseApiRequest = async (newLaunchDetails) => {
         /*let user = this.props.getToken();*/
 
         const formData = new FormData();
         formData.append('file', this.state.file);
         const config = {
             headers: {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
             }
         };
 
-        let response = await backEndApi.post('/addhouse', {params: newLaunchDetails});
-        let resImage = await backEndApi.post('/uploadHouseImage', formData, config);
+        let response = await backEndApi.post('/editHouseUpdate', {params: newLaunchDetails});
+        let resImage = await backEndApi.post('/uploadProductImage', formData, config);
 
-        console.log("The files and Image success fully uploaded" + response);
-        this.setState({isRedirectToHomepage: true,})
+
+        console.log("The files and Image success fully uploaded" + response + resImage);
+        this.setState({isRedirectToHomepage: true})
 
     };
 
+    choseButton = () => {
+
+        switch (this.state.listingStatus) {
+            case 'Active' :
+                if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
+                    return <>
+
+                        <Button onClick={this.onFormSubmit} value='Approved' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}>Cancel Review</Button>
+                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>;
+                } else if (this.state.reviewStatus === "Approved") {
+                    return <>
+
+                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>
+                } else {
+                    return <>
+                        <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}>Cancel Review</Button>
+                        <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>
+                }
+
+            case 'Inactive' :
+                if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
+                    return <>
+
+                        <Button onClick={this.onFormSubmit} value='Approved' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}>Cancel Review</Button>
+                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>;
+                } else if (this.state.reviewStatus === "Approved") {
+                    return <>
+
+                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>
+                } else {
+                    return <>
+                        <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}>Cancel Review</Button>
+                        <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>
+                }
+            case 'Draft' :
+                return <>
+                    <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
+                        paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                        borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                    }}>Save As Draft</Button>
+                    <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                        paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                        borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                    }}>Submit For Review</Button>
+
+                </>;
+            case 'Submitted' :
+                if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
+                    return <>
+                        <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}>Cancel Review</Button>
+                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>;
+                } else if (this.state.reviewStatus === "Approved") {
+                    return <>
+                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>
+                } else {
+                    return <>
+                        <Button onClick={this.onFormSubmit} value='Draft' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}>Cancel Review</Button>
+                        <Button onClick={this.onFormSubmit} value='Submitted' variant='contained' style={{
+                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                        }}> Update Detail</Button>
+
+                    </>
+                }
+            default:
+                return <div>Something occur</div>
+        }
+    };
 
     onLocationChanged = (e) => {
         if (e.target.value.length === 0) {
+
             document.getElementById('locationError').style.display = 'block';
         } else {
             document.getElementById('locationError').style.display = 'none';
 
         }
-        this.setState({location: e.target.value});
-        if (e.target.value !== 1) {
-            this.setState({location: e.target.value})
-        }
+        this.setState({location: e.target.value})
     };
 
     onDescriptionChanged = (e) => {
@@ -421,11 +581,11 @@ class NewListing extends React.Component {
             return <Redirect to='/login'/>
         }
         if (this.state.isRedirectToHomepage) {
-            return <Redirect to='/'/>
+            return <Redirect to='/dashboard'/>
         }
         return (
             <div className={classes.root}>
-                <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>New
+                <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>Edit
                     Listing</Typography>
 
                 <Grid container className={classes.firstGrid} spacing={4}>
@@ -435,7 +595,10 @@ class NewListing extends React.Component {
                                 <Typography variant='body2'>Product Name</Typography>
                                 <input type="text" name='Myname' placeholder='Enter Location of the condominium'
                                        className={classes.input}
-                                       onChange={this.onLocationChanged}/>
+                                       onChange={this.onLocationChanged}
+                                       value={this.state.location}
+
+                                />
                                 <Typography variant='body2' id='locationError' className={classes.inputError}>You have
                                     to
                                     entered Location of your condominium.</Typography>
@@ -444,7 +607,9 @@ class NewListing extends React.Component {
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Product short Description</Typography>
                                 <textarea className={classes.textarea} placeholder='Enter short description...'
-                                          style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}/>
+                                          style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}
+                                          value={this.state.description}
+                                />
                                 <Typography variant='body2' align='right' id='remainingCharacter'
                                             style={{color: '#9e9e9e'}}>({this.characterCounter} Characters
                                     Remaining)</Typography>
@@ -452,6 +617,7 @@ class NewListing extends React.Component {
                                     have to write a description not less than 144 character.</Typography>
 
                             </div>
+
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Floor</Typography>
 
@@ -472,6 +638,8 @@ class NewListing extends React.Component {
                                 <Typography variant='body2'>Monthly Payment</Typography>
                                 <input type="number" min='0' placeholder='$ 00' className={[classes.input]}
                                        onChange={this.onMonthlyPaymentChanged}
+                                       value={this.state.monthlyPayment}
+
 
                                 />
                                 <Typography variant='body2' id='monthlyPaymentError' className={classes.inputError}>you
@@ -482,7 +650,10 @@ class NewListing extends React.Component {
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Bed Rooms</Typography>
                                 <input type="number" min='0' max='100' placeholder='00 %' className={[classes.input]}
-                                       onChange={this.onBedroomChanged}/>
+                                       onChange={this.onBedroomChanged}
+                                       value={this.state.bedRoom}
+
+                                />
                                 <Typography type='number' variant='body2' id='bedRoomError' className={classes.inputError}>You have
                                     to enter number of bed rooms.</Typography>
 
@@ -490,7 +661,10 @@ class NewListing extends React.Component {
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>is it Guest House</Typography>
                                 <input type="text" placeholder='is it Guest House' className={classes.input}
-                                       onChange={this.onGuestHouseChanged}/>
+                                       onChange={this.onGuestHouseChanged}
+                                       value={this.state.guestHouse}
+
+                                />
                                 <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
                                     specific if it is guesthouse.</Typography>
 
@@ -499,7 +673,10 @@ class NewListing extends React.Component {
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>phone number</Typography>
                                 <input type="text" placeholder='Enter your phone number' className={classes.input}
-                                       onChange={this.onPhoneNumberChanged}/>
+                                       onChange={this.onPhoneNumberChanged}
+                                       value={this.state.phoneNumber}
+
+                                />
                                 <Typography variant='body2' id='phoneNumberError' className={classes.inputError}>You
                                     have
                                     to enter your phone number.</Typography>
@@ -509,6 +686,7 @@ class NewListing extends React.Component {
                         </form>
                     </Grid>
                     <Grid item xs={12} md={6}>
+
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2'>Upload Listing Icon</Typography>
 
@@ -536,9 +714,11 @@ class NewListing extends React.Component {
                                    onChange={this.onAvailabilityChanged}/>*/}
                             <div className={classes.dataPicker}>
                                 <DatePicker
-                                    selected={this.state.phoneNumber}
+                                    dateFormat="dd-MM-yyyy"
+                                    selected={this.state.productLaunchDate}
                                     className={[classes.input]}
                                     onChange={this.onAvailabilityChanged}
+                                    value={moment(this.state.editedProductLaunchDate).format("DD-MM-YYYY")}
 
                                 />
                             </div>
@@ -549,7 +729,10 @@ class NewListing extends React.Component {
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2'>Square meters</Typography>
                             <input type="text" placeholder='Enter product Network' className={classes.input}
-                                   onChange={this.onSquareMeterChanged}/>
+                                   onChange={this.onSquareMeterChanged}
+                                   value={this.state.editedProductNetwork}
+
+                            />
                             <Typography variant='body2' id='networkError' className={classes.inputError}>You have to
                                 enter square meters.</Typography>
 
@@ -557,21 +740,17 @@ class NewListing extends React.Component {
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2' style={{marginTop: '10px'}}>Note To Reviewer</Typography>
                             <textarea placeholder='Write note to reviewer' className={classes.textarea}
-                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}/>
+                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}
+                                      value={this.state.editedNoteToReviewer}
+
+                            />
                             <Typography variant='body2' id='noteToReviewerError' className={classes.inputError}>You have
                                 to enter a note to a reviewer</Typography>
 
                         </div>
                         <br/><br/><br/><br/>
                         <div align='right'>
-                            <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
-                                paddingLeft: '50px', paddingRight: '50px', background: '#9e9e9e',
-                                borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
-                            }}>Save As Draft</Button>
-                            <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
-                                paddingLeft: '50px', paddingRight: '50px', background: '#9e9e9e',
-                                borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
-                            }}> Submit For Review</Button>
+                            {this.choseButton()}
                         </div>
                     </Grid>
 
@@ -582,7 +761,7 @@ class NewListing extends React.Component {
 
 }
 
-export default withStyles(useStyles)(NewListing);
+export default withStyles(useStyles)(EditHouse);
 
 
 

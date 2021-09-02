@@ -17,7 +17,7 @@ const useStyles = theme => ({
         /* backgroundColor: '#333',*/
         marginTop: '60px',
         padding: '50px !important',
-        background: 'rgba(242,237,215,0.21)',
+        background: 'rgba(245,245,245,0.87)',
         borderRadius: '15px',
         "& a": {
             color: '#3A6351',
@@ -40,19 +40,18 @@ const useStyles = theme => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        background: '#3A6351',
+        background: '#3F51B5',
         borderRadius: '5px',
         width: '406px',
         height: '50px',
         margin: theme.spacing(3, 0, 2),
         "&:hover": {
-            background: 'rgba(64,98,64,0.8)',
+            background: 'rgba(53,68,152,0.79)',
         }
     },
     textField: {
         marginBottom: '15px',
         padding: '0px',
-        background: "#F2EDD7",
         borderRadius: '5px',
         borderTopLeftRadius: '10px',
         borderBottomLeftRadius: '10px',
@@ -60,7 +59,7 @@ const useStyles = theme => ({
         border: '0px solid #eee',
 
         borderLeftWidth: '7px',
-        borderLeftColor: '#E48257',
+        borderLeftColor: 'rgba(215,215,215,0.87)',
         "& input": {
             color: "rgba(57,50,50,0.25)",
             border: '0px solid #eee',
@@ -70,7 +69,7 @@ const useStyles = theme => ({
 
     },
     inputAdornment: {
-        background: '#E48257',
+        background: 'rgba(215,215,215,0.87)',
         borderRadius: '7px 0px 0px 7px',
 
     },
@@ -196,7 +195,7 @@ class Signup extends React.Component {
                 <Grid container className={classes.root}>
 
                     <Grid item xs={12} md={5} style={{
-                        backgroundColor: "rgba(228,130,87,0.21)",
+                        backgroundColor: "rgba(185,194,226,0.66)",
 
                         borderRadius: '15px', marginBottom: 'auto'
                     }}>
