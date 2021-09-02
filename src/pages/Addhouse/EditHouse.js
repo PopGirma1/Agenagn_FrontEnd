@@ -329,7 +329,7 @@ class EditHouse extends React.Component {
         switch (this.state.listingStatus) {
             case 'Active' :
                 if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
-                    return <>
+                    return <div>
 
                         <Button onClick={this.onFormSubmit} value='Approved' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
@@ -340,18 +340,18 @@ class EditHouse extends React.Component {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>;
+                    </div>;
                 } else if (this.state.reviewStatus === "Approved") {
-                    return <>
+                    return <div>
 
                         <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </div>
                 } else {
-                    return <>
+                    return <div>
                         <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -361,12 +361,12 @@ class EditHouse extends React.Component {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </div>
                 }
 
             case 'Inactive' :
                 if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
-                    return <>
+                    return <div>
 
                         <Button onClick={this.onFormSubmit} value='Approved' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
@@ -377,18 +377,18 @@ class EditHouse extends React.Component {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>;
+                    </div>;
                 } else if (this.state.reviewStatus === "Approved") {
-                    return <>
+                    return <div>
 
                         <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </div>
                 } else {
-                    return <>
+                    return <div>
                         <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -398,10 +398,10 @@ class EditHouse extends React.Component {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </div>
                 }
             case 'Draft' :
-                return <>
+                return <div>
                     <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
                         paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                         borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -411,10 +411,10 @@ class EditHouse extends React.Component {
                         borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                     }}>Submit For Review</Button>
 
-                </>;
+                </div>;
             case 'Submitted' :
                 if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
-                    return <>
+                    return <div>
                         <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -424,17 +424,17 @@ class EditHouse extends React.Component {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>;
+                    </div>;
                 } else if (this.state.reviewStatus === "Approved") {
-                    return <>
+                    return <div>
                         <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </div>
                 } else {
-                    return <>
+                    return <div>
                         <Button onClick={this.onFormSubmit} value='Draft' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -444,7 +444,7 @@ class EditHouse extends React.Component {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </div>
                 }
             default:
                 return <div>Something occur</div>

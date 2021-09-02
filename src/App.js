@@ -9,12 +9,10 @@ import Detail from './pages/Details/'
 import LoginRegister from './pages/Authentication/Login'
 import UserHome from './pages/Authentication/HomeRegistrationForm/UserHome'
 import Footer from './components/Footer'
-import Comment from './pages/Comment'
 import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
 
-import IndexPage from "./pages/IndexPage/IndexPage";
-import Dashboard from "./pages/dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard/dashboard";
 import EditHouse from "./pages/Addhouse/EditHouse";
 import Search from "./pages/Home/Search";
 
@@ -69,8 +67,8 @@ class App extends React.Component {
                         <Route path='/edithouse/:id' exact
                                component={(props) => <EditHouse {...props} getToken={this.getToken}/>}/>
 
-                        <Route path='/comment' component={Comment}/>
-                        <Route path='/go' component={IndexPage}/>
+                        {/*<Route path='/comment' component={Comment}/>
+                        <Route path='/go' component={IndexPage}/>*/}
                     </Container>
                 </BrowserRouter>
                 <Footer/>

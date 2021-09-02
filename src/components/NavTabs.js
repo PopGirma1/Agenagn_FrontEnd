@@ -87,24 +87,24 @@ class NavTabs extends React.Component {
     isAuthnticated = () => {
         if (this.props.getToken()) {
             return (
-                <>
+                <div>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/addhouse'}>Add House</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/dashboard'}>Dashboard</Button></ListItem>
                     <ListItem><Button href='/' onClick={this.onLogoutclicked}>logout</Button></ListItem>
-                </>
+                </div>
 
             )
         } else {
             return (
-                <>
+                <div>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/login'}>login</Button></ListItem>
-                </>
+                </div>
 
             )
         }
@@ -114,7 +114,7 @@ class NavTabs extends React.Component {
         const {classes} = this.props;
 
         if (isWidthDown('sm', this.props.width)) {
-            if (this.state.isHumActive) {
+            if (this.state.isHum ) {
                 return (
                     <div style={{
                         display: 'flex',

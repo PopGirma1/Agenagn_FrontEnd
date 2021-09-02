@@ -370,7 +370,7 @@ password = qw
     );
 
     return (
-        <>
+        <div>
             {/*<button type="button" onClick={handleOpen}>
                 Open Modal
             </button>*/}
@@ -386,6 +386,6 @@ password = qw
             >
                 {body}
             </Modal>
-        </>
+        </div>
     );
 }
