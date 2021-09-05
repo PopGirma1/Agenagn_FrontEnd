@@ -1,79 +1,99 @@
 import React from 'react';
-import {Checkbox, Container, FormControlLabel, Grid, withStyles} from "@material-ui/core";
+import {Checkbox, div, FormControlLabel, withStyles} from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography'
 
 import backEndApi from '../../services/api'
-import {Redirect} from "react-router-dom";
 
-const SignupImage = process.env.PUBLIC_URL + '/img/signup.png';
+const SignupImage = process.env.PUBLIC_URL + '/img/home2.png';
 
 const useStyles = theme => ({
-    root: {
-        /* backgroundColor: '#333',*/
-        marginTop: '60px',
-        padding: '50px !important',
-        background: 'rgba(245,245,245,0.87)',
-        borderRadius: '15px',
-        "& a": {
-            color: '#3A6351',
+        container: {
+            width: '100%',
+            paddingLeft: '16px',
+            paddingRight: '16px',
+            [theme.breakpoints.down('sm')]: {
+                paddingLeft: 5,
+                paddingRight: 5,
+            }
+
         },
+        root: {
+            display: 'flex',
+            justifyContent: 'space-around',
+            flexWrap: 'wrap',
+            background: 'rgba(238,238,238,0.87)',
+            borderRadius: '15px',
+            height: '100vh',
+            padding: 10,
+            "& a": {
+                color: '#3A6351',
+            },
 
 
-    },
-    paper: {
-        marginTop: theme.spacing(4),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        background: '#3F51B5',
-        borderRadius: '5px',
-        width: '406px',
-        height: '50px',
-        margin: theme.spacing(3, 0, 2),
-        "&:hover": {
-            background: 'rgba(53,68,152,0.79)',
-        }
-    },
-    textField: {
-        marginBottom: '15px',
-        padding: '0px',
-        borderRadius: '5px',
-        borderTopLeftRadius: '10px',
-        borderBottomLeftRadius: '10px',
-        width: '406px',
-        border: '0px solid #eee',
-
-        borderLeftWidth: '7px',
-        borderLeftColor: 'rgba(215,215,215,0.87)',
-        "& input": {
-            color: "rgba(57,50,50,0.25)",
+        },
+        avatar: {
+            margin: theme.spacing(1),
+            backgroundColor: theme.palette.secondary.main,
+        },
+        form: {
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', height: '40vh',
+            width: '100%',
+            [theme.breakpoints.down('sm')]: {
+                /*width:'80%'*/
+            }
+        },
+        submit: {background: '#3F51B5',
+            borderRadius:
+                '5px',
+            width:
+                '100%',
+            height:
+                '50px',
+            margin:
+                theme.spacing(3, 0, 2),
+            "&:hover":
+                {
+                    background: 'rgba(53,68,152,0.79)',
+                }
+        },
+        textField: {
+            margin: '10px 0',
+            borderRadius: '5px',
+            borderTopLeftRadius: '10px',
+            borderBottomLeftRadius: '10px',
             border: '0px solid #eee',
-            borderRadius: '30px',
+            borderLeftWidth: '7px',
+            borderLeftColor: 'rgba(215,215,215,0.87)',
+            "& input": {
+                color: "rgba(57,50,50,0.25)",
+                border: '0px solid #eee',
+                borderRadius: '30px',
+                width: '100%',
+            },
+        },
+        inputAdornment: {
+            background: 'rgba(215,215,215,0.87)',
+            borderRadius:
+                '7px 0px 0px 7px',
 
         },
-
-    },
-    inputAdornment: {
-        background: 'rgba(215,215,215,0.87)',
-        borderRadius: '7px 0px 0px 7px',
-
-    },
-});
+        imgHolder: {
+            marginTop: '20px',
+            backgroundColor: "rgba(185,194,226,0.66)",
+            borderRadius: '15px',
+            marginBottom: 'auto',
+            display: 'flex',
+            [theme.breakpoints.down('sm')]:
+                {
+                    display: 'none'
+                }
+        }
+    })
+;
 
 class Signup extends React.Component {
     state = {
@@ -94,14 +114,14 @@ class Signup extends React.Component {
         this.validateInput();
 
     };
-    signUpApiRequest = async (signUpDetails) =>{
+    signUpApiRequest = async (signUpDetails) => {
         const {data} = await backEndApi.post('/signUpUser', signUpDetails);
         if (data === "userExist") {
             this.setState({errorMessage: "The email that you have provided is already in use."})
         } else {
             this.setState({
                 redirect: true,
-                errorMessage : '',
+                errorMessage: '',
                 successMessage: 'You have successfully  Signed Up.'
             });
 
@@ -184,6 +204,7 @@ class Signup extends React.Component {
         }
 
     };
+
     render() {
         /*if (this.state.redirect || this.props.getToken()) {
             return <Redirect to='/login'/>
@@ -191,126 +212,114 @@ class Signup extends React.Component {
         }*/
         const {classes} = this.props;
         return (
-            <Container maxWidth='lg'>
-                <Grid container className={classes.root}>
+            <div className={classes.container}>
+                <div className={classes.root}>
 
-                    <Grid item xs={12} md={5} style={{
-                        backgroundColor: "rgba(185,194,226,0.66)",
-
-                        borderRadius: '15px', marginBottom: 'auto'
-                    }}>
-                        <img src={SignupImage} alt="" height='420px' style={{
+                    <div className={classes.imgHolder}>
+                        <img src={SignupImage} alt="" width='93%' height='420px' style={{
                             borderRadius: '8px',
                             marginTop: '20px',
                             marginLeft: '20px',
-                            marginBottom: '-20px'
+                            marginBottom: '-20px',
                         }}/>
+                    </div>
 
-                    </Grid> {/*height='446px' width='490px' */}
-                    <Grid item xs={1} md={2}> {/*<Divider orientation='vertical'/>*/}</Grid>
+                    <div style={{display: 'flex', flexDirection: 'column',}}>
 
-                    <Grid item xs={12} md={5}>
-                        <Container component="main" maxWidth="xs">
-                            <CssBaseline/>
-                            <div className={classes.paper}>
+                        <Typography align='center' component="h1" variant="h5" style={{padding: 10}}>
+                            Sign Up
+                        </Typography>
+                        <form className={classes.form} noValidate onSubmit={this.onFormSubmit}>
 
-                                <Typography component="h1" variant="h5"
-                                            style={{paddingBottom: '30px', marginTop: '-60px'}}>
-                                    Sign Up
-                                </Typography>
-                                <form className={classes.form} noValidate onSubmit={this.onFormSubmit}>
+                            <TextField
+                                variant="outlined"
+                                margin="none"
+                                required
+                                fullWidth
+                                id="name"
+                                onChange={this.onNameChange}
+                                label="Name"
+                                name="name"
+                                autoFocus
+                                className={classes.textField}
 
-                                    <TextField
-                                        variant="outlined"
-                                        margin="none"
-                                        required
-                                        fullWidth
-                                        id="text"
-                                        onChange={this.onNameChange}
-                                        label="Name"
-                                        name="name"
-                                        autoFocus
-                                        className={classes.textField}
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="none"
+                                required
+                                fullWidth
+                                id="email"
+                                onChange={this.onEmailChange}
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                className={classes.textField}
 
-                                    />
-                                    <TextField
-                                        variant="outlined"
-                                        margin="none"
-                                        required
-                                        fullWidth
-                                        id="email"
-                                        onChange={this.onEmailChange}
-                                        label="Email Address"
-                                        name="email"
-                                        autoComplete="email"
-                                        autoFocus
-                                        className={classes.textField}
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="none"
+                                required
+                                fullWidth
+                                name="password"
+                                onChange={this.onPasswordChange}
 
-                                    />
-                                    <TextField
-                                        variant="outlined"
-                                        margin="none"
-                                        required
-                                        fullWidth
-                                        name="password"
-                                        onChange={this.onPasswordChange}
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                className={classes.textField}
 
-                                        label="Password"
-                                        type="password"
-                                        id="password"
-                                        autoComplete="current-password"
-                                        className={classes.textField}
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="none"
+                                required
+                                fullWidth
+                                onChange={this.onConfirmPasswordChange}
 
-                                    />
-                                    <TextField
-                                        variant="outlined"
-                                        margin="none"
-                                        required
-                                        fullWidth
-                                        onChange={this.onConfirmPasswordChange}
+                                label="Confirm Password"
+                                name='confirmPassword'
+                                type="password"
+                                id="password"
 
-                                        label="Confirm Password"
-                                        name='confirmPassword'
-                                        type="password"
-                                        id="password"
+                                className={classes.textField}
 
-                                        className={classes.textField}
+                            />
 
-                                    />
+                            <FormControlLabel
+                                control={<Checkbox value="remember" color="primary"
+                                                   onChange={this.onCheckboxChange}/>}
+                                label="I have read and agreed to Privacy Policy  & TOU"
+                            />
 
-                                    <FormControlLabel
-                                        control={<Checkbox value="remember" color="primary"
-                                                           onChange={this.onCheckboxChange}/>}
-                                        label="I have read and agreed to Privacy Policy  & TOU"
-                                    />
+                            {this.state.errorMessage ? this.errorcheck() : this.successCheck()}
 
-                                    {this.state.errorMessage ? this.errorcheck() : this.successCheck()}
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Sign Up
+                            </Button>
+                            <div>
 
-                                    <Button
-                                        type="submit"
-                                        fullWidth
-                                        variant="contained"
-                                        color="primary"
-                                        className={classes.submit}
-                                    >
-                                        Sign Up
-                                    </Button>
-                                    <Grid container justify='center'>
-
-                                        <Grid item md={6}>
-                                            <Box mt={4} style={{fontWeight: '800'}}>Already have an account
-                                                <Link href="/login" variant="body2">
-                                                    {" Log in"}
-                                                </Link></Box>
-                                        </Grid>
-                                    </Grid>
-                                </form>
+                                <div>
+                                    <Box mt={4} style={{fontWeight: '800'}}>Already have an account
+                                        <Link href="/login" variant="body2">
+                                            {" Log in"}
+                                        </Link></Box>
+                                </div>
                             </div>
+                        </form>
 
-                        </Container>
-                    </Grid>
-                </Grid>
-            </Container>
+                    </div>
+                </div>
+            </div>
         );
     }
 

@@ -56,7 +56,7 @@ class App extends React.Component {
                     <Container className={classes.mainParts}>
                         <Route path='/' exact> <Search  /></Route>
                         <Route path='/search' exact component={(props)=><MainBody {...props} />}/>
-                        <Route path={process.env.PUBLIC_URL + '/detail'} component={Detail}/>
+                        <Route path={process.env.PUBLIC_URL + '/detail/:id'} component={Detail}/>
                         {/*<Route  path={process.env.PUBLIC_URL + '/login'} component={LoginRegister}/>*/}
                         <Route path='/login' exact> <LoginRegister setToken={this.setToken}
                                                                    getToken={this.getToken}/></Route>

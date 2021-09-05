@@ -266,8 +266,7 @@ class EditHouse extends React.Component {
             && this.state.guestHouse
             && this.state.bedRoom
             && this.state.availabilityDate
-            && this.state.phoneNumber && this.state.description.length > 1
-            && parseInt(this.state.bedRoom) < 100) {
+            && this.state.phoneNumber && this.state.description.length > 1) {
 
             this.submitEditHouseApiRequest(product);
 
@@ -627,7 +626,7 @@ class EditHouse extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>phone number</Typography>
-                                <input type="text" placeholder='Enter your phone number' className={classes.input}
+                                <input type="number"  placeholder='Enter your phone number' className={classes.input}
                                        onChange={this.onPhoneNumberChanged}
                                        value={this.state.phoneNumber}
 

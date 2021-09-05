@@ -70,7 +70,9 @@ const useStyles = ((theme) => ({
         flexDirection: 'column',
         width: '100%',
     },
-    hamburgerIcon: {}
+    LogoTextNavbar:{
+        display:'block', textDecoration:'none', color:'inherit'
+    }
 
 }));
 
@@ -125,8 +127,8 @@ class NavTabs extends React.Component {
                     }}>
                         <div style={{display:"flex", justifyContent:'space-between',}}>
                             <div>
-                                <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
-                                    style={{color: '#ee662d'}}>A</span>genagn</h3>
+                                <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><a href={'/'} className={classes.LogoTextNavbar}><span
+                                    style={{color: '#ee662d'}}>A</span>genagn</a></h3>
                             </div>
                             <div className={classes.hamburgerIcon}>
                                 <button onClick={this.onButtonClick}>
@@ -157,8 +159,8 @@ class NavTabs extends React.Component {
                         flexWrap: 'wrap'
                     }}>
                         <div>
-                            <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
-                                style={{color: '#ee662d'}}>A</span>genagn</h3>
+                            <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><a href={'/'} className={classes.LogoTextNavbar}><span
+                                style={{color: '#ee662d'}}>A</span>genagn</a></h3>
                         </div>
                         {/*<Grid item sm={4} >
                             <SearchBar className={classes.searchBar}/>
@@ -182,8 +184,9 @@ class NavTabs extends React.Component {
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap'}}>
                     <div>
                         <div>
-                            <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
-                                style={{color: '#ee662d'}}>A</span>genagn</h3>
+                            <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><a className={classes.LogoTextNavbar}  href={'/'}><span
+                                style={{color: '#ee662d'}}>A</span>genagn</a></h3>
+
                         </div>
                     </div>
                     {/*<Grid item sm={4} >

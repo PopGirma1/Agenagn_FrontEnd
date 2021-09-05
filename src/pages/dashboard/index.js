@@ -72,8 +72,7 @@ export default function Dashboard({getToken}){
                 const response = await backEndApi.get('/dashboard', config);
                 console.log(response.data);
 
-               /* setProductDocs(response.data.productDocs);
-                setUserDetail(response.data.docs);*/
+
                 setAuth(response.data.auth);
             } else {
                 setIsAuth(false)

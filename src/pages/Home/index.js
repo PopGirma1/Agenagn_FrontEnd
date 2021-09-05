@@ -59,7 +59,7 @@ class MainBody extends React.Component {
                                 <CardActionArea>
                                     <CardMedia
                                         className={classes.media}
-                                        image={local + '/images/products/' + home.encodedImageUrl + '.jpg'}
+                                        image={`${local}/images/products/${home.ownerEmail}/${home._id}/1.png`}
                                         title="Contemplative Reptile"
                                     />
                                     <CardContent>
@@ -75,7 +75,7 @@ class MainBody extends React.Component {
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions>
-                                    <Button href="/detail" size="small" color="primary">
+                                    <Button href={`/detail/${home._id}`} size="small" color="primary">
                                         View
                                     </Button>
                                     <Button size="small" color="primary">

@@ -1,12 +1,13 @@
 import React from 'react';
 import {Button, Grid, Typography, withStyles} from '@material-ui/core';
-import {DropzoneArea} from 'material-ui-dropzone';
+import {DropzoneArea, DropzoneAreaBase, DropzoneDialog, DropzoneDialogBase} from 'material-ui-dropzone';
 import {Redirect} from "react-router-dom";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import backEndApi from '../../services/api'
 import moment from "moment";
+import ImageForm from "./ImageForm";
 
 const useStyles = theme => ({
     root: {
@@ -97,13 +98,12 @@ const useStyles = theme => ({
         "& .MuiDropzoneArea-root": {
             background: '#EEEEEE',
             marginBottom: '30px',
-            maxHeight: '243',
-            height: '210px',
-            minHeight: '200px',
+            maxHeight: '343',
+
             border: '.5px solid #9e9e9e',
 
         },
-        "& .MuiTypography-h5": {
+        /*"& .MuiTypography-h5": {
             fontSize: '14px',
             fontWeight: 'normal'
         },
@@ -116,7 +116,7 @@ const useStyles = theme => ({
             marginTop: '-100px',
             marginLeft: '110px',
             color: "#9e9e9e"
-        }
+        }*/
     },
     inputError: {
         color: 'red',
@@ -129,11 +129,11 @@ class NewListing extends React.Component {
     state = {
 
         location: '',
-        bed_room: '',
-        monthly_payment: '',
+        bedRoom: '',
+        monthlyPayment: '',
         floor: '',
-        phone_number: '',
-        guest_house: '',
+        phoneNumber: '',
+        guestHouse: '',
         description: '',
 
         file: null,
@@ -142,26 +142,6 @@ class NewListing extends React.Component {
 
     };
     characterCounter = 144;
-
-
-    /*handlePreviewIcon = (fileObject, classes) => {
-        const {type} = fileObject.file;
-        const iconProps = {
-            className: classes.image,
-        };
-
-        if (type.startsWith("video/")) return <Theaters {...iconProps} />;
-
-        switch (type) {
-            case "application/msword":
-            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                return <Description {...iconProps} />;
-            case "application/pdf":
-                return <PictureAsPdf {...iconProps} />;
-            default:
-                return <AttachFile {...iconProps} />
-        }
-    };*/
 
     onFormSubmit = (e) => {
         e.preventDefault();
@@ -178,24 +158,14 @@ class NewListing extends React.Component {
     };
     validateForm = (e) => {
 
-
-        /*const jvLinkParse = () =>{
-            if(!(this.state.phone_number.indexOf('http://') > -1)){
-                return "http://" + this.state.phone_number
-            }else{
-                return this.state.phone_number
-            }
-        };
-        console.log(jvLinkParse());*/
-
         const product = {
 
             location: this.state.location,
-            bedRoom: parseInt(this.state.bed_room),
-            monthlyPayment: parseInt(this.state.monthly_payment),
+            bedRoom: parseInt(this.state.bedRoom),
+            monthlyPayment: parseInt(this.state.monthlyPayment),
             floor: parseInt(this.state.floor),
-            phoneNumber: parseInt(this.state.phone_number),
-            guestHouse: this.state.guest_house,
+            phoneNumber: parseInt(this.state.phoneNumber),
+            guestHouse: this.state.guestHouse,
             description: this.state.description,
 
             listingStatus : this.listingStatusFilter(e),
@@ -215,11 +185,11 @@ class NewListing extends React.Component {
             document.getElementById('floorError').style.display = 'block';
 
         }
-        if (!this.state.monthly_payment) {
+        if (!this.state.monthlyPayment) {
             document.getElementById('monthlyPaymentError').style.display = 'block';
 
         }
-        if (!this.state.bed_room) {
+        if (!this.state.bedRoom) {
             document.getElementById('bedRoomError').style.display = 'block';
 
         }
@@ -237,30 +207,14 @@ class NewListing extends React.Component {
         }
 
         if (this.state.location && this.state.description &&
-            this.state.floor && this.state.monthly_payment
+            this.state.floor && this.state.monthlyPayment
             && this.state.guestHouse
-            && this.state.bed_room
-            && this.state.phoneNumber && this.state.file && this.characterCounter < 1
-            && parseInt(this.state.bed_room) < 100) {
-            //Api request or form submit to backend.
+            && this.state.bedRoom
+            && this.state.phoneNumber && this.state.file && this.characterCounter < 1){
 
 
             this.submitNewListingApiRequest(product);
 
-
-            //this.imageUploadApiRequest();
-            /*axios.all([
-                axios.post(`/my-url`, {
-                    myVar: 'myValue'
-                }),
-                axios.post(`/my-url2`, {
-                    myVar: 'myValue'
-                })
-            ])
-                .then(axios.spread((data1, data2) => {
-                    // output of req.
-                    console.log('data1', data1, 'data2', data2)
-                }));*/
 
         } else {
             //for not yet validated
@@ -274,17 +228,18 @@ class NewListing extends React.Component {
         /*let user = this.props.getToken();*/
 
         const formData = new FormData();
-        formData.append('file', this.state.file);
+        this.state.file.forEach(fil => formData.append('files[]', fil));
+        /*formData.append('files[]', this.state.file);*/
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         };
-
+        console.log(formData);
         let response = await backEndApi.post('/addhouse', {params: newLaunchDetails});
         let resImage = await backEndApi.post('/uploadHouseImage', formData, config);
 
-        console.log("The files and Image success fully uploaded" + response);
+        console.log("The files and Image success fully uploaded" +resImage+ response);
         this.setState({isRedirectToHomepage: true,})
 
     };
@@ -388,7 +343,8 @@ class NewListing extends React.Component {
 
         }
         /*this.setState({file:e.target.files[0]});*/
-        this.setState({file: e[0]});
+        console.log(e);
+        this.setState({file: e});
 
     };
     onGuestHouseChanged = (e) => {
@@ -436,7 +392,7 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Bed Rooms</Typography>
-                                <select className={classes.input} value={this.state.bedRoom} onChange={this.onBedroomChanged}>
+                                <select className={classes.input} onChange={this.onBedroomChanged}>
                                     <option value="Select Bed Rooms" disabled selected>Select Bed Rooms
                                     </option>
                                     <option value='1'>0</option>
@@ -453,7 +409,7 @@ class NewListing extends React.Component {
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Floor</Typography>
 
-                                <select className={classes.input} value={this.state.floor} onChange={this.onFloorchanged}>
+                                <select className={classes.input} onChange={this.onFloorchanged}>
                                     <option value="Select Floor" disabled selected>Select Floor
                                     </option>
                                     <option value='1'>1</option>
@@ -481,7 +437,7 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>phone number</Typography>
-                                <input type="text" placeholder='Enter your phone number' className={classes.input}
+                                <input type="number" placeholder='Enter your phone number' className={classes.input}
                                        onChange={this.onPhoneNumberChanged}
                                        value={this.state.phoneNumber}
 
@@ -514,21 +470,22 @@ class NewListing extends React.Component {
                             <Typography variant='body2'>Upload Listing Icon</Typography>
 
                             <Grid style={{marginTop: '5px'}}>
-                                <Grid itme xs={12} md={6} className={classes.dropZone}>
+                                <Grid itme xs={12} md={8} className={classes.dropZone}>
+
                                     {/*Icon ={}*/}
                                     <DropzoneArea
                                         acceptedFiles={['image/*']}
                                         maxFileSize={2000000}
-                                        filesLimit={'1'}
+                                        filesLimit={'6'}
                                         dropzoneText={"Drag and drop an image here or click"}
                                         onChange={this.onDropZoneChange}
                                     />
                                     {/*<DropzoneArea getPreviewIcon={this.handlePreviewIcon}
                                                   dropzoneText="Drag and drop a jpg, png or webp Icon, Or click to add"/>*/}
                                 </Grid>
-                                {/* <Typography variant='body2' id='dropZoneImage' className={classes.inputError}>You have
+                                 <Typography variant='body2' id='dropZoneImage' className={classes.inputError}>You have
                                     to
-                                    upload an image.</Typography>*/}
+                                    upload an image.</Typography>
                             </Grid>
                         </div>
                         <div className={[classes.inputsContainer]}>
@@ -563,7 +520,7 @@ class NewListing extends React.Component {
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2'>is it Guest House</Typography>
                             <label htmlFor="guestYes">Yes</label>
-                            <input type="radio" value='yes' id='guestYes' checked={this.state.guestHouse==='yes'}  name='guestRadio' placeholder='is it Guest House'
+                            <input type="radio" value='yes' id='guestYes'  name='guestRadio' placeholder='is it Guest House'
                                    onChange={this.onGuestHouseChanged}
 
                             />
@@ -571,7 +528,7 @@ class NewListing extends React.Component {
 
                             <input type="radio" value='no' id='guestNo'  name='guestRadio'
                                    onChange={this.onGuestHouseChanged}
-                                   checked={this.state.guestHouse==='no'}
+                                   checked
 
                             />
                             <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
@@ -580,21 +537,16 @@ class NewListing extends React.Component {
 
                         </div>
 
-                        {/*<div className={classes.inputsContainer}>
-                            <Typography variant='body2' style={{marginTop: '10px'}}>Note To Reviewer</Typography>
-                            <textarea placeholder='Write note to reviewer' className={classes.textarea}
-                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}
-                                      value={this.state.editedNoteToReviewer}
-
-                            />
-                            <Typography variant='body2' id='noteToReviewerError' className={classes.inputError}>You have
-                                to enter a note to a reviewer</Typography>
-
-                        </div>*/}
-
                         <br/><br/><br/><br/>
                         <div align='right'>
-                            {this.choseButton()}
+                            <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
+                                paddingLeft: '50px', paddingRight: '50px', background: '#9e9e9e',
+                                borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                            }}>Save As Draft</Button>
+                            <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                                paddingLeft: '50px', paddingRight: '50px', background: '#9e9e9e',
+                                borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
+                            }}> Submit For Review</Button>
                         </div>
                     </Grid>
 
