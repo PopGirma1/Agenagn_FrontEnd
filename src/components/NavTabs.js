@@ -3,6 +3,8 @@ import {AppBar, Button, Grid, Link, List, ListItem, Toolbar, Typography, withSty
 import {Redirect} from "react-router-dom";
 import withWidth, {isWidthDown} from '@material-ui/core/withWidth';
 import {compose} from 'recompose';
+import LottieAnimation from "./lotiContact";
+import lotiContact from "./contactus1.json";
 
 const useStyles = ((theme) => ({
     root: {
@@ -87,24 +89,24 @@ class NavTabs extends React.Component {
     isAuthnticated = () => {
         if (this.props.getToken()) {
             return (
-                <div>
+                <React.Fragment>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/addhouse'}>Add House</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/dashboard'}>Dashboard</Button></ListItem>
                     <ListItem><Button href='/' onClick={this.onLogoutclicked}>logout</Button></ListItem>
-                </div>
+                </React.Fragment>
 
             )
         } else {
             return (
-                <div>
+                <React.Fragment>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/login'}>login</Button></ListItem>
-                </div>
+                </React.Fragment>
 
             )
         }
@@ -114,7 +116,7 @@ class NavTabs extends React.Component {
         const {classes} = this.props;
 
         if (isWidthDown('sm', this.props.width)) {
-            if (this.state.isHum ) {
+            if (this.state.isHumActive) {
                 return (
                     <div style={{
                         display: 'flex',
@@ -123,10 +125,12 @@ class NavTabs extends React.Component {
                         flexDirection:"column",
                         flexWrap: 'wrap'
                     }}>
+
                         <div style={{display:"flex", justifyContent:'space-between',}}>
                             <div>
                                 <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
-                                    style={{color: '#ee662d'}}>A</span>genagn</h3>
+                                    style={{color: '#ee662d'}}>A</span>genagn </h3>
+                                <div><LottieAnimation lotti={lotiContact} height={20} width={100} /></div>
                             </div>
                             <div className={classes.hamburgerIcon}>
                                 <button onClick={this.onButtonClick}>
@@ -141,7 +145,7 @@ class NavTabs extends React.Component {
                                 {this.isAuthnticated()}
                             </List>
 
-                    </div>
+                        </div>
 
 
                     </div>
@@ -156,10 +160,12 @@ class NavTabs extends React.Component {
                         alignItems: 'center',
                         flexWrap: 'wrap'
                     }}>
+
                         <div>
                             <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
                                 style={{color: '#ee662d'}}>A</span>genagn</h3>
                         </div>
+
                         {/*<Grid item sm={4} >
                             <SearchBar className={classes.searchBar}/>
                         </Grid>*/}
@@ -181,9 +187,10 @@ class NavTabs extends React.Component {
             return (
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap'}}>
                     <div>
-                        <div>
+                        <div style={{display:'flex', alignItems:'center'}}>
                             <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
                                 style={{color: '#ee662d'}}>A</span>genagn</h3>
+                            <LottieAnimation lotti={lotiContact} height={20} width={100} />
                         </div>
                     </div>
                     {/*<Grid item sm={4} >
@@ -214,8 +221,6 @@ class NavTabs extends React.Component {
         return (
             <AppBar className={classes.root} position='fixed'>
                 {this.navOptions()}
-
-
             </AppBar>
 
         );

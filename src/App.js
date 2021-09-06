@@ -8,16 +8,21 @@ import Detail from './pages/Details/'
 /*import LoginRegister from './pages/Authentication/LoginRegister'*/
 import LoginRegister from './pages/Authentication/Login'
 import UserHome from './pages/Authentication/HomeRegistrationForm/UserHome'
-import Footer from './components/Footer'
+// import Footer from './components/Footer';
+import Footer from "./components/Footer";
 import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
 
-import Dashboard from "./pages/Dashboard/dashboard";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import EditHouse from "./pages/Addhouse/EditHouse";
 import Search from "./pages/Home/Search";
+import About from "./pages/About/About";
+import Common from "./components/Common";
 
 const useStyles = ((theme) => ({
-    root: {},
+    root: {
+        backgroundImage:'/img/background.jpg'
+    },
     mainParts: {
         marginTop: '100px'
     },
@@ -50,6 +55,7 @@ class App extends React.Component {
             <div className={classes.root}>
 
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
+
                     <NavTabs getToken={this.getToken}/>
                     <Container className={classes.mainParts}>
                         <Route path='/' exact> <Search  /></Route>
@@ -66,13 +72,14 @@ class App extends React.Component {
                         <Route path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
                         <Route path='/edithouse/:id' exact
                                component={(props) => <EditHouse {...props} getToken={this.getToken}/>}/>
+                        <Route path='/about' component={About}/>
 
                         {/*<Route path='/comment' component={Comment}/>
                         <Route path='/go' component={IndexPage}/>*/}
                     </Container>
                 </BrowserRouter>
+                <Common></Common>
                 <Footer/>
-
             </div>
         );
     }

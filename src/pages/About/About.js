@@ -89,34 +89,25 @@ class About extends Component {
                     <div>
                         <Typography variant="h6">Girmay</Typography>
                         <Avatar alt="Remy Sharp" src="/asset/Img/wow.jpg" className={classes.large}/>
-
-                        <Typography
-                            variant="h6"
-                            style={{ margin: "2em", lineHeight: "1.5" }}
-                            className={classes.paragraphStyling}>
-                           Software Engineer
-                        </Typography>
-                    </div>
-                    <div>
-                        <Typography variant="h6">Kalab </Typography>
-                        <Avatar alt="Remy Sharp" src="/asset/Img/kalab.jpg" className={classes.large}/>
-                        <Typography
-                            variant="h6"
-                            style={{ margin: "2em", lineHeight: "1.5" }}
-                            className={classes.paragraphStyling}>
-                            Software Engineer
+                        <Typography>
+                            Software Engineer (web developer and designer)
                         </Typography>
                     </div>
                     <div>
                         <Typography variant="h6" >Desalegn </Typography>
                         <Avatar alt="Remy Sharp" src="/asset/Img/cmd.jpg"  className={classes.large}/>
-                        <Typography
-                            variant="h6"
-                            style={{ margin: "2em", lineHeight: "1.5" }}
-                            className={classes.paragraphStyling}>
-                            Software Engineer
+                        <Typography>
+                            Software Engineer (web developer and designer)
                         </Typography>
                     </div>
+                    <div>
+                        <Typography variant="h6">Kalab </Typography>
+                        <Avatar alt="Remy Sharp" src="/asset/Img/kalab.jpg" className={classes.large}/>
+                        <Typography>
+                            Software Engineer (web developer and designer)
+                        </Typography>
+                    </div>
+
                 </div>
             </div>
         );
