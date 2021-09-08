@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import backEndApi from "../../../services/api";
 import Switch from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
-import UpgradePopUp from './UpgradePopUp'
 import AccountInfo from "./AccountInfo";
 import Loader from "./Loader";
 import ViewLaunchOnHover from './ViewLaunchOnHover'
@@ -286,23 +285,7 @@ class userDashboard extends React.Component {
                             <DeleteIcon fontSize="inherit" className={classes.deleteIcon}/>
                         </IconButton>*/}
 
-                                <IconButton style={{margin: '0px', padding: '0px'}}><UpgradePopUp row={row}
-                                                                                                  userDetail={this.state.userDetail}/></IconButton>
-                                {/* <Tooltip title={"\n" +
-                        "  Price: $"+row.productPrice+"\n" +
-                        "  Commission: "+row.productCommission+"% \n" +
-                        "  VendorName: "+row.productVendorName+"\n" +
-                        "  Network: "+row.productNetwork +"\n" +
-                        "  LaunchDate: "+row.productLaunchDate+"\n" +
-                        "  Description: "+row.productDescription+"\n" +
-                        "  noteToReviewer:"+row.noteToReviewer+"\n"
-                        } placement="top-start" arrow style={{maxWidth:'50px'}}>
-                            <IconButton
-                                 className={[classes.margin, classes.iconBackgroundBlack]}
-                                size='small'>
-                                <VisibilityIcon fontSize="inherit"/>
-                            </IconButton>
-                        </Tooltip>*/}
+
                                 <span style={{position: 'relative', top:'auto', zIndex: 9,}}>
                                             <span
                                                 style={{
@@ -366,8 +349,7 @@ class userDashboard extends React.Component {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>
-                                            <Typography variant='h6' style={{fontSize: '16px'}}>Product
-                                                name</Typography>
+                                            <Typography variant='h6' style={{fontSize: '16px'}}>Location</Typography>
                                         </TableCell>
                                         <TableCell style={{textAlign: 'center'}}>
                                             <Typography variant='h6' style={{fontSize: '16px'}}>Listing

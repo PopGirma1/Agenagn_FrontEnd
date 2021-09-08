@@ -1,11 +1,13 @@
 import React from 'react';
-import {Button, Grid, Typography, withStyles} from '@material-ui/core';
+import {Button, Grid, Typography} from '@material-ui/core';
 import {DropzoneArea} from 'material-ui-dropzone';
 import {Redirect} from "react-router-dom";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import backEndApi from '../../services/api'
+import moment from "moment";
+import {withStyles} from "@material-ui/styles";
 
 const useStyles = theme => ({
     root: {
@@ -96,13 +98,12 @@ const useStyles = theme => ({
         "& .MuiDropzoneArea-root": {
             background: '#EEEEEE',
             marginBottom: '30px',
-            maxHeight: '243',
-            height: '210px',
-            minHeight: '200px',
+            maxHeight: '343',
+
             border: '.5px solid #9e9e9e',
 
         },
-        "& .MuiTypography-h5": {
+        /*"& .MuiTypography-h5": {
             fontSize: '14px',
             fontWeight: 'normal'
         },
@@ -115,7 +116,7 @@ const useStyles = theme => ({
             marginTop: '-100px',
             marginLeft: '110px',
             color: "#9e9e9e"
-        }
+        }*/
     },
     inputError: {
         color: 'red',
@@ -128,39 +129,19 @@ class NewListing extends React.Component {
     state = {
 
         location: '',
-        bed_room: '',
-        monthly_payment: '',
+        bedRoom: '',
+        monthlyPayment: '',
         floor: '',
-        phone_number: '',
-        guest_house: '',
+        phoneNumber: '',
+        guestHouse: '',
         description: '',
+        squareMeter: '',
 
         file: null,
         errorMessage: '',
         isRedirectToHomepage: false,
 
     };
-    characterCounter = 144;
-
-
-    /*handlePreviewIcon = (fileObject, classes) => {
-        const {type} = fileObject.file;
-        const iconProps = {
-            className: classes.image,
-        };
-
-        if (type.startsWith("video/")) return <Theaters {...iconProps} />;
-
-        switch (type) {
-            case "application/msword":
-            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                return <Description {...iconProps} />;
-            case "application/pdf":
-                return <PictureAsPdf {...iconProps} />;
-            default:
-                return <AttachFile {...iconProps} />
-        }
-    };*/
 
     onFormSubmit = (e) => {
         e.preventDefault();
@@ -170,55 +151,40 @@ class NewListing extends React.Component {
     listingStatusFilter = (e) => {
         if (e.currentTarget.value === "Pending") {
             return "Submitted"
-        }else{
-        return "Draft"
+        } else {
+            return "Draft"
         }
 
     };
     validateForm = (e) => {
 
-
-        /*const jvLinkParse = () =>{
-            if(!(this.state.phone_number.indexOf('http://') > -1)){
-                return "http://" + this.state.phone_number
-            }else{
-                return this.state.phone_number
-            }
-        };
-        console.log(jvLinkParse());*/
-
         const product = {
 
             location: this.state.location,
-            bedRoom: parseInt(this.state.bed_room),
-            monthlyPayment: parseInt(this.state.monthly_payment),
+            bedRoom: parseInt(this.state.bedRoom),
+            monthlyPayment: parseInt(this.state.monthlyPayment),
             floor: parseInt(this.state.floor),
-            phoneNumber: parseInt(this.state.phone_number),
-            guestHouse: this.state.guest_house,
+            squareMeter:this.state.squareMeter,
+            phoneNumber: parseInt(this.state.phoneNumber),
+            guestHouse: this.state.guestHouse,
             description: this.state.description,
 
-            listingStatus : this.listingStatusFilter(e),
-            reviewStatus :  e.currentTarget.value
+            listingStatus: this.listingStatusFilter(e),
+            reviewStatus: e.currentTarget.value
         };
 
         if (!this.state.location) {
             document.getElementById('locationError').style.display = 'block';
         }
-        if (!this.state.description) {
-            document.getElementById('descriptionError').style.display = 'block';
-
-        } else if (this.characterCounter > 1) {
-            document.getElementById('descriptionError').style.display = 'block';
-        }
         if (!this.state.floor) {
             document.getElementById('floorError').style.display = 'block';
 
         }
-        if (!this.state.monthly_payment) {
+        if (!this.state.monthlyPayment) {
             document.getElementById('monthlyPaymentError').style.display = 'block';
 
         }
-        if (!this.state.bed_room) {
+        if (!this.state.bedRoom) {
             document.getElementById('bedRoomError').style.display = 'block';
 
         }
@@ -236,30 +202,14 @@ class NewListing extends React.Component {
         }
 
         if (this.state.location && this.state.description &&
-            this.state.floor && this.state.monthly_payment
+            this.state.floor && this.state.monthlyPayment
             && this.state.guestHouse
-            && this.state.bed_room
-            && this.state.phoneNumber && this.state.file && this.characterCounter < 1
-            && parseInt(this.state.bed_room) < 100) {
-            //Api request or form submit to backend.
+            && this.state.bedRoom
+            && this.state.phoneNumber && this.state.file) {
 
 
             this.submitNewListingApiRequest(product);
 
-
-            //this.imageUploadApiRequest();
-            /*axios.all([
-                axios.post(`/my-url`, {
-                    myVar: 'myValue'
-                }),
-                axios.post(`/my-url2`, {
-                    myVar: 'myValue'
-                })
-            ])
-                .then(axios.spread((data1, data2) => {
-                    // output of req.
-                    console.log('data1', data1, 'data2', data2)
-                }));*/
 
         } else {
             //for not yet validated
@@ -273,17 +223,18 @@ class NewListing extends React.Component {
         /*let user = this.props.getToken();*/
 
         const formData = new FormData();
-        formData.append('file', this.state.file);
+        this.state.file.forEach(fil => formData.append('files[]', fil));
+        /*formData.append('files[]', this.state.file);*/
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         };
-
+        console.log(formData);
         let response = await backEndApi.post('/addhouse', {params: newLaunchDetails});
         let resImage = await backEndApi.post('/uploadHouseImage', formData, config);
 
-        console.log("The files and Image success fully uploaded" + response);
+        console.log("The files and Image success fully uploaded" + resImage + response);
         this.setState({isRedirectToHomepage: true,})
 
     };
@@ -303,16 +254,7 @@ class NewListing extends React.Component {
     };
 
     onDescriptionChanged = (e) => {
-        this.characterCounter = 144 - e.target.value.length;
-        if (this.characterCounter < 1) {
-            document.getElementById('remainingCharacter').style.display = 'none';
-            document.getElementById('descriptionError').style.display = 'none';
-        } else if (this.characterCounter > 0) {
-            document.getElementById('descriptionError').style.display = 'block';
-        } else {
-            document.getElementById('descriptionError').style.display = 'none';
 
-        }
         this.setState({description: e.target.value})
     };
     onFloorchanged = (e) => {
@@ -331,29 +273,17 @@ class NewListing extends React.Component {
             document.getElementById('monthlyPaymentError').style.display = 'none';
         }
 
-        this.setState({monthly_payment: e.target.value})
+        this.setState({monthlyPayment: e.target.value})
     };
     onBedroomChanged = (e) => {
-        const changeToInt = parseInt(e.target.value);
-        if (e.target.value.length === 0 || changeToInt > 100) {
+        if (e.target.value.length === 'Select Bed Rooms') {
             document.getElementById('bedRoomError').style.display = 'block';
 
         } else {
             document.getElementById('bedRoomError').style.display = 'none';
 
         }
-        this.setState({bed_room: e.target.value})
-    };
-    onGuestHouseChanged = (e) => {
-
-        if (e.target.value.length === 0) {
-            document.getElementById('guestHouseError').style.display = 'block';
-
-        } else {
-            document.getElementById('guestHouseError').style.display = 'none';
-
-        }
-        this.setState({guestHouse: e.target.value})
+        this.setState({bedRoom: e.target.value})
     };
     onPhoneNumberChanged = (e) => {
 
@@ -366,13 +296,12 @@ class NewListing extends React.Component {
         }
 
 
-        this.setState({phone_number: e.target.value})
+        this.setState({phoneNumber: e.target.value})
 
 
     };
     onAvailabilityChanged = (date) => {
 
-        console.log(date);
         if (date === null) {
             document.getElementById('availabilityError').style.display = 'block';
 
@@ -381,37 +310,32 @@ class NewListing extends React.Component {
 
         }
 
-        this.setState({phoneNumber: date})
+        this.setState({availabilityDate: date})
     };
     onSquareMeterChanged = (e) => {
 
-        if (e.target.value.length === 0) {
-            document.getElementById('networkError').style.display = 'block';
-
-        } else {
-            document.getElementById('networkError').style.display = 'none';
-
-        }
         this.setState({squareMeter: e.target.value})
-    };
-    onNoteToReviewerChanged = (e) => {
-        /*if (e.target.value.length === 0) {
-            document.getElementById('noteToReviewerError').style.display = 'block';
-
-        } else {
-            document.getElementById('noteToReviewerError').style.display = 'none';
-
-        }*/
-        this.setState({noteToReviewer: e.target.value})
     };
     onDropZoneChange = (e) => {
         if (e[0]) {
             document.getElementById('dropZoneImage').style.display = 'none';
 
         }
-        /*this.setState({file:e.target.files[0]});*/
-        this.setState({file: e[0]});
 
+        this.setState({file: e});
+
+    };
+    onGuestHouseChanged = (e) => {
+
+        if (e.target.value.length === 0) {
+            document.getElementById('guestHouseError').style.display = 'block';
+
+        } else {
+            document.getElementById('guestHouseError').style.display = 'none';
+
+        }
+
+        this.setState({guestHouse: e.target.value === 'yes'})
     };
 
     render() {
@@ -425,31 +349,50 @@ class NewListing extends React.Component {
         }
         return (
             <div className={classes.root}>
-                <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>New
-                    Listing</Typography>
+                <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>New House</Typography>
 
                 <Grid container className={classes.firstGrid} spacing={4}>
                     <Grid item xs={12} md={6}>
                         <form>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Product Name</Typography>
-                                <input type="text" name='Myname' placeholder='Enter Location of the condominium'
+                                <Typography variant='body2'>Location of the Condominium</Typography>
+                                <input type="text" list='locationOfCondominium' name='Myname' placeholder='Location of the condominium'
                                        className={classes.input}
-                                       onChange={this.onLocationChanged}/>
+                                       onChange={this.onLocationChanged}
+                                       value={this.state.location}
+
+                                />
+                                <datalist id="locationOfCondominium" >
+                                    <option value="Ayat Condominium"/>
+                                    <option value="Yeka Abado Condominium"/>
+                                    <option value="Submit Condominium"/>
+                                    <option value="Gelan Condominium"/>
+                                    <option value="Tuludimtu Condominium"/>
+                                    <option value="4 killo Condominium"/>
+                                    <option value="Gotera Condominium"/>
+                                    <option value="Balderas Condominium"/>
+                                    <option value="Mebrathail Condominium"/>
+                                </datalist>
+
                                 <Typography variant='body2' id='locationError' className={classes.inputError}>You have
-                                    to
-                                    entered Location of your condominium.</Typography>
+                                    to entered Location of your condominium.</Typography>
 
                             </div>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Product short Description</Typography>
-                                <textarea className={classes.textarea} placeholder='Enter short description...'
-                                          style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}/>
-                                <Typography variant='body2' align='right' id='remainingCharacter'
-                                            style={{color: '#9e9e9e'}}>({this.characterCounter} Characters
-                                    Remaining)</Typography>
-                                <Typography variant='body2' id='descriptionError' className={classes.inputError}>You
-                                    have to write a description not less than 144 character.</Typography>
+                                <Typography variant='body2'>Bed Rooms</Typography>
+                                <select className={classes.input} onChange={this.onBedroomChanged}>
+                                    <option value="Select Bed Rooms" disabled selected>Select Bed Rooms
+                                    </option>
+                                    <option value='1'>0 (studio)</option>
+                                    <option value='1'>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+
+                                </select>
+
+                                <Typography type='number' variant='body2' id='bedRoomError'
+                                            className={classes.inputError}>You have
+                                    to enter number of bed rooms.</Typography>
 
                             </div>
                             <div className={classes.inputsContainer}>
@@ -458,10 +401,13 @@ class NewListing extends React.Component {
                                 <select className={classes.input} onChange={this.onFloorchanged}>
                                     <option value="Select Floor" disabled selected>Select Floor
                                     </option>
-                                    <option value='1'>1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                    <option value='0'>ground</option>
+                                    <option value='1'>+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                    <option value="4">+4</option>
+                                    <option value="5">+5</option>
+                                    <option value="6">+6</option>
 
                                 </select>
                                 <Typography variant='body2' id='floorError' className={classes.inputError}>you have
@@ -470,8 +416,10 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Monthly Payment</Typography>
-                                <input type="number" min='0' placeholder='$ 00' className={[classes.input]}
+                                <input type="number" min='0' placeholder='eg, 5000' className={[classes.input]}
                                        onChange={this.onMonthlyPaymentChanged}
+                                       value={this.state.monthlyPayment}
+
 
                                 />
                                 <Typography variant='body2' id='monthlyPaymentError' className={classes.inputError}>you
@@ -480,45 +428,69 @@ class NewListing extends React.Component {
 
                             </div>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Bed Rooms</Typography>
-                                <input type="number" min='0' max='100' placeholder='00 %' className={[classes.input]}
-                                       onChange={this.onBedroomChanged}/>
-                                <Typography type='number' variant='body2' id='bedRoomError' className={classes.inputError}>You have
-                                    to enter number of bed rooms.</Typography>
+                                <Typography variant='body2'>Square meters <span style={{opacity:'0.5'}}>(optional)</span></Typography>
+                                <input type="text" list='squareMetersInput' placeholder='Square meter of your house' className={classes.input}
+                                       onChange={this.onSquareMeterChanged}
+                                       value={this.state.editavailabilityDate}
+
+                                />
+                                <datalist id='squareMetersInput'>
+                                    <option value="4 x 4"></option>
+                                    <option value="3 x 4"></option>
+                                    <option value="5 x 4"></option>
+                                    <option value="5 x 3"></option>
+                                </datalist>
 
                             </div>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>is it Guest House</Typography>
-                                <input type="text" placeholder='is it Guest House' className={classes.input}
-                                       onChange={this.onGuestHouseChanged}/>
-                                <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
-                                    specific if it is guesthouse.</Typography>
+                            <div className={[classes.inputsContainer]}>
+                                <Typography variant='body2'>Available for rent starting from</Typography>
+                                {/* <input type="text" placeholder='Enter product name' className={classes.input}
+                                   onChange={this.onAvailabilityChanged}/>*/}
+                                <div className={classes.dataPicker}>
+                                    <DatePicker
+                                        dateFormat="dd-MM-yyyy"
+                                        selected={this.state.productLaunchDate}
+                                        className={[classes.input]}
+                                        onChange={this.onAvailabilityChanged}
+                                        value={moment(this.state.availabilityDate).format("DD-MM-YYYY")}
 
+                                    />
+                                </div>
+                                <Typography variant='body2' id='availabilityError' className={classes.inputError}>You have
+                                    to
+                                    Set Launch Data.</Typography>
 
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>phone number</Typography>
-                                <input type="text" placeholder='Enter your phone number' className={classes.input}
-                                       onChange={this.onPhoneNumberChanged}/>
+                                <div style={{position:'relative'}}><input type="number" placeholder='eg, 925762589' className={classes.input}
+                                                                          onChange={this.onPhoneNumberChanged}
+                                                                          value={this.state.phoneNumber}
+                                                                          style={{paddingLeft: '50px'}}
+                                />
+                                    <span style={{position: 'absolute', left: 7, top: "35%", opacity: '0.5'}}>+251</span></div>
+
                                 <Typography variant='body2' id='phoneNumberError' className={classes.inputError}>You
                                     have
                                     to enter your phone number.</Typography>
 
-
                             </div>
+
                         </form>
                     </Grid>
                     <Grid item xs={12} md={6}>
+
                         <div className={classes.inputsContainer}>
-                            <Typography variant='body2'>Upload Listing Icon</Typography>
+                            <Typography variant='body2'>Upload house image</Typography>
 
                             <Grid style={{marginTop: '5px'}}>
-                                <Grid itme xs={12} md={6} className={classes.dropZone}>
+                                <Grid itme xs={12} md={8} className={classes.dropZone}>
+
                                     {/*Icon ={}*/}
                                     <DropzoneArea
                                         acceptedFiles={['image/*']}
                                         maxFileSize={2000000}
-                                        filesLimit={'1'}
+                                        filesLimit={'6'}
                                         dropzoneText={"Drag and drop an image here or click"}
                                         onChange={this.onDropZoneChange}
                                     />
@@ -530,52 +502,51 @@ class NewListing extends React.Component {
                                     upload an image.</Typography>
                             </Grid>
                         </div>
-                        <div className={[classes.inputsContainer]}>
-                            <Typography variant='body2'>Available for rent starting from</Typography>
-                            {/* <input type="text" placeholder='Enter product name' className={classes.input}
-                                   onChange={this.onAvailabilityChanged}/>*/}
-                            <div className={classes.dataPicker}>
-                                <DatePicker
-                                    selected={this.state.phoneNumber}
-                                    className={[classes.input]}
-                                    onChange={this.onAvailabilityChanged}
-
-                                />
-                            </div>
-                            <Typography variant='body2' id='availabilityError' className={classes.inputError}>You have to
-                                Set Launch Data.</Typography>
-
-                        </div>
                         <div className={classes.inputsContainer}>
-                            <Typography variant='body2'>Square meters</Typography>
-                            <input type="text" placeholder='Enter product Network' className={classes.input}
-                                   onChange={this.onSquareMeterChanged}/>
-                            <Typography variant='body2' id='networkError' className={classes.inputError}>You have to
-                                enter square meters.</Typography>
+                            <Typography variant='body2'>is it Guest House</Typography>
+                            <label htmlFor="guestYes">Yes</label>
+                            <input type="radio" value='yes' id='guestYes' name='guestRadio'
+                                   placeholder='is it Guest House'
+                                   onChange={this.onGuestHouseChanged}
+
+                            />
+                            <label htmlFor="guestNo">No</label>
+
+                            <input type="radio" value='no' id='guestNo' name='guestRadio'
+                                   onChange={this.onGuestHouseChanged}
+                                   checked
+
+                            />
+                            <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
+                                specific if it is guesthouse.</Typography>
+
 
                         </div>
+
                         <div className={classes.inputsContainer}>
-                            <Typography variant='body2' style={{marginTop: '10px'}}>Note To Reviewer</Typography>
-                            <textarea placeholder='Write note to reviewer' className={classes.textarea}
-                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}/>
-                            <Typography variant='body2' id='noteToReviewerError' className={classes.inputError}>You have
-                                to enter a note to a reviewer</Typography>
+                            <Typography variant='body2'>Short description <span style={{opacity:'0.5'}}>(optional)</span></Typography>
+                            <textarea className={classes.textarea} placeholder='Enter short description...'
+                                      style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}
+                                      value={this.state.description}
+                            />
 
                         </div>
+
                         <br/><br/><br/><br/>
                         <div align='right'>
                             <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
-                                paddingLeft: '50px', paddingRight: '50px', background: '#9e9e9e',
+                                paddingLeft: '50px', paddingRight: '50px', background: 'blue',
                                 borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                             }}>Save As Draft</Button>
                             <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
-                                paddingLeft: '50px', paddingRight: '50px', background: '#9e9e9e',
+                                paddingLeft: '50px', paddingRight: '50px', background: 'blue',
                                 borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                             }}> Submit For Review</Button>
                         </div>
                     </Grid>
 
                 </Grid>
+
             </div>
         );
     }
