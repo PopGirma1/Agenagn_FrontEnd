@@ -1,4 +1,4 @@
-describe("renders the home page",()=>{
+describe("renders the About page",()=>{
     it("renders correctly",()=> {
 
         cy.visit('/About');

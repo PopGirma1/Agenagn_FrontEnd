@@ -132,20 +132,20 @@ export default function Common() {
                     </Typography>
                     <div className={classes.contactUs}>
                         <Typography style={{marginTop:'-20px'}}>Follow Us</Typography>
-                        <ExternalLink href="https://www.facebook.com/popgirma/">
+                        <ExternalLink href="https://www.facebook.com/">
                             <span><FacebookIcon color="primary"></FacebookIcon></span>
                         </ExternalLink>
 
-                        <ExternalLink href="https://web.telegram.org/k/">
+                        <ExternalLink href="https://web.telegram.org/">
                             <span><TelegramIcon color="primary"></TelegramIcon></span>
                         </ExternalLink>
-                        <ExternalLink href="https://www.linkedin.com/feed/">
+                        <ExternalLink href="https://www.linkedin.com/">
                             <span><LinkedInIcon color="primary"></LinkedInIcon></span>
                         </ExternalLink>
-                        <ExternalLink href="https://twitter.com/login?lang=en-gb">
+                        <ExternalLink href="https://twitter.com/">
                             <span><TwitterIcon color="primary"></TwitterIcon></span>
                         </ExternalLink>
-                        <ExternalLink href="https://www.instagram.com/accounts/login/">
+                        <ExternalLink href="https://www.instagram.com/">
                             <span><InstagramIcon color="primary"></InstagramIcon></span>
                         </ExternalLink>
 

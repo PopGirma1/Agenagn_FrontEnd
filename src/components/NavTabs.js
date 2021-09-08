@@ -5,6 +5,7 @@ import withWidth, {isWidthDown} from '@material-ui/core/withWidth';
 import {compose} from 'recompose';
 import LottieAnimation from "./lotiContact";
 import lotiContact from "./contactus1.json";
+import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = ((theme) => ({
     root: {
@@ -130,6 +131,7 @@ class NavTabs extends React.Component {
                             <div>
                                 <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
                                     style={{color: '#ee662d'}}>A</span>genagn </h3>
+
                                 <div><LottieAnimation lotti={lotiContact} height={20} width={100} /></div>
                             </div>
                             <div className={classes.hamburgerIcon}>
@@ -164,6 +166,7 @@ class NavTabs extends React.Component {
                         <div>
                             <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
                                 style={{color: '#ee662d'}}>A</span>genagn</h3>
+
                         </div>
 
                         {/*<Grid item sm={4} >
@@ -190,6 +193,7 @@ class NavTabs extends React.Component {
                         <div style={{display:'flex', alignItems:'center'}}>
                             <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><span
                                 style={{color: '#ee662d'}}>A</span>genagn</h3>
+
                             <LottieAnimation lotti={lotiContact} height={20} width={100} />
                         </div>
                     </div>

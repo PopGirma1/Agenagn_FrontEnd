@@ -11,6 +11,8 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import * as yup from "yup";
 
 import DoneIcon from "@material-ui/icons/Done";
+import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
 
 const useStyles = (theme) => ({
     root: {
@@ -96,10 +98,16 @@ class FeedBack extends Component {
     render() {
         const { classes } = this.props;
         return (
+
+
             <div style={parentDivStyling}>
+
+                <Card><CardContent>
                 <div style={{ width: "100%", margin: "2em 0", textAlign: "center" }}>
-                    <Typography variant="h4">FeedBack</Typography>
+                    <Typography variant="h5">FeedBack</Typography>
                 </div>
+
+
                 <form
                     className={classes.root}
                     noValidate
@@ -139,6 +147,8 @@ class FeedBack extends Component {
                         className={classes.buttonStyle}
                     />
                 </form>
+
+                </CardContent></Card>
             </div>
         );
     }
