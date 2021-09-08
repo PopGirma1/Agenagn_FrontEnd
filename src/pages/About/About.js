@@ -29,7 +29,10 @@ const useStyles = (theme) => ({
         padding:'0 3%',
         lineHeight:'1.5',
         textTransform: "full-width",
-       fontSize:'20px'
+        fontSize:'20px',
+        textIndent:'50px',
+        textAlign:'justify',
+        letterSpacing:'2px'
     },
 
 
