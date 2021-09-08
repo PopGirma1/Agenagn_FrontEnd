@@ -57,13 +57,13 @@ class About extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <Card  id={'container'}>
-            <Card className={classes.root}>
-                <div style={{ background: "#eee" }}>
+            <Card  id={'container'} style={{ background: "#eee" }}>
+            <Card className={classes.root} >
+                <div>
                     <div
                         className="aboutContent"
                         style={{ textAlign: "center", margin: "2em " }}>
-                        <Typography variant="h4">Agenagn</Typography>
+                        <Typography variant="h5">Agenagn</Typography>
                         <Card><CardContent>
                         <Typography>
                               <p className={classes.paragraphStyling}>
@@ -93,34 +93,42 @@ class About extends Component {
             </Card>
         <div className={classes.developer}>
         <Card><CardContent>
-        <Typography variant="h5">Developers : </Typography>
+        <Typography variant="h6">Developers : </Typography>
         <div className={classes.Developers}>
             <Card><CardContent>
-            <div>
+
                 <Typography variant="h6">Girmay</Typography>
                 <Avatar alt="Remy Sharp" src="/asset/Img/wow.jpg" className={classes.large}/>
                 <Card>
+                    <CardContent>
                     Software Engineer (web developer and designer)
+                    </CardContent>
                 </Card>
-            </div>
+
             </CardContent></Card>
             <Card><CardContent>
-            <div>
+
                 <Typography variant="h6" >Desalegn </Typography>
                 <Avatar alt="Remy Sharp" src="/asset/Img/cmd.jpg"  className={classes.large}/>
                 <Card>
-                    Software Engineer (web developer and designer)
+                    <CardContent>
+                        Software Engineer (web developer and designer)
+                    </CardContent>
+
                 </Card>
-            </div>
+
             </CardContent></Card>
             <Card><CardContent>
-            <div>
+
                 <Typography variant="h6">Kalab </Typography>
                 <Avatar alt="Remy Sharp" src="/asset/Img/kalab.jpg" className={classes.large}/>
                 <Card>
-                    Software Engineer (web developer and designer)
+                    <CardContent>
+                        Software Engineer (web developer and designer)
+                    </CardContent>
                 </Card>
-            </div></CardContent></Card>
+
+            </CardContent></Card>
         </div>
         </CardContent></Card>
         </div>

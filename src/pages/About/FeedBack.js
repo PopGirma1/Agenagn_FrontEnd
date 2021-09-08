@@ -100,7 +100,7 @@ class FeedBack extends Component {
         return (
 
 
-            <div style={parentDivStyling}>
+            <Card style={parentDivStyling}>
 
                 <Card><CardContent>
                 <div style={{ width: "100%", margin: "2em 0", textAlign: "center" }}>
@@ -148,8 +148,9 @@ class FeedBack extends Component {
                     />
                 </form>
 
+
                 </CardContent></Card>
-            </div>
+            </Card>
         );
     }
 }
