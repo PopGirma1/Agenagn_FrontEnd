@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
+        minHeight: '5vh',
 
     },
 
@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3, 2),
         marginTop: 'auto',
         zIndex: theme.zIndex.drawer + 2,
-
         backgroundColor:
             theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
     },
