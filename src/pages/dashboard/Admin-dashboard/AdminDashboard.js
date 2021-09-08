@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import moment from 'moment'
 import backEndApi from '../../../services/api'
 import MyModal from './Modal';
+import {Redirect} from "react-router-dom";
 
 const useStyles = theme => ({
     root: {
@@ -23,7 +24,8 @@ const useStyles = theme => ({
     tableContainer: {
         padding: '10px',
         borderRadius: '5px',
-        backgroundColor: '#F2EDD7',
+        backgroundColor: '#eeeeee',
+
 
     },
     margin: {
@@ -59,10 +61,11 @@ const useStyles = theme => ({
 
         },
         "& .MuiRadio-colorPrimary.Mui-checked": {
-            color: '#E48257',
+            color: 'rgb(90,109,255)',
+
         },
         "& .MuiRadio-root": {
-            color: '#E48257',
+            color: '#747474',
 
         }
 
@@ -90,7 +93,7 @@ const useStyles = theme => ({
 
 
 class AdminDashboard extends React.Component {
-    state = {homeDocs: [], isReRender: false, filterSelected: ''};
+    state = {homeDocs: [], isReRender: false, filterSelected: '', isRedirect:false, redirectTo:''};
     componentDidMount = async () => {
         const config = {
             headers: {
@@ -160,10 +163,17 @@ class AdminDashboard extends React.Component {
     reRender = (isReRender) => {
         this.setState({isReRender: isReRender})
     };
-
+    onTableRowClick = (row) =>{
+        console.log(row._id);
+        this.setState({isRedirect:true,redirectTo:row._id})
+    };
     render() {
         const {classes} = this.props;
-
+        if(this.state.isRedirect){
+          return  <Redirect
+                to={`/adminDetail/${this.state.redirectTo}`}
+            />
+        }
         if (this.state.isReRender) {
             window.location.reload(false);
 
@@ -201,7 +211,7 @@ class AdminDashboard extends React.Component {
                                 <TableBody >
                                     {this.state.homeDocs?
                                         this.state.homeDocs.map((row) => (
-                                            <TableRow key={row._id} >
+                                            <TableRow key={row._id} onClick={()=>this.onTableRowClick(row)}  style={{cursor:'pointer'}}>
                                                 <TableCell component="th" scope="row" style={{ width:'15%'}}>
                                                     {row.location}
                                                 </TableCell>
@@ -248,7 +258,8 @@ class AdminDashboard extends React.Component {
                     </Grid>
                     <Box container style={{
                         marginTop: '10px',
-                        backgroundColor: '#f2edd7',
+                        backgroundColor: '#eeeeee',
+
                         boxShadow: '-9px 9px 16px rgba(0, 0, 0, 0.05)',
                         borderRadius: '5px'
                     }}>

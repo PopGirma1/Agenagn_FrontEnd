@@ -57,15 +57,9 @@ function Search(props) {
     const onFormSubmit = async (e)=>{
         e.preventDefault();
         history.push(`/search?q=${keyword}`)
-        /*const {data} = await backEndApi.get('/search', {params:{q:keyword}});
-        props.setQuery(data);
-        setRedirect(true);
-        console.log(data);*/
+
     };
 
-    /*if(redirect){
-        return <Redirect to={'/search'}/>
-    }*/
 
     const onInputChange = async (e) =>{
         setKeyword(e.target.value)

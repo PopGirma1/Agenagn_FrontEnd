@@ -19,6 +19,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ReplayIcon from "@material-ui/icons/Replay";
 //Tabs
 import {withStyles} from "@material-ui/core/styles";
+import backEndApi from "../../services/api";
 
 const styles = theme => ({
     root: {
@@ -30,7 +31,71 @@ const styles = theme => ({
     },
 
 });
+class EditHose extends React.Component {
+    state = {
 
+        originalHouseId: '',
+        ownerEmail: '',
+        location: '',
+        description: '',
+        squareMeter: '',
+        bedRoom: '',
+        monthlyPayment: '',
+        floor: '',
+        phoneNumber: '',
+        guestHouse: '',
+
+        availabilityDate: '',
+        editedEncodedAvatarUrl: '',
+        listingStatus: '',
+        reviewStatus: '',
+
+        errorMessage: '',
+        file: `https://images.pexels.com/photos/1909603/pexels-photo-1909603.jpeg`,
+
+        isRedirectToHomepage: false,
+        submitValue: '',
+
+    };
+
+    componentDidMount = async () => {
+        const {data} = await backEndApi.get('./edithouse', {params: {id: props.match.params.id}});
+        console.log(data);
+        const imagesImage = () => {
+            const files = data.files;
+            const what = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/`;
+            files.forEach((file) => {
+                otherArray.push(what + file)
+            })
+            return otherArray
+        };
+
+        const firstImg = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/${data.files[0]}`
+        setState({
+            originalHouseId: data.docs._id,
+            ownerEmail: data.docs.ownerEmail,
+            location: data.docs.location,
+            squareMeter: data.docs.squareMeter,
+            bedRoom: parseInt(data.docs.bed_room),
+            monthlyPayment: parseInt(data.docs.monthly_payment),
+            floor: parseInt(data.docs.floor),
+            phoneNumber: parseInt(data.docs.phone_number),
+            guestHouse: data.docs.guest_house ? 'yes' : 'no',
+            description: data.docs.description,
+            availabilityDate: data.docs.availabilityDate,
+            listingStatus: data.docs.listingStatus,
+            reviewStatus: data.docs.reviewStatus,
+
+            editedEncodedAvatarUrl: data.docs.encodedAvatarUrl,
+            file: imagesImage(),
+            /*file:[...file, firstImg],*/
+
+        });
+
+    };
+
+
+}
 class ImageUploadCard extends React.Component {
     state = {
         mainState: "initial", // initial, search, gallery, uploaded
@@ -105,6 +170,71 @@ class ImageUploadCard extends React.Component {
             </React.Fragment>
         );
     }
+}
+class EditHose extends React.Component {
+    state = {
+
+        originalHouseId: '',
+        ownerEmail: '',
+        location: '',
+        description: '',
+        squareMeter: '',
+        bedRoom: '',
+        monthlyPayment: '',
+        floor: '',
+        phoneNumber: '',
+        guestHouse: '',
+
+        availabilityDate: '',
+        editedEncodedAvatarUrl: '',
+        listingStatus: '',
+        reviewStatus: '',
+
+        errorMessage: '',
+        file: `https://images.pexels.com/photos/1909603/pexels-photo-1909603.jpeg`,
+
+        isRedirectToHomepage: false,
+        submitValue: '',
+
+    };
+
+    componentDidMount = async () => {
+        const {data} = await backEndApi.get('./edithouse', {params: {id: props.match.params.id}});
+        console.log(data);
+        const imagesImage = () => {
+            const files = data.files;
+            const what = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/`;
+            files.forEach((file) => {
+                otherArray.push(what + file)
+            })
+            return otherArray
+        };
+
+        const firstImg = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/${data.files[0]}`
+        setState({
+            originalHouseId: data.docs._id,
+            ownerEmail: data.docs.ownerEmail,
+            location: data.docs.location,
+            squareMeter: data.docs.squareMeter,
+            bedRoom: parseInt(data.docs.bed_room),
+            monthlyPayment: parseInt(data.docs.monthly_payment),
+            floor: parseInt(data.docs.floor),
+            phoneNumber: parseInt(data.docs.phone_number),
+            guestHouse: data.docs.guest_house ? 'yes' : 'no',
+            description: data.docs.description,
+            availabilityDate: data.docs.availabilityDate,
+            listingStatus: data.docs.listingStatus,
+            reviewStatus: data.docs.reviewStatus,
+
+            editedEncodedAvatarUrl: data.docs.encodedAvatarUrl,
+            file: imagesImage(),
+            /*file:[...file, firstImg],*/
+
+        });
+
+    };
+
+
 }
 
 export default withStyles(styles, {withTheme: true})(ImageUploadCard);

@@ -25,27 +25,34 @@ function Detail(props) {
     const local = 'http://localhost:5000';
     const [data, setData] = useState([]);
     const [files, setFiles] = useState([]);
+
+    const [activeImg, setActiveImg] = useState([]);
     useEffect(()=>{
         const  getData =async()=> {
             const {data} =  await backEndApi.get('/detail', {params:{id:props.match.params.id}});
             console.log(data);
             setData(data.docs)
             setFiles(data.files)
+            setActiveImg(data.files[0])
         };
         getData();
 
     },[]);
+
+    useEffect(()=>{
+
+    },[])
     return (
         <div className='container'>
             <div className='image-grid'>
                 <div className='small-images'>
                     {files.map((file)=>{
-                        return(<img src={`${local}/images/products/${data.ownerEmail}/${data._id}/${file}`} alt={`${data.location}`}  className='simg'/>)
+                        return(<button onClick={()=>setActiveImg(file)}><img src={`${local}/images/products/${data.ownerEmail}/${data._id}/${file}`}
+                                       alt={`${data.location}`} className='simg'/></button>)
                     })}
                 </div>
                 <div className='one-big-image'>
-                    <img src={local + '/images/products/' + data.encodedImageUrl + '.jpg'} />
-                    <img src={`${local}/images/products/${data.ownerEmail}/${data._id}/${files[0]}`} alt={`${data.location}`} width='95%' height='95%' />
+                    <img src={ `${local}/images/products/${data.ownerEmail}/${data._id}/${activeImg}`} className='limg' />
 
                 </div>
             </div>
@@ -69,7 +76,7 @@ function Detail(props) {
                 </div>
                 <div className='att'>
                     <span className='att-title'>Phone Number</span>
-                    <span className='att-value'>{data.phone_number}</span>
+                    <span className='att-value'>+251 925191919</span>
                 </div>
             </div>
 

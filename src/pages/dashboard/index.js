@@ -41,16 +41,16 @@ const useStyles = theme => ({
 });
 
 
-export default function Dashboard({getToken}){
+export default function Dashboard(props){
     const [auth, setAuth] = useState('')
     const [isAuth, setIsAuth] = useState(true)
 
     const authenticate = () => {
 
         if (auth === "Admin") {
-            return <AdminDashboard getToken={getToken}/>
+            return <AdminDashboard {...props} getToken={props.getToken}/>
         } else if (auth === "User") {
-            return <UserDashboard getToken={getToken}/>
+            return <UserDashboard getToken={props.getToken}/>
         } else if (auth === '') {
 
             return <div>
