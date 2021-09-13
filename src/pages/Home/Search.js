@@ -3,6 +3,10 @@ import {withStyles} from "@material-ui/core";
 import backEndApi from "../../services/api";
 import {Redirect} from "react-router-dom";
 import {useHistory} from "react-router-dom"
+import HomeIcon from '@material-ui/icons/Home'
+import LottieAnimation from "../../components/lotiContact";
+import lotiContact from "../../components/contactus1.json";
+
 
 const useStyles = ((theme) => ({
     searchBarHolder:{
@@ -76,11 +80,12 @@ function Search(props) {
 
         }}>
             <div className={classes.textAndInput}  >
-                <h1 style={{fontSize: '40px'}}><span style={{color: '#ee662d'}}>A</span>genagn</h1>
+                <h1 style={{fontSize: '40px'}}>
+                    <span style={{color: '#2d6dee'}}>A</span>genagn <HomeIcon style={{ fontSize: '66px',marginBottom:'-20px',color:'#50ee2d' }}></HomeIcon></h1>
                 <form className={classes.searchBarHolder} onSubmit={onFormSubmit}>
-                    <input type="text" value={keyword} placeholder="Ayat Condominium" className={classes.searchBar} onChange={onInputChange}/>
+                    <input id="search" name="search" type="text" value={keyword} placeholder="Ayat Condominium" className={classes.searchBar} onChange={onInputChange}/>
                     <i className="fas fa-search fa-lg"
-                          style={{position: 'absolute', left: 15, top: 19, opacity: '0.4'}}></i>
+                          style={{position: 'relative', left: 15, top: -30, opacity: '0.4'}}></i>
                 </form>
             </div>
         </div>

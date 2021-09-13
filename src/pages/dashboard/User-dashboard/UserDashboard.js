@@ -334,7 +334,7 @@ class userDashboard extends React.Component {
                             </Grid>
                             <Grid item xs={6} sm={6} md={6}></Grid>
                             <Grid item xs={3} md={3} align='right'>
-                                <Button href='/addhouse' style={{
+                                <Button id="addNewHouse" href='/addhouse' style={{
                                     background: '#3A6351',
                                     textTransform: 'none',
                                     color: '#F2EDD7',

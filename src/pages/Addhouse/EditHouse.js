@@ -317,7 +317,7 @@ function EditHouse(props) {
         switch (listingStatus) {
             case 'Active' :
                 if (reviewStatus === "Pending" || reviewStatus === "Rejected") {
-                    return <>
+                    return <React.Fragment>
 
                         <Button onClick={onFormSubmit} value='Approved' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
@@ -328,18 +328,18 @@ function EditHouse(props) {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>;
+                    </React.Fragment>;
                 } else if (reviewStatus === "Approved") {
-                    return <>
+                    return <React.Fragment>
 
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </React.Fragment>
                 } else {
-                    return <>
+                    return <React.Fragment>
                         <Button onClick={onFormSubmit} value='' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -349,12 +349,12 @@ function EditHouse(props) {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </React.Fragment>
                 }
 
             case 'Inactive' :
                 if (reviewStatus === "Pending" || reviewStatus === "Rejected") {
-                    return <>
+                    return <React.Fragment>
 
                         <Button onClick={onFormSubmit} value='Approved' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
@@ -365,18 +365,18 @@ function EditHouse(props) {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>;
+                    </React.Fragment>;
                 } else if (reviewStatus === "Approved") {
-                    return <>
+                    return <React.Fragment>
 
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </React.Fragment>
                 } else {
-                    return <>
+                    return <React.Fragment>
                         <Button onClick={onFormSubmit} value='' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -386,10 +386,10 @@ function EditHouse(props) {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </React.Fragment>
                 }
             case 'Draft' :
-                return <>
+                return <React.Fragment>
                     <Button onClick={onFormSubmit} value='NA' variant='contained' style={{
                         paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                         borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -399,10 +399,10 @@ function EditHouse(props) {
                         borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                     }}>Submit For Review</Button>
 
-                </>;
+                </React.Fragment>;
             case 'Submitted' :
                 if (reviewStatus === "Pending" || reviewStatus === "Rejected") {
-                    return <>
+                    return <React.Fragment>
                         <Button onClick={onFormSubmit} value='NA' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -412,17 +412,17 @@ function EditHouse(props) {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>;
+                    </React.Fragment>;
                 } else if (reviewStatus === "Approved") {
-                    return <>
+                    return <React.Fragment>
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </React.Fragment>
                 } else {
-                    return <>
+                    return <React.Fragment>
                         <Button onClick={onFormSubmit} value='Draft' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -432,7 +432,7 @@ function EditHouse(props) {
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
-                    </>
+                    </React.Fragment>
                 }
             default:
                 return <div>Something occur</div>
@@ -701,7 +701,7 @@ function EditHouse(props) {
                                     onChange={onDropZoneChange}
                                     initialFiles={[`http://localhost:5000/images/products/${theDocs?theDocs.docs.ownerEmail:''}/${theDocs?theDocs.docs._id:''}/${theDocs?theDocs.files[0]:''}`]
                                     }
-                                    
+
                                 />
                                 <input type="file"/>
                                 {console.log(theDocs.files, `and then`)}

@@ -8,13 +8,13 @@ import Typography from '@material-ui/core/Typography'
 
 import backEndApi from '../../services/api'
 
-const SignupImage = process.env.PUBLIC_URL + '/img/home2.png';
+const SignupImage = process.env.PUBLIC_URL + '/img/image.png';
 
 const useStyles = theme => ({
         container: {
             width: '100%',
-            paddingLeft: '16px',
-            paddingRight: '16px',
+            paddingLeft: '6px',
+            paddingRight: '6px',
             [theme.breakpoints.down('sm')]: {
                 paddingLeft: 5,
                 paddingRight: 5,
@@ -24,10 +24,10 @@ const useStyles = theme => ({
         root: {
             display: 'flex',
             justifyContent: 'space-around',
-            flexWrap: 'wrap',
-            background: 'rgba(238,238,238,0.87)',
+            flexWrap: 'nowrap',
+            background: 'rgba(241,231,231,0.87)',
             borderRadius: '15px',
-            height: '100vh',
+            height:'600px',
             padding: 10,
             "& a": {
                 color: '#3A6351',
@@ -83,10 +83,12 @@ const useStyles = theme => ({
         },
         imgHolder: {
             marginTop: '20px',
-            backgroundColor: "rgba(185,194,226,0.66)",
+            backgroundColor: "rgba(223,225,232,0.66)",
             borderRadius: '15px',
             marginBottom: 'auto',
             display: 'flex',
+            height:'auto',
+            paddingBottom:'50px',
             [theme.breakpoints.down('sm')]:
                 {
                     display: 'none'
@@ -224,7 +226,7 @@ class Signup extends React.Component {
                         }}/>
                     </div>
 
-                    <div style={{display: 'flex', flexDirection: 'column',}}>
+                    <div style={{display: 'flex', flexDirection: 'column',heigh:'auto'}}>
 
                         <Typography align='center' component="h1" variant="h5" style={{padding: 10}}>
                             Sign Up
@@ -289,7 +291,7 @@ class Signup extends React.Component {
 
                             />
 
-                            <FormControlLabel
+                            <FormControlLabel id="check"
                                 control={<Checkbox value="remember" color="primary"
                                                    onChange={this.onCheckboxChange}/>}
                                 label="I have read and agreed to Privacy Policy  & TOU"
@@ -298,6 +300,7 @@ class Signup extends React.Component {
                             {this.state.errorMessage ? this.errorcheck() : this.successCheck()}
 
                             <Button
+                                id="SignUp"
                                 type="submit"
                                 fullWidth
                                 variant="contained"
@@ -310,7 +313,7 @@ class Signup extends React.Component {
 
                                 <div>
                                     <Box mt={4} style={{fontWeight: '800'}}>Already have an account
-                                        <Link href="/login" variant="body2">
+                                        <Link href="/login" variant="body2" id="goToLogin">
                                             {" Log in"}
                                         </Link></Box>
                                 </div>

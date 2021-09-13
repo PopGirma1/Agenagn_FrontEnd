@@ -356,11 +356,10 @@ class NewListing extends React.Component {
                         <form>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Location of the Condominium</Typography>
-                                <input type="text" list='locationOfCondominium' name='Myname' placeholder='Location of the condominium'
+                                <input type="text" list='locationOfCondominium' id="location" name='Myname' placeholder='Location of the condominium'
                                        className={classes.input}
                                        onChange={this.onLocationChanged}
                                        value={this.state.location}
-
                                 />
                                 <datalist id="locationOfCondominium" >
                                     <option value="Ayat Condominium"/>
@@ -380,14 +379,13 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Bed Rooms</Typography>
-                                <select className={classes.input} onChange={this.onBedroomChanged}>
+                                <select className={classes.input} onChange={this.onBedroomChanged} name="selectNumberOfBedrooms">
                                     <option value="Select Bed Rooms" disabled selected>Select Bed Rooms
                                     </option>
                                     <option value='1'>0 (studio)</option>
                                     <option value='1'>1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
-
                                 </select>
 
                                 <Typography type='number' variant='body2' id='bedRoomError'
@@ -398,7 +396,7 @@ class NewListing extends React.Component {
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Floor</Typography>
 
-                                <select className={classes.input} onChange={this.onFloorchanged}>
+                                <select name="selectNumberOfFloor" className={classes.input} onChange={this.onFloorchanged}>
                                     <option value="Select Floor" disabled selected>Select Floor
                                     </option>
                                     <option value='0'>ground</option>
@@ -416,7 +414,7 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Monthly Payment</Typography>
-                                <input type="number" min='0' placeholder='eg, 5000' className={[classes.input]}
+                                <input name="payment" type="number" min='0' placeholder='eg, 5000' className={[classes.input]}
                                        onChange={this.onMonthlyPaymentChanged}
                                        value={this.state.monthlyPayment}
 
@@ -429,7 +427,7 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Square meters <span style={{opacity:'0.5'}}>(optional)</span></Typography>
-                                <input type="text" list='squareMetersInput' placeholder='Square meter of your house' className={classes.input}
+                                <input name="SquareMeter" type="text" list='squareMetersInput' placeholder='Square meter of your house' className={classes.input}
                                        onChange={this.onSquareMeterChanged}
                                        value={this.state.editavailabilityDate}
 
@@ -446,14 +444,13 @@ class NewListing extends React.Component {
                                 <Typography variant='body2'>Available for rent starting from</Typography>
                                 {/* <input type="text" placeholder='Enter product name' className={classes.input}
                                    onChange={this.onAvailabilityChanged}/>*/}
-                                <div className={classes.dataPicker}>
+                                <div className={classes.dataPicker} id="date">
                                     <DatePicker
                                         dateFormat="dd-MM-yyyy"
                                         selected={this.state.productLaunchDate}
                                         className={[classes.input]}
                                         onChange={this.onAvailabilityChanged}
                                         value={moment(this.state.availabilityDate).format("DD-MM-YYYY")}
-
                                     />
                                 </div>
                                 <Typography variant='body2' id='availabilityError' className={classes.inputError}>You have
@@ -463,7 +460,7 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>phone number</Typography>
-                                <div style={{position:'relative'}}><input type="number" placeholder='eg, 925762589' className={classes.input}
+                                <div style={{position:'relative'}}><input type="number" placeholder='eg, 925762589' name="phone" className={classes.input}
                                                                           onChange={this.onPhoneNumberChanged}
                                                                           value={this.state.phoneNumber}
                                                                           style={{paddingLeft: '50px'}}
@@ -484,12 +481,12 @@ class NewListing extends React.Component {
                             <Typography variant='body2'>Upload house image</Typography>
 
                             <Grid style={{marginTop: '5px'}}>
-                                <Grid itme xs={12} md={8} className={classes.dropZone}>
+                                <Grid itme xs={12} md={8} className={classes.dropZone} id="upload"  data-cy="content">
 
                                     {/*Icon ={}*/}
                                     <DropzoneArea
                                         acceptedFiles={['image/*']}
-                                        maxFileSize={2000000}
+                                        maxFileSize={6000000}
                                         filesLimit={'6'}
                                         dropzoneText={"Drag and drop an image here or click"}
                                         onChange={this.onDropZoneChange}
@@ -514,8 +511,6 @@ class NewListing extends React.Component {
 
                             <input type="radio" value='no' id='guestNo' name='guestRadio'
                                    onChange={this.onGuestHouseChanged}
-                                   checked
-
                             />
                             <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
                                 specific if it is guesthouse.</Typography>
@@ -525,7 +520,7 @@ class NewListing extends React.Component {
 
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2'>Short description <span style={{opacity:'0.5'}}>(optional)</span></Typography>
-                            <textarea className={classes.textarea} placeholder='Enter short description...'
+                            <textarea name="shortDescription" className={classes.textarea} placeholder='Enter short description...'
                                       style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}
                                       value={this.state.description}
                             />
@@ -538,7 +533,7 @@ class NewListing extends React.Component {
                                 paddingLeft: '50px', paddingRight: '50px', background: 'blue',
                                 borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                             }}>Save As Draft</Button>
-                            <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                            <Button onClick={this.onFormSubmit} value='Pending' id="submit" variant='contained' style={{
                                 paddingLeft: '50px', paddingRight: '50px', background: 'blue',
                                 borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                             }}> Submit For Review</Button>

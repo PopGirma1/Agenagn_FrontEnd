@@ -30,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
         flexFlow: "column wrap",
     },
     contact:{
-        marginBottom:'130px',
-        marginTop:'138px'
+        marginBottom:'5px',
+        marginTop:'5px'
     },
 
     contact1:{
-        padding:'30px'
+        padding:'10px'
     },
     root1: {
         display: "flex",
@@ -64,26 +64,26 @@ function Contact(props) {
             <Card className={classes.contact1}><CardContent className="frmctl">
                 <FormControl>
                 <InputLabel htmlFor="my-input">  Name</InputLabel>
-                <Input id="my-input" type={"text"} aria-describedby="my-helper-text" />
+                <Input id="name" type={"text"} aria-describedby="my-helper-text" />
                 </FormControl>
                 <FormControl>
                 <InputLabel htmlFor="my-input">Email address</InputLabel>
-                <Input id="my-input" type={"email"} aria-describedby="my-helper-text" />
+                <Input id="email" type={"email"} aria-describedby="my-helper-text" />
                 </FormControl>
                 <FormControl>
                 <InputLabel htmlFor="my-input">Phone Number</InputLabel>
-                <Input id="my-input" type={"number"} aria-describedby="my-helper-text" />
+                <Input id="phone" type={"number"} aria-describedby="my-helper-text" />
                 </FormControl>
                 <FormControl>
                 <InputLabel htmlFor="my-input">Company</InputLabel>
-                <Input id="my-input" type={"text"} aria-describedby="my-helper-text" />
+                <Input id="company" type={"text"} aria-describedby="my-helper-text" />
                 </FormControl>
                 <FormControl>
                 <InputLabel htmlFor="my-input">Country</InputLabel>
-                <Input id="my-input" type={"text"} aria-describedby="my-helper-text" />
+                <Input id="country" type={"text"} aria-describedby="my-helper-text" />
                 </FormControl>
             </CardContent>
-                <Button variant="contained" color="primary" href="#contained-buttons" className="btn">Subimit</Button>
+                <Button id="submit" variant="contained" color="primary" href="#contained-buttons" className="btn">Subimit</Button>
             </Card>
            </form>
             <div className={classes.root1}>
@@ -95,45 +95,40 @@ function Contact(props) {
                         Contact Information
 
                             <Card><CardContent>
-                                Company: Noosphere Affairs
+                                Company: Agenagn
                                 Trading P.L;C
-                                Address:   Firdu Commercial
+                                Address:   Agenagn Commercial,Addis Ababa
                                 Building, 3rd Floor
-                                Office no 308.
-
-                                P.O.box: 54178
-                                Tel: 1  +251-974 082036
-                                Tel: 2  +251-974 082037
+                                Office no 300.
+                                P.O.box: 54100
+                                Tel: 1  +251-940-651-252
                             </CardContent></Card>
                         <Card className={classes.contact}><CardContent>
                             Email:
                             <Link
                                 component="button"
-                                variant="body2"
                                 onClick={() => {
                                     console.info("I'm a button.");
                                 }}
                             >
-                                digital@backtoschoolethiopia.org
+                                papa@gmail.com
                             </Link>
                             <Link
                                 component="button"
-                                variant="body2"
                                 onClick={() => {
                                     console.info("I'm a button.");
                                 }}
                             >
-                                back2schooleth@gmail.com
+                                kalab@gmail.com
                             </Link>
                             <Typography>What’s up No:     +251 974082037</Typography>
                             <Link
                                 component="button"
-                                variant="body2"
                                 onClick={() => {
                                     console.info("I'm a button.");
                                 }}
                             >
-                                www.backtoschoolethiopia.org
+                               cmd@gmail.com
                             </Link>
                         </CardContent></Card>
 
