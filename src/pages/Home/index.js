@@ -34,6 +34,8 @@ const useStyles = ((theme) => ({
     searchBarHolder:{
         position:'relative',
         width: '70%',
+        padding:0,
+        margin:0,
         paddingBottom:'20px',
 
         "&:focus-within":{
@@ -102,7 +104,7 @@ class MainBody extends React.Component {
                 <form className={classes.searchBarHolder} onSubmit={this.onFormSubmit}>
                     <input type="text" value={this.state.keyword} placeholder="Ayat Condominium" className={classes.searchBar} onChange={this.onInputChange}/>
                     <i className="fas fa-search fa-lg"
-                       style={{position: 'relative', left: 15, top: -30, opacity: '0.4'}}></i>
+                       style={{position: 'absolute', left: 15, top: 19, opacity: '0.4'}}></i>
                 </form>
 
                 <Grid container spacing={4}>

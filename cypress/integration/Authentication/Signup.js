@@ -1,10 +1,4 @@
 describe("renders Authentication Signup page",()=>{
-    it("renders correctly",()=> {
-
-        cy.visit('/Signup');
-        cy.contains("Agenagn Background!");
-    });
-
     it("accepts user input and can register",()=>{ // new user can register
         cy.visit("/Signup")
         cy.get('#name')
@@ -22,7 +16,6 @@ describe("renders Authentication Signup page",()=>{
         cy.wait(9000)
     })
 });
-
 
 describe("if user already have an account, user see that, he/she has existed account",()=>{
    // existed user can not be registered again

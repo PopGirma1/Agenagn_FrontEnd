@@ -65,6 +65,8 @@
   },
   "devDependencies": {
     "@4tw/cypress-drag-drop": "^2.0.0",
+    "@bahmutov/cy-api": "^1.5.0",
+    "@cypress/code-coverage": "^3.9.11",
     "@cypress/react": "^5.9.4",
     "@cypress/webpack-dev-server": "^1.4.0",
     "@material-ui/styles": "^4.11.4",

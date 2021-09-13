@@ -27,7 +27,7 @@ const useStyles = theme => ({
         display: 'flex',
         justifyContent: 'space-around',
         flexWrap: 'wrap',
-        background: 'rgba(238,238,238,0.87)',
+        background: '#F5F5F5',
         borderRadius: '15px',
         height: '100vh',
         padding: 10,

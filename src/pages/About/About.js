@@ -62,7 +62,7 @@ class About extends Component {
         return (
             <Card  id={'container'}>
                 <Card className={classes.root}>
-                    <div style={{ background: "#eee" }}>
+                    <div style={{ background: "#F5F5F5" }}>
                         <div
                             className="aboutContent"
                             style={{ textAlign: "center", margin: "2em " }}>

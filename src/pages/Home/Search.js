@@ -12,9 +12,11 @@ const useStyles = ((theme) => ({
     searchBarHolder:{
         position:'relative',
             width: '70%',
-
+        padding:0,
+        margin:0,
             "&:focus-within":{
             transform: "scale(1.025)",
+
 
         },
         [theme.breakpoints.down('sm')]: {
@@ -85,7 +87,7 @@ function Search(props) {
                 <form className={classes.searchBarHolder} onSubmit={onFormSubmit}>
                     <input id="search" name="search" type="text" value={keyword} placeholder="Ayat Condominium" className={classes.searchBar} onChange={onInputChange}/>
                     <i className="fas fa-search fa-lg"
-                          style={{position: 'relative', left: 15, top: -30, opacity: '0.4'}}></i>
+                          style={{position: 'absolute', left: 15, top: 19, opacity: '0.4'}}></i>
                 </form>
             </div>
         </div>
