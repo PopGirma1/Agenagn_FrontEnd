@@ -15,8 +15,8 @@ import EditHouse from "./pages/Addhouse/EditHouse";
 import Search from "./pages/Home/Search";
 import AdminDetail from './pages/Dashboard/Admin-dashboard/AdminDetail'
 import About from "./pages/About/About";
-import Common from "./components/Common";
 import Contact from "./pages/Contact/Contact";
+import UpperFooter from "./components/UpperFooter";
 
 const useStyles = ((theme) => ({
     root: {},
@@ -72,7 +72,8 @@ class App extends React.Component {
                         <Route path='/contact' component={Contact}/>
                     </Container>
                 </BrowserRouter>
-                <Common></Common>
+
+                <UpperFooter></UpperFooter>
                 <Footer/>
 
             </div>

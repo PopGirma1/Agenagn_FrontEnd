@@ -34,6 +34,7 @@
     "react-transition-group-v1": "npm:react-transition-group@^1.2.1",
     "recompose": "^0.30.0",
     "sprite-animator": "^1.11.5",
+    "styled-components": "^5.3.1",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },
