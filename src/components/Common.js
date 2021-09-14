@@ -21,7 +21,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 const useStyles = makeStyles((theme) => ({
     root: {
         width:'auto',
-        marginTop:'120px'
+        marginTop:'10vh',
     },
     media: {
         height: 0,

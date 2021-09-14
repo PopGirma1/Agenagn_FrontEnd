@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 import backEndApi from '../../services/api'
 
-const loginImage = process.env.PUBLIC_URL + '/img/home2.png';
+const loginImage = process.env.PUBLIC_URL + '/img/image.png';
 const useStyles = theme => ({
     container: {
         width: '100%',
@@ -222,7 +222,7 @@ class Login extends React.Component {
                         <Typography align='center' component="h1" variant="h5" style={{padding: 10}}>
                             Login
                         </Typography>
-                        <form className={classes.form} noValidate>
+                        <form className={classes.form} noValidate >
 
                             <TextField
                                 variant="outlined"
@@ -266,6 +266,7 @@ class Login extends React.Component {
                             {this.errorcheck()}
 
                             <Button
+                                id="login"
                                 type="submit"
                                 fullWidth
                                 variant="contained"
@@ -279,7 +280,7 @@ class Login extends React.Component {
 
                                 <div item md={6}>
                                     <Box mt={4} style={{fontWeight: '800'}}>Don't have an account?
-                                        <Link href="/signup" variant="body2">
+                                        <Link href="/signup" variant="body2" id="gotoSignup">
                                             {" Sign Up"}
                                         </Link></Box>
                                 </div>

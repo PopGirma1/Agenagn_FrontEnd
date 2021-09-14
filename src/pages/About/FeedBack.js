@@ -1,3 +1,5 @@
+
+
 import {
     withStyles,
     makeStyles,
@@ -10,6 +12,8 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 //import PropTypes from "prop-types";
 
 import DoneIcon from "@material-ui/icons/Done";
+import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
 
 const useStyles = (theme) => ({
     root: {
@@ -77,49 +81,59 @@ class FeedBack extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div style={parentDivStyling}>
-                <div style={{ width: "100%", margin: "2em 0", textAlign: "center" }}>
-                    <Typography variant="h4">FeedBack</Typography>
-                </div>
-                <form
-                    className={classes.root}
-                    noValidate
-                    autoComplete="off"
-                    onSubmit={this.onSubmit}
-                    style={stylingForm}>
-                    <TextField
-                        id="filled-basic"
-                        label="email"
-                        variant="outlined"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.onChange}
-                        className={classes.emailBoxStyling}
-                    />
-                    {/* <DoneIcon color="primary" style={this.state.view.email} /> */}
-                    <div>
-                        <span style={{ color: "red" }}>{this.state.error}</span>
-                    </div>
-                    <TextareaAutosize
-                        minRows={15}
-                        aria-label="maximum height"
-                        placeholder="write a comment"
-                        name="feedback"
-                        onChange={this.onChange}
-                        value={this.state.feedback}
-                        className={classes.commentFieldStyling}
-                    />
-                    {/* <DoneIcon color="primary" style={this.state.view.feedback} /> */}
 
-                    <TextField
-                        id="filled-basic"
-                        variant="filled"
-                        type="submit"
-                        value="Submit"
-                        size="small"
-                        className={classes.buttonStyle}
-                    />
-                </form>
+
+            <div style={parentDivStyling}>
+
+                <Card><CardContent>
+                    <div style={{ width: "100%", margin: "2em 0", textAlign: "center" }}>
+                        <Typography variant="h5">FeedBack</Typography>
+                    </div>
+
+
+                    <form
+                        className={classes.root}
+                        noValidate
+                        autoComplete="off"
+                        onSubmit={this.onSubmit}
+                        style={stylingForm}>
+                        <TextField
+                            id="filled-basic"
+                            label="email"
+                            variant="outlined"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.onChange}
+                            className={classes.emailBoxStyling}
+                        />
+                        {/* <DoneIcon color="primary" style={this.state.view.email} /> */}
+                        <div>
+                            <span style={{ color: "red" }}>{this.state.error}</span>
+                        </div>
+                        <TextareaAutosize
+                            id="feedback"
+                            minRows={15}
+                            aria-label="maximum height"
+                            placeholder="write a comment"
+                            name="feedback"
+                            onChange={this.onChange}
+                            value={this.state.feedback}
+                            className={classes.commentFieldStyling}
+                        />
+                        {/* <DoneIcon color="primary" style={this.state.view.feedback} /> */}
+
+                        <TextField
+                            name="submit"
+                            id="submit"
+                            variant="filled"
+                            type="submit"
+                            value="Submit"
+                            size="small"
+                            className={classes.buttonStyle}
+                        />
+                    </form>
+
+                </CardContent></Card>
             </div>
         );
     }

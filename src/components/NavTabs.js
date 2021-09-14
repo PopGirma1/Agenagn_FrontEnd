@@ -3,6 +3,8 @@ import {AppBar, Button, Grid, Link, List, ListItem, Toolbar, Typography, withSty
 import {Redirect} from "react-router-dom";
 import withWidth, {isWidthDown} from '@material-ui/core/withWidth';
 import {compose} from 'recompose';
+import LottieAnimation from "./lotiContact";
+import lotiContact from "./contactus1.json";
 
 const useStyles = ((theme) => ({
     root: {
@@ -89,24 +91,23 @@ class NavTabs extends React.Component {
     isAuthnticated = () => {
         if (this.props.getToken()) {
             return (
-                <>
+                <React.Fragment>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/addhouse'}>Add House</Button></ListItem>
-                    <ListItem><Button href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/dashboard'}>Dashboard</Button></ListItem>
                     <ListItem><Button href='/' onClick={this.onLogoutclicked}>logout</Button></ListItem>
-                </>
+                </React.Fragment>
 
             )
         } else {
             return (
-                <>
+                <React.Fragment>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
-                    <ListItem><Button href={process.env.PUBLIC_URL + '/comment'}>Feed back</Button></ListItem>
+                    <ListItem><Button href={process.env.PUBLIC_URL + '/contact'}>Contact</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/login'}>login</Button></ListItem>
-                </>
+                </React.Fragment>
 
             )
         }
@@ -138,7 +139,6 @@ class NavTabs extends React.Component {
                         </div>
 
                         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch'}}>
-
                             <List className={classes.listContainerMobile}>
                                 {this.isAuthnticated()}
                             </List>
@@ -161,6 +161,7 @@ class NavTabs extends React.Component {
                         <div>
                             <h3 style={{fontSize: '30px', margin: 0, color: 'black'}}><a href={'/'} className={classes.LogoTextNavbar}><span
                                 style={{color: '#ee662d'}}>A</span>genagn</a></h3>
+
                         </div>
                         {/*<Grid item sm={4} >
                             <SearchBar className={classes.searchBar}/>

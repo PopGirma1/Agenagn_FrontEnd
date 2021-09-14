@@ -10,11 +10,16 @@ import LoginRegister from './pages/Authentication/Login'
 import Footer from './components/Footer'
 import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
-import About from "./pages/About/About";
+
 import Dashboard from "./pages/Dashboard/";
 import EditHouse from "./pages/Addhouse/EditHouse";
 import Search from "./pages/Home/Search";
 import AdminDetail from './pages/Dashboard/Admin-dashboard/AdminDetail'
+
+import About from "./pages/About/About";
+import Common from "./components/Common";
+import Contact from "./pages/Contact/Contact";
+
 
 const useStyles = ((theme) => ({
     root: {},
@@ -68,10 +73,12 @@ class App extends React.Component {
                         <Route path='/edithouse/:id' exact
                                component={(props) => <EditHouse {...props} getToken={this.getToken}/>}/>
 
-                        {/*<Route path='/comment' component={Comment}/>
-                        <Route path='/go' component={IndexPage}/>*/}
+                        <Route path='/about' component={About}/>
+                        <Route path='/contact' component={Contact}/>
+
                     </Container>
                 </BrowserRouter>
+                <Common></Common>
                 <Footer/>
 
             </div>

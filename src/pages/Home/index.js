@@ -167,7 +167,7 @@ function MainBody(props) {
                     <input type="text" value={keyword} placeholder="Ayat Condominium"
                            className={classes.searchBar} onChange={onInputChange}/>
                     <i className="fas fa-search fa-lg"
-                       style={{position: 'absolute', left: 15, top: 19, opacity: '0.4'}}></i>
+                       style={{position: 'relative', left: 15, top: -30, opacity: '0.4'}}></i>
                 </form>
                 {isMobile? <div>
                     <div className={classes.showFilter} onClick={onShowFilterClicked}>

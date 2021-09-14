@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, FormControl, FormControlLabel, Grid, Typography, withStyles} from '@material-ui/core';
+import {Box, Button, FormControl, FormControlLabel, Grid, Typography, withStyles} from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Table from '@material-ui/core/Table';
@@ -187,11 +187,22 @@ class AdminDashboard extends React.Component {
                                 <Typography variant='h5' style={{marginBottom:'20px'}}>All Listing Reviews</Typography>
                             </Grid>
 
+                            <Grid item xs={3} md={3} align='right'>
+                                <Button id="addNewHouse" href='/addhouse' style={{
+                                    background: '#3A6351',
+                                    textTransform: 'none',
+                                    color: '#F2EDD7',
+                                    borderRadius: '5px',
+                                    paddingLeft: '20px',
+                                    paddingRight: '20px',
+                                }}>+ Add new house</Button>
+                            </Grid>
+
                         </Grid>
                         <Box><TableContainer component={Paper} className={classes.tableContainer}>
                             <Table className={classes.table} size="small" aria-label="a dense table">
                                 <TableHead>
-                                    <TableRow>
+                                    <TableRow id="userInfo">
                                         <TableCell>
                                             <Typography variant='h6' style={{fontSize:'16px'}}>Product name</Typography>
                                         </TableCell>
@@ -281,6 +292,8 @@ class AdminDashboard extends React.Component {
                                     />*/}
 
                                     <FormControlLabel
+
+                                        id="Pending"
                                         control={<Radio name="Construction" color='primary'
                                                         className={classes.myCheckbox}/>}
                                         value="Pending"
@@ -291,6 +304,8 @@ class AdminDashboard extends React.Component {
 
                                     />
                                     <FormControlLabel
+
+                                        id="Rejected"
                                         control={<Radio name="Construction" color='primary'
                                                         className={classes.myCheckbox}/>}
                                         value="Rejected"
@@ -302,6 +317,7 @@ class AdminDashboard extends React.Component {
                                     />
 
                                     <FormControlLabel
+                                        id="Approved"
                                         control={<Radio name="Construction" color='primary'
                                                         className={classes.myCheckbox}/>}
                                         value="Approved"
@@ -311,8 +327,9 @@ class AdminDashboard extends React.Component {
 
                                     />
                                     <FormControlLabel
+
                                         control={<Radio name="Construction" color='primary'
-                                                        className={classes.myCheckbox}/>}
+                                                        className={classes.myCheckbox} id="AllStatus"/>}
                                         value="All Status"
                                         label="All Status"
                                         labelPlacement='start'
@@ -321,8 +338,9 @@ class AdminDashboard extends React.Component {
 
                                     />
                                     <FormControlLabel
+
                                         control={<Radio name="Construction" color='primary'
-                                                        className={classes.myCheckbox}/>}
+                                                        className={classes.myCheckbox} id="SortByDate" />}
                                         value='Sort by date'
                                         label="Sort by date"
                                         labelPlacement='start'

@@ -54,32 +54,27 @@ export default function ContactCard() {
     return (
         <Card className={classes.root}>
             <CardHeader className={classes.titile}
-                title="PLEASE DON’T TELL!"
-                subheader="Introducing our 5th edition Exclusive Benefit Package!                                                             "
+                title="Agenagn!"
+                subheader="Agenagn is a solution for looking for house available for rent.!                                                             "
             />
             <CardContent>
-                <Typography paragraph>“Back to School Virtual Detour De Ethiopia, 5th edition engage with more
-                    than fifty, 50, government & private college/universities though out Ethiopia”.
+                <Typography paragraph>
+                    The system connects strangers who looking for house rent and
+                    administrator of the system. The service capable of showing the
+                    detailed information about the house such as number of bedrooms,
+                    bathrooms, price of rent, location where the house is found.
                 </Typography>
 
-                <Typography paragraph> Caveat:
-                    Early registration on Back to School Virtual Detour De Ethiopia, 2022 has the following privileges to offer for exhibitors!
+                <Typography >
+                    In addition, the strangers can filter the available house with
+                    respect to the ranges of price they can afford.
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-
-                    <ul>
-                        <li> Be part of the grand Back to School lottery ticket for the chance to win “LIFE TIME FREE TO ATTENED” certificate of honor.</li>
-                        <li>Entitled to take part on 2 of the virtual tour programs FREE of charge.</li>
-                        <li>Entitled for a 20% discount on all virtual tour package.</li>
-                        <li>Entitled for Peninsula stand on 7 of the virtual tour event locations in accord to their location choosing.</li>
-                        <li>Exhibitor’s promotional video inclusion on event official websites until the end of the virtual tour program.</li>
-                        <li>Exhibitor’s promotional documents to be displayed onsite on all fifty, 50, college & universities that shall be included in the virtual tour program.</li>
-                        <li>Exhibitors who shall be donating books, either in hard or soft copy, to Noosphere Academy shall be entitled for a 50% discount on all virtual tour packages.
-                            Kindly note that the discount is applicable with the number of books donated.</li>
-                        <li>Exclusive access to our event monthly digital newsletter.
-                            Exhibitors shall also be granted a space in our digital newsletter to share their part of story.</li>
-                        <li>Entitled for a free upgrade as a sponsor with privileges intact, upon availability.</li>
-                    </ul>
+                <Typography>
+                    The service would
+                    not provide online payment since online payment is another
+                    challenge in Ethiopia. The system reduces strangers’ time, energy
+                    and money spent by looking for house. It reduces an additional
+                    money spent for brokers from both strangers and owner.
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -96,15 +91,13 @@ export default function ContactCard() {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Caveats:
-                        Names & location details of all fifty, 50, government & private universities
-                        in Ethiopia that shall be included on Back to School Virtual Detour De Ethiopia,
-                        to be announced on December 16, 2021.
+                    <Typography>
+                        money spent for brokers from both strangers and owner.
+                        Furthermore, it facilitates house rent to be taken earlier. In
+                        terms of boundary Agenagn works for house found around Addis Ababa
+                        for now. But, for sure Agenagn will expand to the rest of
+                        Ethiopia.
                     </Typography>
-                    <Typography paragraph>
-                        SAVE UP TO 20 – 50% PARTICPATION COST!
-                    </Typography>
-                    <Typography>REGISTER NOW!</Typography>
                 </CardContent>
             </Collapse>
         </Card>
