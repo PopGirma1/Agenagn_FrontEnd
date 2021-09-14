@@ -61,7 +61,7 @@ export default function Dashboard(props){
     };
 
     useEffect( () => {
-      const  checkLocalStorage=async()=>{
+        const checkLocalStorage=async()=>{
             if (localStorage.getItem(('token'))) {
 
                 const config = {
@@ -97,5 +97,3 @@ export default function Dashboard(props){
     );
 
 }
-
-
