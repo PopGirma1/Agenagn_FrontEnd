@@ -3,8 +3,6 @@ import {AppBar, Button, Grid, Link, List, ListItem, Toolbar, Typography, withSty
 import {Redirect} from "react-router-dom";
 import withWidth, {isWidthDown} from '@material-ui/core/withWidth';
 import {compose} from 'recompose';
-import LottieAnimation from "./lotiContact";
-import lotiContact from "./contactus1.json";
 
 const useStyles = ((theme) => ({
     root: {

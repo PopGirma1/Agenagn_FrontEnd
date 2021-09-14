@@ -133,7 +133,7 @@ class NewListing extends React.Component {
         monthlyPayment: '',
         floor: '',
         phoneNumber: '',
-        guestHouse: '',
+        guestHouse: false,
         description: '',
         squareMeter: '',
 
@@ -172,7 +172,7 @@ class NewListing extends React.Component {
             listingStatus: this.listingStatusFilter(e),
             reviewStatus: e.currentTarget.value
         };
-
+        console.log('come 1 ');
         if (!this.state.location) {
             document.getElementById('locationError').style.display = 'block';
         }
@@ -188,10 +188,10 @@ class NewListing extends React.Component {
             document.getElementById('bedRoomError').style.display = 'block';
 
         }
-        if (!this.state.guestHouse) {
+        /*if (!this.state.guestHouse) {
             document.getElementById('guestHouseError').style.display = 'block';
 
-        }
+        }*/
         if (!this.state.phoneNumber) {
             document.getElementById('availabilityError').style.display = 'block';
 
@@ -200,19 +200,21 @@ class NewListing extends React.Component {
         if (!this.state.file) {
             document.getElementById('dropZoneImage').style.display = 'block';
         }
+        console.log('come 2 ');
 
-        if (this.state.location && this.state.description &&
+        if (this.state.location &&
             this.state.floor && this.state.monthlyPayment
-            && this.state.guestHouse
             && this.state.bedRoom
             && this.state.phoneNumber && this.state.file) {
 
+            console.log('come 3 ');
 
             this.submitNewListingApiRequest(product);
 
 
         } else {
             //for not yet validated
+            console.log('come 4 ');
 
         }
 
@@ -230,7 +232,7 @@ class NewListing extends React.Component {
                 'content-type': 'multipart/form-data'
             }
         };
-        console.log(formData);
+        console.log(newLaunchDetails, 'what');
         let response = await backEndApi.post('/addhouse', {params: newLaunchDetails});
         let resImage = await backEndApi.post('/uploadHouseImage', formData, config);
 
@@ -327,13 +329,13 @@ class NewListing extends React.Component {
     };
     onGuestHouseChanged = (e) => {
 
-        if (e.target.value.length === 0) {
+        /*if (e.target.value.length === 0) {
             document.getElementById('guestHouseError').style.display = 'block';
 
         } else {
             document.getElementById('guestHouseError').style.display = 'none';
 
-        }
+        }*/
 
         this.setState({guestHouse: e.target.value === 'yes'})
     };

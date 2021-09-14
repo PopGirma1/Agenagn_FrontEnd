@@ -17,7 +17,7 @@ import Search from "./pages/Home/Search";
 import AdminDetail from './pages/Dashboard/Admin-dashboard/AdminDetail'
 
 import About from "./pages/About/About";
-import Common from "./components/Common";
+/*import Common from "./components/Common";*/
 import Contact from "./pages/Contact/Contact";
 
 
@@ -56,7 +56,7 @@ class App extends React.Component {
 
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <NavTabs getToken={this.getToken}/>
-                    <Container className={classes.mainParts}>
+                    <Container className={classes.mainParts} maxWidth={'xl'}>
                         <Route path='/' exact> <Search/></Route>
                         <Route path='/search' exact component={(props) => <MainBody {...props} />}/>
                         <Route path={process.env.PUBLIC_URL + '/detail/:id'} component={Detail}/>
@@ -78,7 +78,6 @@ class App extends React.Component {
 
                     </Container>
                 </BrowserRouter>
-                <Common></Common>
                 <Footer/>
 
             </div>

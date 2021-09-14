@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
-import './Contact.css'
 import {makeStyles} from "@material-ui/core/styles";
 import {red} from "@material-ui/core/colors";
 import ContactCard from "./ContactCard";
@@ -18,8 +17,6 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import LottieAnimation from "./lotiContact";
-import lotiContact from "./contactus2.json";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +52,6 @@ function Contact(props) {
     return (
         <div>
             <div>
-                <LottieAnimation lotti={lotiContact} height={300} width={400} />
             </div>
         <div className={classes.root}>
         <div className={classes.main}>

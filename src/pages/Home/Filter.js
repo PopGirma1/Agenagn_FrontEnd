@@ -8,11 +8,12 @@ const useStyles = ((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent:'center',
-        padding:'5px',
+        justifyContent:'flex-start',
+        padding:'15px',
         borderRadius:'7px',
-        background: '#ffffff',
-        /*boxShadow: '0 1px 1px rgb(0 0 0 / 0.2)',*/
+        /*background: '#ffffff',*/
+        /*boxShadow: '0 3px 2px rgb(0 0 0 / 0.2)',*/
+        border:'1px solid #eeeeee',
         "& label":{
             display:'block'
         }

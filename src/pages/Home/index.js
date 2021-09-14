@@ -64,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
     searchBarHolder: {
         position: 'relative',
         width: '70%',
+        padding: 0,
+        margin: 0,
         paddingBottom: '20px',
 
         "&:focus-within": {
@@ -167,7 +169,7 @@ function MainBody(props) {
                     <input type="text" value={keyword} placeholder="Ayat Condominium"
                            className={classes.searchBar} onChange={onInputChange}/>
                     <i className="fas fa-search fa-lg"
-                       style={{position: 'relative', left: 15, top: -30, opacity: '0.4'}}></i>
+                       style={{position: 'absolute', left: 15, top: 19, opacity: '0.4'}}></i>
                 </form>
                 {isMobile? <div>
                     <div className={classes.showFilter} onClick={onShowFilterClicked}>
@@ -183,12 +185,12 @@ function MainBody(props) {
             <Container maxWidth={'xl'} className={classes.lowerContainer}>
                 {isMobile?'':<Filter/>}
 
-                <Container maxWidth='md' className={classes.contentRoot} >
+                <Container maxWidth='lg' className={classes.contentRoot} >
 
 
-                    <Grid container spacing={3}>
+                    <Grid container spacing={2}>
                         {houseDocs ? houseDocs.map((home) => (
-                            <Grid item key={home._id} xs={12} sm={6} md={4}>
+                            <Grid item key={home._id} xs={12} sm={6} md={4} lg={3} xl={2}>
                                 <Card className={classes.contentRoot}>
                                     <CardActionArea href={`/detail/${home._doc._id}`}>
                                         <CardMedia
@@ -196,7 +198,7 @@ function MainBody(props) {
                                             image={`${local}/images/products/${home._doc.ownerEmail}/${home._doc._id}/${home.Img}`}
                                             title="Contemplative Reptile"
                                         />
-                                        <CardContent style={{paddingBottom: 0}}>
+                                        <CardContent style={{paddingBottom: 0, height:'100px'}}>
                                             <Typography gutterBottom variant="body1" component="h2">
                                                 {home._doc.location}
                                             </Typography>
