@@ -5,15 +5,8 @@ import {
 import React, { Component } from "react";
 import FeedBack from "./FeedBack";
 import Avatar from "@material-ui/core/Avatar";
-import { bounce } from 'react-animations';
-import Radium, {StyleRoot} from 'radium';
 const useStyles = (theme) => ({
 
-    bounce: {
-        animation: 'x 1s',
-        animationName: Radium.keyframes(bounce, 'bounce')
-    }
-,
     root: {
         display: "grid",
         margin: "2em",

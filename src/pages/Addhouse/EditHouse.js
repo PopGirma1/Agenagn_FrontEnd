@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Button, Grid, Typography, withStyles} from '@material-ui/core';
 import {DropzoneArea} from 'material-ui-dropzone';
 import {Redirect} from "react-router-dom";
@@ -124,176 +124,164 @@ const useStyles = theme => ({
         display: 'none',
     },
 });
+let otherArray = [];
 
-class EditHouse extends React.Component {
-    state = {
 
-        originalHouseId: '',
-        ownerEmail: '',
-        location: '',
-        description: '',
+function EditHouse(props) {
 
-        bedRoom:'',
-        monthlyPayment:'',
-        floor:'',
-        phoneNumber:'',
-        guestHouse:'',
+    let firstImg1 = `http://localhost:5000/images/products/kalabamare88@gmail.com/61360f78238d173368337a3e/1.jpg`;
+    const {classes} = props;
+    const firstImg2 = useRef([]);
+    const [theDocs, setTheDocs] = useState('');
+    const [originalHouseId, setOriginalHouseId] = useState('');
+    const [ownerEmail, setOwnerEmail] = useState('');
+    const [location, setLocation] = useState('');
+    const [description, setDescription] = useState('');
+    const [squareMeter, setSquareMeter] = useState('');
+    const [bedRoom, setBedRoom] = useState('');
+    const [monthlyPayment, setMonthlyPayment] = useState('');
+    const [floor, setFloor] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [guestHouse, setGuestHouse] = useState('');
+    const [availabilityDate, setAvailabilityDate] = useState('');
+    const [editedEncodedAvatarUrl, setEditedEncodedAvatarUrl] = useState('');
+    const [listingStatus, setListingStatus] = useState('');
+    const [reviewStatus, setReviewStatus] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [file, setFile] = useState([]);
+    const [isRedirectToHomepage, setIsRedirectToHomepage] = useState('');
+    const [submitValue, setSubmitValue] = useState('');
 
-        editedEncodedAvatarUrl: '',
-        listingStatus: '',
-        reviewStatus: '',
+    useEffect(() => {
 
-        errorMessage: '',
-        file: null,
 
-        isRedirectToHomepage: false,
-        submitValue: '',
+        const loadData = async () => {
 
-    };
-    characterCounter = 144;
+            const {data} = await backEndApi.get('./edithouse', {params: {id: props.match.params.id}});
+            console.log(data);
+            setTheDocs(data);
+            const imagesImage =  () => {
+                const files = data.files;
+                otherArray = [];
+                files.forEach((the) => {
+                const what = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/${the}`;
+                    otherArray.push(what)
+                });
+                console.log(otherArray, 'what');
+                return otherArray
+            };
 
-    componentDidMount = async () => {
-        const {data} = await backEndApi.get('./edithouse', {params: {id: this.props.match.params.id}})
-        console.log(data);
-        this.setState({
-            originalHouseId: data._id,
-            location: data.location,
-            bedRoom: parseInt(data.bed_room),
-            monthlyPayment: parseInt(data.monthly_payment),
-            floor: parseInt(data.floor),
-            phoneNumber: parseInt(data.phone_number),
-            guestHouse: data.guest_house,
-            description: data.description,
+            /*firstImg2.current = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/${data.files[0]}`;*/
+            firstImg2.current = imagesImage();
 
-            listingStatus : data.listingStatus,
-            reviewStatus :  data.reviewStatus,
+            let newVar = setFile(imagesImage());
+            console.log(imagesImage(), 'and what')
+            // eslint-disable-next-line no-unused-expressions
+            setOwnerEmail(data.docs.ownerEmail),
+            setOriginalHouseId(data.docs._id),
+            setLocation(data.docs.location),
+            setSquareMeter(data.docs.squareMeter),
+            setBedRoom(parseInt(data.docs.bed_room)),
+            setMonthlyPayment(parseInt(data.docs.monthly_payment)),
+            setFloor(parseInt(data.docs.floor)),
+            setPhoneNumber(parseInt(data.docs.phone_number)),
+            setGuestHouse(data.docs.guest_house) ? 'yes' : 'no',
+            setDescription(data.docs.description),
+            setAvailabilityDate(data.docs.availabilityDate),
+            setListingStatus(data.docs.listingStatus),
+            setReviewStatus(data.docs.reviewStatus),
+            setEditedEncodedAvatarUrl(data.docs.encodedAvatarUrl)
 
-            editedEncodedAvatarUrl: data.encodedAvatarUrl,
-            file:null, /*['http://localhost:5000/images/products/' + data.encodedAvatarUrl + ".jpg"]*/
-
-        });
-
-    };
-
-    /*handlePreviewIcon = (fileObject, classes) => {
-        const {type} = fileObject.file;
-        const iconProps = {
-            className: classes.image,
         };
+        loadData();
 
-        if (type.startsWith("video/")) return <Theaters {...iconProps} />;
+    }, [setTheDocs])
 
-        switch (type) {
-            case "application/msword":
-            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                return <Description {...iconProps} />;
-            case "application/pdf":
-                return <PictureAsPdf {...iconProps} />;
-            default:
-                return <AttachFile {...iconProps} />
-        }
-    };*/
 
-    onFormSubmit = (e) => {
+    const onFormSubmit = (e) => {
         e.preventDefault();
 
-        this.validateForm(e);
+        validateForm(e);
     };
-    listingStatusFilter = (e) => {
-        console.log(e.currentTarget.value, this.state.listingStatus)
-        if (e.currentTarget.value === "NA" && this.state.listingStatus === "Submitted") {
+    const listingStatusFilter = (e) => {
+        console.log(e.currentTarget.value, listingStatus)
+        if (e.currentTarget.value === "NA" && listingStatus === "Submitted") {
             return "Draft"
-        } else if (e.currentTarget.value === "Pending" && this.state.listingStatus === "Draft") {
+        } else if (e.currentTarget.value === "Pending" && listingStatus === "Draft") {
             return "Submitted"
-        }/*else if (e.currentTarget.value === "Inactive" && this.state.listingStatus === "Active"){
+        }/*else if (e.currentTarget.value === "Inactive" && listingStatus === "Active"){
             return "Inactive"
-        }else if (e.currentTarget.value === "Active" && this.state.listingStatus === "Inactive"){
+        }else if (e.currentTarget.value === "Active" && listingStatus === "Inactive"){
             return "Active"
         }*/ else {
-            return this.state.listingStatus
+            return listingStatus
         }
     };
-    reviewStatusFilter = (e) => {
+    const reviewStatusFilter = (e) => {
 
         return e.currentTarget.value;
     };
-    validateForm = (e) => {
-
-
+    const validateForm = (e) => {
 
 
         const product = {
-            originalId: this.state.originalHouseId,
-            ownerEmail: this.state.ownerEmail,
-            location: this.state.location,
-            description: this.state.description,
-            bed_room : this.state.bedRoom,
-            guest_house: this.state.guestHouse,
-            monthly_payment: parseInt(this.state.monthlyPayment),
-            listingStatus: this.listingStatusFilter(e),
-            reviewStatus: this.reviewStatusFilter(e)
+            originalId: originalHouseId,
+            ownerEmail: ownerEmail,
+            location: location,
+            squareMeter: squareMeter,
+            description: description,
+            bedRoom: parseInt(bedRoom),
+            floor: parseInt(floor),
+            monthlyPayment: parseInt(monthlyPayment),
+            phoneNumber: parseInt(phoneNumber),
+            guest_house: guestHouse === 'yes',
+
+
+            availabilityDate: availabilityDate,
+            listingStatus: listingStatusFilter(e),
+            reviewStatus: reviewStatusFilter(e)
         };
 
-        if (!this.state.location) {
+        if (!location) {
             document.getElementById('locationError').style.display = 'block';
         }
-        if (!this.state.description) {
-            document.getElementById('descriptionError').style.display = 'block';
-
-        } else if (this.characterCounter > 1) {
-            document.getElementById('descriptionError').style.display = 'block';
-        }
-        if (!this.state.floor) {
+        if (!floor) {
             document.getElementById('floorError').style.display = 'block';
 
         }
-        if (!this.state.monthly_payment) {
+        if (!monthlyPayment) {
             document.getElementById('monthlyPaymentError').style.display = 'block';
 
         }
-        if (!this.state.bed_room) {
+        if (!bedRoom) {
             document.getElementById('bedRoomError').style.display = 'block';
 
         }
-        if (!this.state.guestHouse) {
-            document.getElementById('guestHouseError').style.display = 'block';
-
-        }
-        if (!this.state.phoneNumber) {
+        if (!availabilityDate) {
             document.getElementById('availabilityError').style.display = 'block';
 
         }
+        if (!guestHouse) {
+            document.getElementById('guestHouseError').style.display = 'block';
 
-        if (!this.state.file) {
-            document.getElementById('dropZoneImage').style.display = 'block';
         }
+        /* if (!phoneNumber) {
+             document.getElementById('phoneNumber').style.display = 'block';
 
-        if (this.state.location && this.state.description &&
-            this.state.floor && this.state.monthly_payment
-            && this.state.guestHouse
-            && this.state.bed_room
-            && this.state.phoneNumber && this.state.file && this.characterCounter < 1
-            && parseInt(this.state.bed_room) < 100) {
+         }*/
 
-            this.submitEditHouseApiRequest(product);
+        /*if (!file) {
+            document.getElementById('dropZoneImage').style.display = 'block';
+        }*/
 
+        if (location && description &&
+            floor && monthlyPayment
+            && guestHouse
+            && bedRoom
+            && availabilityDate
+            && phoneNumber && description.length > 1) {
 
-
-
-
-            //this.imageUploadApiRequest();
-            /*axios.all([
-                axios.post(`/my-url`, {
-                    myVar: 'myValue'
-                }),
-                axios.post(`/my-url2`, {
-                    myVar: 'myValue'
-                })
-            ])
-                .then(axios.spread((data1, data2) => {
-                    // output of req.
-                    console.log('data1', data1, 'data2', data2)
-                }));*/
+            submitEditHouseApiRequest(product);
 
         } else {
             //for not yet validated
@@ -304,11 +292,11 @@ class EditHouse extends React.Component {
 
     };
 
-    submitEditHouseApiRequest = async (newLaunchDetails) => {
-        /*let user = this.props.getToken();*/
+    const submitEditHouseApiRequest = async (newLaunchDetails) => {
+        /*let user = props.getToken();*/
 
         const formData = new FormData();
-        formData.append('file', this.state.file);
+        formData.append('file', file);
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
@@ -320,31 +308,31 @@ class EditHouse extends React.Component {
 
 
         console.log("The files and Image success fully uploaded" + response + resImage);
-        this.setState({isRedirectToHomepage: true})
+        setIsRedirectToHomepage(true)
 
     };
 
-    choseButton = () => {
+    const choseButton = () => {
 
-        switch (this.state.listingStatus) {
+        switch (listingStatus) {
             case 'Active' :
-                if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
+                if (reviewStatus === "Pending" || reviewStatus === "Rejected") {
                     return <>
 
-                        <Button onClick={this.onFormSubmit} value='Approved' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Approved' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
-                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
                     </>;
-                } else if (this.state.reviewStatus === "Approved") {
+                } else if (reviewStatus === "Approved") {
                     return <>
 
-                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
@@ -352,11 +340,11 @@ class EditHouse extends React.Component {
                     </>
                 } else {
                     return <>
-                        <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
-                        <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
@@ -365,23 +353,23 @@ class EditHouse extends React.Component {
                 }
 
             case 'Inactive' :
-                if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
+                if (reviewStatus === "Pending" || reviewStatus === "Rejected") {
                     return <>
 
-                        <Button onClick={this.onFormSubmit} value='Approved' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Approved' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
-                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
                     </>;
-                } else if (this.state.reviewStatus === "Approved") {
+                } else if (reviewStatus === "Approved") {
                     return <>
 
-                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
@@ -389,11 +377,11 @@ class EditHouse extends React.Component {
                     </>
                 } else {
                     return <>
-                        <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
-                        <Button onClick={this.onFormSubmit} value='' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
@@ -402,32 +390,32 @@ class EditHouse extends React.Component {
                 }
             case 'Draft' :
                 return <>
-                    <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
+                    <Button onClick={onFormSubmit} value='NA' variant='contained' style={{
                         paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                         borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                     }}>Save As Draft</Button>
-                    <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                    <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                         paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                         borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                     }}>Submit For Review</Button>
 
                 </>;
             case 'Submitted' :
-                if (this.state.reviewStatus === "Pending" || this.state.reviewStatus === "Rejected") {
+                if (reviewStatus === "Pending" || reviewStatus === "Rejected") {
                     return <>
-                        <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='NA' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
-                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
                     </>;
-                } else if (this.state.reviewStatus === "Approved") {
+                } else if (reviewStatus === "Approved") {
                     return <>
-                        <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
@@ -435,11 +423,11 @@ class EditHouse extends React.Component {
                     </>
                 } else {
                     return <>
-                        <Button onClick={this.onFormSubmit} value='Draft' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Draft' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
-                        <Button onClick={this.onFormSubmit} value='Submitted' variant='contained' style={{
+                        <Button onClick={onFormSubmit} value='Submitted' variant='contained' style={{
                             paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
@@ -451,7 +439,9 @@ class EditHouse extends React.Component {
         }
     };
 
-    onLocationChanged = (e) => {
+    const onLocationChanged = (e) => {
+        console.log(file);
+        console.log(firstImg2, 'this 2');
         if (e.target.value.length === 0) {
 
             document.getElementById('locationError').style.display = 'block';
@@ -459,52 +449,41 @@ class EditHouse extends React.Component {
             document.getElementById('locationError').style.display = 'none';
 
         }
-        this.setState({location: e.target.value})
+        setLocation(e.target.value)
     };
 
-    onDescriptionChanged = (e) => {
-        this.characterCounter = 144 - e.target.value.length;
-        if (this.characterCounter < 1) {
-            document.getElementById('remainingCharacter').style.display = 'none';
-            document.getElementById('descriptionError').style.display = 'none';
-        } else if (this.characterCounter > 0) {
-            document.getElementById('descriptionError').style.display = 'block';
-        } else {
-            document.getElementById('descriptionError').style.display = 'none';
-
-        }
-        this.setState({description: e.target.value})
+    const onDescriptionChanged = (e) => {
+        setDescription(e.target.value)
     };
-    onFloorchanged = (e) => {
+    const onFloorchanged = (e) => {
         if (e.target.value === 'Select Floor') {
             document.getElementById('floorError').style.display = 'block';
 
         } else {
             document.getElementById('floorError').style.display = 'none';
         }
-        this.setState({floor: e.target.value})
+        setFloor(e.target.value)
     };
-    onMonthlyPaymentChanged = (e) => {
+    const onMonthlyPaymentChanged = (e) => {
         if (e.target.value.length === 0) {
             document.getElementById('monthlyPaymentError').style.display = 'block';
         } else {
             document.getElementById('monthlyPaymentError').style.display = 'none';
         }
 
-        this.setState({monthly_payment: e.target.value})
+        setMonthlyPayment(e.target.value)
     };
-    onBedroomChanged = (e) => {
-        const changeToInt = parseInt(e.target.value);
-        if (e.target.value.length === 0 || changeToInt > 100) {
+    const onBedroomChanged = (e) => {
+        if (e.target.value.length === 'Select Bed Rooms') {
             document.getElementById('bedRoomError').style.display = 'block';
 
         } else {
             document.getElementById('bedRoomError').style.display = 'none';
 
         }
-        this.setState({bed_room: e.target.value})
+        setBedRoom(e.target.value)
     };
-    onGuestHouseChanged = (e) => {
+    const onGuestHouseChanged = (e) => {
 
         if (e.target.value.length === 0) {
             document.getElementById('guestHouseError').style.display = 'block';
@@ -513,9 +492,10 @@ class EditHouse extends React.Component {
             document.getElementById('guestHouseError').style.display = 'none';
 
         }
-        this.setState({guestHouse: e.target.value})
+
+        setGuestHouse(e.target.value === 'yes' ? 'yes' : 'no')
     };
-    onPhoneNumberChanged = (e) => {
+    const onPhoneNumberChanged = (e) => {
 
         if (e.target.value.length === 0) {
             document.getElementById('phoneNumberError').style.display = 'block';
@@ -526,11 +506,11 @@ class EditHouse extends React.Component {
         }
 
 
-        this.setState({phone_number: e.target.value})
+        setPhoneNumber(e.target.value)
 
 
     };
-    onAvailabilityChanged = (date) => {
+    const onAvailabilityChanged = (date) => {
 
         console.log(date);
         if (date === null) {
@@ -541,223 +521,237 @@ class EditHouse extends React.Component {
 
         }
 
-        this.setState({phoneNumber: date})
+        setAvailabilityDate(date)
     };
-    onSquareMeterChanged = (e) => {
-
-        if (e.target.value.length === 0) {
-            document.getElementById('networkError').style.display = 'block';
-
-        } else {
-            document.getElementById('networkError').style.display = 'none';
-
-        }
-        this.setState({squareMeter: e.target.value})
+    const onSquareMeterChanged = (e) => {
+        setSquareMeter(e.target.value)
     };
-    onNoteToReviewerChanged = (e) => {
-        /*if (e.target.value.length === 0) {
-            document.getElementById('noteToReviewerError').style.display = 'block';
+    const onDropZoneChange = (e) => {
 
-        } else {
-            document.getElementById('noteToReviewerError').style.display = 'none';
-
-        }*/
-        this.setState({noteToReviewer: e.target.value})
-    };
-    onDropZoneChange = (e) => {
-        if (e[0]) {
-            document.getElementById('dropZoneImage').style.display = 'none';
-
-        }
-        /*this.setState({file:e.target.files[0]});*/
-        this.setState({file: e[0]});
+        /*setFile(e)*/
 
     };
 
-    render() {
-        const {classes} = this.props;
 
-        if (!this.props.getToken()) {
-            return <Redirect to='/login'/>
-        }
-        if (this.state.isRedirectToHomepage) {
-            return <Redirect to='/dashboard'/>
-        }
-        return (
-            <div className={classes.root}>
-                <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>Edit
-                    Listing</Typography>
+    if (!props.getToken()) {
+        return <Redirect to='/login'/>
+    }
+    if (isRedirectToHomepage) {
+        return <Redirect to='/dashboard'/>
+    }
+    return (
+        <div className={classes.root}>
+            <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>Edit
+                House</Typography>
 
-                <Grid container className={classes.firstGrid} spacing={4}>
-                    <Grid item xs={12} md={6}>
-                        <form>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Product Name</Typography>
-                                <input type="text" name='Myname' placeholder='Enter Location of the condominium'
-                                       className={classes.input}
-                                       onChange={this.onLocationChanged}
-                                       value={this.state.location}
-
-                                />
-                                <Typography variant='body2' id='locationError' className={classes.inputError}>You have
-                                    to
-                                    entered Location of your condominium.</Typography>
-
-                            </div>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Product short Description</Typography>
-                                <textarea className={classes.textarea} placeholder='Enter short description...'
-                                          style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}
-                                          value={this.state.description}
-                                />
-                                <Typography variant='body2' align='right' id='remainingCharacter'
-                                            style={{color: '#9e9e9e'}}>({this.characterCounter} Characters
-                                    Remaining)</Typography>
-                                <Typography variant='body2' id='descriptionError' className={classes.inputError}>You
-                                    have to write a description not less than 144 character.</Typography>
-
-                            </div>
-
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Floor</Typography>
-
-                                <select className={classes.input} onChange={this.onFloorchanged}>
-                                    <option value="Select Floor" disabled selected>Select Floor
-                                    </option>
-                                    <option value='1'>1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-
-                                </select>
-                                <Typography variant='body2' id='floorError' className={classes.inputError}>you have
-                                    to
-                                    select floor.</Typography>
-                            </div>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Monthly Payment</Typography>
-                                <input type="number" min='0' placeholder='$ 00' className={[classes.input]}
-                                       onChange={this.onMonthlyPaymentChanged}
-                                       value={this.state.monthlyPayment}
-
-
-                                />
-                                <Typography variant='body2' id='monthlyPaymentError' className={classes.inputError}>you
-                                    have to
-                                    enter monthly payment.</Typography>
-
-                            </div>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Bed Rooms</Typography>
-                                <input type="number" min='0' max='100' placeholder='00 %' className={[classes.input]}
-                                       onChange={this.onBedroomChanged}
-                                       value={this.state.bedRoom}
-
-                                />
-                                <Typography type='number' variant='body2' id='bedRoomError' className={classes.inputError}>You have
-                                    to enter number of bed rooms.</Typography>
-
-                            </div>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>is it Guest House</Typography>
-                                <input type="text" placeholder='is it Guest House' className={classes.input}
-                                       onChange={this.onGuestHouseChanged}
-                                       value={this.state.guestHouse}
-
-                                />
-                                <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
-                                    specific if it is guesthouse.</Typography>
-
-
-                            </div>
-                            <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>phone number</Typography>
-                                <input type="text" placeholder='Enter your phone number' className={classes.input}
-                                       onChange={this.onPhoneNumberChanged}
-                                       value={this.state.phoneNumber}
-
-                                />
-                                <Typography variant='body2' id='phoneNumberError' className={classes.inputError}>You
-                                    have
-                                    to enter your phone number.</Typography>
-
-
-                            </div>
-                        </form>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-
+            <Grid container className={classes.firstGrid} spacing={4}>
+                <Grid item xs={12} md={6}>
+                    <form>
                         <div className={classes.inputsContainer}>
-                            <Typography variant='body2'>Upload Listing Icon</Typography>
-
-                            <Grid style={{marginTop: '5px'}}>
-                                <Grid itme xs={12} md={6} className={classes.dropZone}>
-                                    {/*Icon ={}*/}
-                                    <DropzoneArea
-                                        acceptedFiles={['image/*']}
-                                        maxFileSize={2000000}
-                                        filesLimit={'1'}
-                                        dropzoneText={"Drag and drop an image here or click"}
-                                        onChange={this.onDropZoneChange}
-                                    />
-                                    {/*<DropzoneArea getPreviewIcon={this.handlePreviewIcon}
-                                                  dropzoneText="Drag and drop a jpg, png or webp Icon, Or click to add"/>*/}
-                                </Grid>
-                                <Typography variant='body2' id='dropZoneImage' className={classes.inputError}>You have
-                                    to
-                                    upload an image.</Typography>
-                            </Grid>
-                        </div>
-                        <div className={[classes.inputsContainer]}>
-                            <Typography variant='body2'>Available for rent starting from</Typography>
-                            {/* <input type="text" placeholder='Enter product name' className={classes.input}
-                                   onChange={this.onAvailabilityChanged}/>*/}
-                            <div className={classes.dataPicker}>
-                                <DatePicker
-                                    dateFormat="dd-MM-yyyy"
-                                    selected={this.state.productLaunchDate}
-                                    className={[classes.input]}
-                                    onChange={this.onAvailabilityChanged}
-                                    value={moment(this.state.editedProductLaunchDate).format("DD-MM-YYYY")}
-
-                                />
-                            </div>
-                            <Typography variant='body2' id='availabilityError' className={classes.inputError}>You have to
-                                Set Launch Data.</Typography>
-
-                        </div>
-                        <div className={classes.inputsContainer}>
-                            <Typography variant='body2'>Square meters</Typography>
-                            <input type="text" placeholder='Enter product Network' className={classes.input}
-                                   onChange={this.onSquareMeterChanged}
-                                   value={this.state.editedProductNetwork}
+                            <Typography variant='body2'>Location of the Condominium</Typography>
+                            <input type="text" list='locationOfCondominium' name='Myname'
+                                   placeholder='Enter Location of the condominium'
+                                   className={classes.input}
+                                   onChange={onLocationChanged}
+                                   value={location}
 
                             />
+                            <datalist id="locationOfCondominium">
+                                <option value="Ayat Condominium"/>
+                                <option value="Yeka Abado Condominium"/>
+                                <option value="Submit Condominium"/>
+                                <option value="Gelan Condominium"/>
+                                <option value="Tuludimtu Condominium"/>
+                                <option value="4 killo Condominium"/>
+                                <option value="Gotera Condominium"/>
+                                <option value="Balderas Condominium"/>
+                                <option value="Mebrathail Condominium"/>
+                            </datalist>
+
+                            <Typography variant='body2' id='locationError' className={classes.inputError}>You have
+                                to
+                                entered Location of your condominium.</Typography>
+
+                        </div>
+                        <div className={classes.inputsContainer}>
+                            <Typography variant='body2'>Bed Rooms</Typography>
+                            <select className={classes.input} value={bedRoom}
+                                    onChange={onBedroomChanged}>
+                                <option value="Select Bed Rooms" disabled selected>Select Bed Rooms
+                                </option>
+                                <option value='1'>0 (studio)</option>
+                                <option value='1'>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+
+                            </select>
+
+                            <Typography type='number' variant='body2' id='bedRoomError'
+                                        className={classes.inputError}>You have
+                                to enter number of bed rooms.</Typography>
+
+                        </div>
+                        <div className={classes.inputsContainer}>
+                            <Typography variant='body2'>Floor</Typography>
+
+                            <select className={classes.input} value={floor}
+                                    onChange={onFloorchanged}>
+                                <option value="Select Floor" disabled selected>Select Floor
+                                </option>
+                                <option value='0'>ground</option>
+                                <option value='1'>+1</option>
+                                <option value="2">+2</option>
+                                <option value="3">+3</option>
+                                <option value="4">+4</option>
+                                <option value="5">+5</option>
+                                <option value="6">+6</option>
+
+                            </select>
+                            <Typography variant='body2' id='floorError' className={classes.inputError}>you have
+                                to
+                                select floor.</Typography>
+                        </div>
+                        <div className={classes.inputsContainer}>
+                            <Typography variant='body2'>Monthly Payment</Typography>
+                            <input type="number" min='0' placeholder='eg, 5000' className={[classes.input]}
+                                   onChange={onMonthlyPaymentChanged}
+                                   value={monthlyPayment}
+
+
+                            />
+                            <Typography variant='body2' id='monthlyPaymentError' className={classes.inputError}>you
+                                have to
+                                enter monthly payment.</Typography>
+
+                        </div>
+                        <div className={classes.inputsContainer}>
+                            <Typography variant='body2'>Square meters <span
+                                style={{opacity: '0.5'}}>(optional)</span></Typography>
+                            <input type="text" list='squareMetersInput' placeholder='Square meters of your house'
+                                   className={classes.input}
+                                   onChange={onSquareMeterChanged}
+                                   value={squareMeter}
+
+                            />
+                            <datalist id='squareMetersInput'>
+                                <option value="4 x 4"></option>
+                                <option value="3 x 4"></option>
+                                <option value="5 x 4"></option>
+                                <option value="5 x 3"></option>
+                            </datalist>
+
                             <Typography variant='body2' id='networkError' className={classes.inputError}>You have to
                                 enter square meters.</Typography>
 
                         </div>
+                        <div className={[classes.inputsContainer]}>
+                            <Typography variant='body2'>Available for rent starting from</Typography>
+                            {/* <input type="text" placeholder='Enter product name' className={classes.input}
+                                   onChange={onAvailabilityChanged}/>*/}
+                            <div className={classes.dataPicker}>
+                                <DatePicker
+                                    dateFormat="dd-MM-yyyy"
+                                    selected={availabilityDate}
+                                    className={[classes.input]}
+                                    onChange={onAvailabilityChanged}
+                                    value={moment(availabilityDate).format("DD-MM-YYYY")}
+
+                                />
+                            </div>
+                            <Typography variant='body2' id='availabilityError' className={classes.inputError}>You
+                                have to
+                                Set Launch Data.</Typography>
+
+                        </div>
                         <div className={classes.inputsContainer}>
-                            <Typography variant='body2' style={{marginTop: '10px'}}>Note To Reviewer</Typography>
-                            <textarea placeholder='Write note to reviewer' className={classes.textarea}
-                                      onChange={this.onNoteToReviewerChanged} style={{marginTop: '5px'}}
-                                      value={this.state.editedNoteToReviewer}
+                            <Typography variant='body2'>phone number</Typography>
+                            <div style={{position: 'relative'}}>
+                                <input type="number" placeholder='Enter your phone number' className={classes.input}
+                                       onChange={onPhoneNumberChanged}
+                                       value={phoneNumber}
+                                       style={{paddingLeft: '50px'}}
 
-                            />
-                            <Typography variant='body2' id='noteToReviewerError' className={classes.inputError}>You have
-                                to enter a note to a reviewer</Typography>
+
+                                />
+                                <span
+                                    style={{position: 'absolute', left: 7, top: "35%", opacity: '0.5'}}>+251</span>
+                            </div>
+
+                            <Typography variant='body2' id='phoneNumberError' className={classes.inputError}>You
+                                have
+                                to enter your phone number.</Typography>
+
 
                         </div>
-                        <br/><br/><br/><br/>
-                        <div align='right'>
-                            {this.choseButton()}
-                        </div>
-                    </Grid>
 
+                    </form>
                 </Grid>
-            </div>
-        );
-    }
+                <Grid item xs={12} md={6}>
+
+                    <div className={classes.inputsContainer}>
+                        <Typography variant='body2'>Upload house image</Typography>
+
+                        <Grid style={{marginTop: '5px'}}>
+                            <Grid itme xs={12} md={6} className={classes.dropZone}>
+                                <DropzoneArea
+                                    acceptedFiles={['image/*']}
+                                    maxFileSize={2000000}
+                                    filesLimit={'6'}
+                                    dropzoneText={"Drag and drop an image here or click"}
+                                    onChange={onDropZoneChange}
+                                    initialFiles={[`http://localhost:5000/images/products/${theDocs?theDocs.docs.ownerEmail:''}/${theDocs?theDocs.docs._id:''}/${theDocs?theDocs.files[0]:''}`]
+                                    }
+                                    
+                                />
+                                <input type="file"/>
+                                {console.log(theDocs.files, `and then`)}
+                                {console.log(`http://localhost:5000/images/products/${theDocs?theDocs.docs.ownerEmail:''}/${theDocs?theDocs.docs._id:''}/${theDocs?theDocs.files[0]:''}`, `why then`)}
+                            </Grid>
+                        </Grid>
+                    </div>
+                    <div className={classes.inputsContainer}>
+                        <Typography variant='body2'>is it Guest House</Typography>
+                        <label htmlFor="guestYes">Yes</label>
+                        <input type="radio" value='yes' id='guestYes' checked={guestHouse === 'yes'}
+                               name='guestRadio' placeholder='is it Guest House'
+                               onChange={onGuestHouseChanged}
+
+                        />
+                        <label htmlFor="guestNo">No</label>
+
+                        <input type="radio" value='no' id='guestNo' name='guestRadio'
+                               onChange={onGuestHouseChanged}
+                               checked={guestHouse === 'no'}
+
+                        />
+                        <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
+                            specific if it is guesthouse.</Typography>
+
+
+                    </div>
+
+                    <div className={classes.inputsContainer}>
+                        <Typography variant='body2'>Short description <span
+                            style={{opacity: '0.5'}}>(optional)</span></Typography>
+                        <textarea className={classes.textarea} placeholder='Enter short description...'
+                                  style={{marginTop: '5px',}} onChange={onDescriptionChanged}
+                                  value={description}
+                        />
+
+
+                    </div>
+
+
+                    <br/><br/><br/><br/>
+                    <div align='right'>
+                        {choseButton()}
+                    </div>
+                </Grid>
+
+            </Grid>
+        </div>
+
+    )
 
 }
 

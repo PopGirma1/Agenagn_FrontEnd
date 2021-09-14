@@ -3,7 +3,7 @@ import {withStyles} from "@material-ui/core";
 import backEndApi from "../../services/api";
 import {Redirect} from "react-router-dom";
 import {useHistory} from "react-router-dom"
-
+import HomeIcon from '@material-ui/icons/Home'
 const useStyles = ((theme) => ({
     searchBarHolder:{
         position:'relative',
@@ -37,8 +37,15 @@ const useStyles = ((theme) => ({
         },
         [theme.breakpoints.down('sm')]: {
             fontSize:'20px',
+
         }
     },
+    textAndInput:{
+        display:'flex', alignItems:'center', width:'80%', flexDirection:'column', height:'70vh',
+        [theme.breakpoints.down('sm')]: {
+           width:'100%',
+        }
+    }
 
 
 }));
@@ -50,15 +57,9 @@ function Search(props) {
     const onFormSubmit = async (e)=>{
         e.preventDefault();
         history.push(`/search?q=${keyword}`)
-        /*const {data} = await backEndApi.get('/search', {params:{q:keyword}});
-        props.setQuery(data);
-        setRedirect(true);
-        console.log(data);*/
+
     };
 
-    /*if(redirect){
-        return <Redirect to={'/search'}/>
-    }*/
 
     const onInputChange = async (e) =>{
         setKeyword(e.target.value)
@@ -72,10 +73,9 @@ function Search(props) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-
         }}>
-            <div style={{display:'flex', alignItems:'center', width:'100%', flexDirection:'column', height:'70vh'}}>
-                <h1 style={{fontSize: '40px'}}><span style={{color: '#ee662d'}}>A</span>genagn</h1>
+            <div className={classes.textAndInput}  >
+                <h1 style={{fontSize: '40px'}}><span style={{color: '#ee662d'}}>A</span>genagn <HomeIcon style={{ fontSize: '46px',marginBottom:'-10px',color:'red' }}></HomeIcon></h1>
                 <form className={classes.searchBarHolder} onSubmit={onFormSubmit}>
                     <input type="text" value={keyword} placeholder="Ayat Condominium" className={classes.searchBar} onChange={onInputChange}/>
                     <i className="fas fa-search fa-lg"

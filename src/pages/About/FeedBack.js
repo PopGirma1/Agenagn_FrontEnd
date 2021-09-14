@@ -8,7 +8,6 @@ import {
 import React, { Component } from "react";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 //import PropTypes from "prop-types";
-import * as yup from "yup";
 
 import DoneIcon from "@material-ui/icons/Done";
 
@@ -57,10 +56,6 @@ const useStyles = (theme) => ({
     },
 });
 
-const schema = yup.object().shape({
-    email: yup.string().required().email(),
-    feedback: yup.string().required(),
-});
 
 class FeedBack extends Component {
     state = {
@@ -77,21 +72,7 @@ class FeedBack extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        schema
-            .validate(this.state)
-            .then((data) => {
-                this.props.onSubmit(data.email, data.feedback);
-                this.setState({
-                    email: "",
-                    feedback: "",
-                    error: "",
-                });
-            })
-            .catch((error) =>
-                this.setState({
-                    error: "either email isn't valid or feedback leave empty",
-                })
-            );
+
     };
     render() {
         const { classes } = this.props;

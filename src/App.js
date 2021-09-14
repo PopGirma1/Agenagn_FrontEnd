@@ -1,22 +1,20 @@
 import React from 'react';
-import {Link, Route, HashRouter, BrowserRouter} from "react-router-dom";
-import {withStyles, Container} from "@material-ui/core";
+import {BrowserRouter, Route} from "react-router-dom";
+import {Container, withStyles} from "@material-ui/core";
 
 import NavTabs from './components/NavTabs'
 import MainBody from './pages/Home'
 import Detail from './pages/Details/'
 /*import LoginRegister from './pages/Authentication/LoginRegister'*/
 import LoginRegister from './pages/Authentication/Login'
-import UserHome from './pages/Authentication/HomeRegistrationForm/UserHome'
 import Footer from './components/Footer'
-/*import Comment from './pages/Comment'*/
 import Signup from "./pages/Authentication/Signup";
-import RegisterHouse from './pages/Addhouse/New';
-
-/*import IndexPage from "./pages/IndexPage/IndexPage";*/
-/*import Dashboard from "./pages/dashboard/Dashboard.js";*/
+import RegisterHouse from './pages/Addhouse/New'
+import About from "./pages/About/About";
+import Dashboard from "./pages/Dashboard/";
 import EditHouse from "./pages/Addhouse/EditHouse";
 import Search from "./pages/Home/Search";
+import AdminDetail from './pages/Dashboard/Admin-dashboard/AdminDetail'
 
 const useStyles = ((theme) => ({
     root: {},
@@ -26,7 +24,7 @@ const useStyles = ((theme) => ({
 }));
 
 class App extends React.Component {
-    state = {token: '', searchKeyword:''};
+    state = {token: '', searchKeyword: ''};
     setToken = (token) => {
         localStorage.setItem('token', JSON.stringify(token));
 
@@ -54,23 +52,24 @@ class App extends React.Component {
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <NavTabs getToken={this.getToken}/>
                     <Container className={classes.mainParts}>
-                        <Route path='/' exact> <Search  /></Route>
-                        <Route path='/search' exact component={(props)=><MainBody {...props} />}/>
-                        <Route path={process.env.PUBLIC_URL + '/detail'} component={Detail}/>
-                        {/*<Route  path={process.env.PUBLIC_URL + '/login'} component={LoginRegister}/>*/}
+                        <Route path='/' exact> <Search/></Route>
+                        <Route path='/search' exact component={(props) => <MainBody {...props} />}/>
+                        <Route path={process.env.PUBLIC_URL + '/detail/:id'} component={Detail}/>
+                        <Route path='/adminDetail/:id'
+                               component={(props) => <AdminDetail {...props} getToken={this.getToken}/>}/>
                         <Route path='/login' exact> <LoginRegister setToken={this.setToken}
                                                                    getToken={this.getToken}/></Route>
                         <Route path='/signup' exact> <Signup setToken={this.setToken} getToken={this.getToken}/></Route>
-                        {/*<Route  path='/userdashboard' component={UserHome}/>*/}
-                        {/*<Route path='/dashboard' exact> <Dashboard getToken={this.getToken}/></Route>*/}
+                        <Route path='/dashboard' exact> <Dashboard getToken={this.getToken}/></Route>
 
                         <Route path='/register' component={Signup}/>
+                        <Route path='/about' component={About}/>
                         <Route path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
                         <Route path='/edithouse/:id' exact
                                component={(props) => <EditHouse {...props} getToken={this.getToken}/>}/>
 
-                        {/*<Route path='/comment' component={Comment}/>*/}
-                        {/*<Route path='/go' component={IndexPage}/>*/}
+                        {/*<Route path='/comment' component={Comment}/>
+                        <Route path='/go' component={IndexPage}/>*/}
                     </Container>
                 </BrowserRouter>
                 <Footer/>
