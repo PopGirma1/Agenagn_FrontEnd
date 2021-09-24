@@ -3,7 +3,7 @@ describe("it renders correctly", ()=>{
     it("first go to login",() =>{
             cy.visit("/Login")
             cy.get('#email')
-                .type('girmaytadesepop@gmail.com\n')
+                .type('cmd@gmail.com\n')
             cy.get("#password")
                 .type('pass')
             cy.get("#login")

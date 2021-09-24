@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "cors": "^2.8.5",
+    "cypress-plugin-retries": "^1.5.2",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "material-ui-dropzone": "^3.5.0",
@@ -39,7 +40,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts  start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -67,9 +68,11 @@
     "@4tw/cypress-drag-drop": "^2.0.0",
     "@bahmutov/cy-api": "^1.5.0",
     "@cypress/code-coverage": "^3.9.11",
+    "@cypress/instrument-cra": "^1.4.0",
     "@cypress/react": "^5.9.4",
     "@cypress/webpack-dev-server": "^1.4.0",
     "@material-ui/styles": "^4.11.4",
+    "babel-plugin-istanbul": "^6.0.0",
     "clsx": "^1.1.1",
     "components": "^0.1.0",
     "cypress": "^8.3.0",

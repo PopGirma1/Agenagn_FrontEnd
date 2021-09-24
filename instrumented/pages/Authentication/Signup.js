@@ -114,6 +114,7 @@ class Signup extends React.Component {
         this.setState({successMessage: ''});
 
         this.validateInput();
+
     };
     signUpApiRequest = async (signUpDetails) => {
         const {data} = await backEndApi.post('/signUpUser', signUpDetails);
@@ -184,7 +185,6 @@ class Signup extends React.Component {
         }
         this.setState({isCheck: e.target.checked})
     };
-
     errorcheck = () => {
         if (this.state.errorMessage) {
             return <Typography variant='h6'
