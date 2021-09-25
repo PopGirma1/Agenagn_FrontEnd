@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Collapse from "@material-ui/core/Collapse";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from "clsx";
@@ -8,27 +8,31 @@ const useStyles = ((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent:'flex-start',
-        padding:'15px',
-        borderRadius:'7px',
+        justifyContent: 'flex-start',
+        padding: '15px',
+        borderRadius: '7px',
         /*background: '#ffffff',*/
         /*boxShadow: '0 3px 2px rgb(0 0 0 / 0.2)',*/
-        border:'1px solid #eeeeee',
-        "& label":{
-            display:'block'
+        border: '1px solid #eeeeee',
+        "& label": {
+            display: 'block',
+            cursor: 'pointer',
+
         }
     },
     rowHolder: {
         display: 'flex',
         flexDirection: 'column',
         gap: 5,
-        padding:'10px 0',
+        padding: '10px 0',
+        cursor: 'pointer',
+        minWidth: '210px',
 
 
     },
-    borderRadiuss:{
-        borderBottom:'1px solid #eeeee',
-        borderTop:'1px solid #eeeeee',
+    borderRadiuss: {
+        borderBottom: '1px solid #eeeee',
+        borderTop: '1px solid #eeeeee',
     },
     row: {
         display: 'flex',
@@ -39,12 +43,12 @@ const useStyles = ((theme) => ({
     },
     listHolder: {
         display: 'flex',
-        flexDirection:'column',
+        flexDirection: 'column',
         gap: 10,
-        marginLeft:10,
+        marginLeft: 10,
     },
     expand: {
-        color:'#005CC8',
+        color: '#005CC8',
         transform: 'rotate(0deg)',
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
@@ -59,8 +63,8 @@ const useStyles = ((theme) => ({
     guestInput: {
         marginRight: 10,
     },
-    inputs:{
-        marginRight:10,
+    inputs: {
+        marginRight: 10,
     }
 
 }));
@@ -68,11 +72,11 @@ const useStyles = ((theme) => ({
 function Filter(props) {
     const {classes} = props;
     const theme = useTheme();
-    const isMobile = useMediaQuery( theme.breakpoints.down("sm"));
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const locations = ['Ayat Condominium', 'Gelan Condominium', 'Submit Condominium'];
-    const monthlyRents = ['2000 - 4000 ', '4001 - 6000', '6001 - 8000', '8001 - 12000', '12001 - 20000'];
-    const bedRooms = [0, 1, 2, 3];
+    const locations = ['Ayat', 'Gelan', 'Yeka Abado', 'Submit', 'Tuludimtu', '4 killo', 'Gotera', 'Balderas', 'Mebrathail', 'Jemo', 'Klinto'];
+    const monthlyRents = ['2000 - 4000 ', '4001 - 6000', '6001 - 8000', '8001 - 12000', '12001 - 20000', '> 20000'];
+    const bedRooms = [0, 1, 2, 3, 4];
 
     const [elocation, seteElocation] = React.useState(false);
     const [ebedRoom, setEbedRoom] = React.useState(false);
@@ -82,8 +86,45 @@ function Filter(props) {
     const [locationsState, setLocationsState] = React.useState(new Array(locations.length).fill(false));
     const [monthlyRentsState, setMonthlyRentsState] = React.useState(new Array(monthlyRents.length).fill(false));
     const [bedRoomsState, setBedroomsState] = React.useState(new Array(bedRooms.length).fill(false));
-    const [guestHouse, setguestHouse] = React.useState(false);
+    const [guestHouseState, setGuestHouseState] = React.useState(false);
 
+    useEffect(() => {
+
+        let locas = [];
+        for (let i = 0; i < locationsState.length; i++) {
+            if (locationsState[i]) {
+                locas.push(locations[i])
+            }
+        }
+        props.setLocation(locas)
+    }, [locationsState]);
+
+    useEffect(() => {
+        let pay = [];
+        for (let i = 0; i < monthlyRentsState.length; i++) {
+            if (monthlyRentsState[i]) {
+                pay.push(i)
+            }
+        }
+
+        props.setPayment(pay)
+    }, [monthlyRentsState]);
+
+
+    useEffect(() => {
+        let rooms = [];
+        for (let i = 0; i < bedRoomsState.length; i++) {
+            if (bedRoomsState[i]) {
+                rooms.push(i)
+            }
+        }
+        props.setBedrooms(rooms)
+    }, [bedRoomsState]);
+
+    useEffect(()=>{
+        props.setGuestHouses(guestHouseState);
+        console.log(guestHouseState);
+    }, [guestHouseState]);
     const onEbedRoomClick = () => {
         setEbedRoom(!ebedRoom);
     };
@@ -102,11 +143,11 @@ function Filter(props) {
         setLocationsState(updatedCheckedState);
     };
     const onMonthlyRentsChanged = (position) => {
-        const updatedCheckedState = monthlyRentsState.map((item, index) =>
+        const updatedCheckedStatem = monthlyRentsState.map((item, index) =>
             index === position ? !item : item
         );
 
-        setMonthlyRentsState(updatedCheckedState);
+        setMonthlyRentsState(updatedCheckedStatem);
     };
     const onBedroomsChanged = (position) => {
         const updatedCheckedState = bedRoomsState.map((item, index) =>
@@ -115,11 +156,12 @@ function Filter(props) {
         setBedroomsState(updatedCheckedState);
     };
     const onGuestHouseChanged = () => {
-        setguestHouse(!guestHouse)
-    };
+        setGuestHouseState(!guestHouseState);
 
+        console.log(guestHouseState, 'guest');
+    };
     return (
-        <div className={classes.root} style={{margin:isMobile?'10px 0':0}}>
+        <div className={classes.root} style={{margin: isMobile ? '10px 0' : 0}}>
             <h3>Filter By</h3>
             <div className={classes.rowHolder}>
                 <div className={classes.row} onClick={onEmonthlyRentClick}>
@@ -144,13 +186,13 @@ function Filter(props) {
                                     className={classes.inputs}
                                     checked={monthlyRentsState[index]}
                                     onChange={() => onMonthlyRentsChanged(index)}
-                                />{name} <span style={{opacity:'0.5'}}>birr</span></label>
+                                />{name} <span style={{opacity: '0.5'}}>birr</span></label>
                             </div>
                         );
                     })}</div>
                 </Collapse>
             </div>
-            <div className={clsx(classes.rowHolder,classes.borderRadiuss)}>
+            <div className={clsx(classes.rowHolder, classes.borderRadiuss)}>
                 <div className={classes.row} onClick={onEbedRoomClick}>
                     <span>Number of Bedrooms</span>
                     <button
@@ -191,11 +233,11 @@ function Filter(props) {
                         <ExpandMoreIcon/>
                     </button>
                 </div>
-                <Collapse in={elocation} timeout="auto" unmountOnExit >
-                    <div className={classes.listHolder} >{locations.map((name, index) => {
+                <Collapse in={elocation} timeout="auto" unmountOnExit>
+                    <div className={classes.listHolder}>{locations.map((name, index) => {
                         return (
                             <div key={index}>
-                                <label ><input
+                                <label><input
                                     type="checkbox"
                                     id={`location-${index}`}
                                     name={name}
@@ -203,17 +245,19 @@ function Filter(props) {
                                     className={classes.inputs}
                                     checked={locationsState[index]}
                                     onChange={() => onLocationsChanged(index)}
-                                />{name}</label>
+                                />{name} Condominium</label>
                             </div>
                         );
                     })}</div>
                 </Collapse>
             </div>
             <div className={clsx(classes.rowHolder, classes.borderRadiuss)}>
-                <div className={classes.row}>
-                    <label htmlFor="guest-house-input">Guest House</label>
-                    <input type="checkbox" id='guest-house-input' className={classes.guestInput} value={guestHouse}
-                           onChange={onGuestHouseChanged}/>
+                <div>
+                    <label style={{display: 'flex', justifyContent: 'space-between'}}>
+                        Guest House <input type="checkbox" className={classes.guestInput}
+                                           value={guestHouseState}
+                                           onChange={onGuestHouseChanged}/></label>
+
                 </div>
             </div>
         </div>

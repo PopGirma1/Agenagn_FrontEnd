@@ -189,7 +189,7 @@ class AdminDashboard extends React.Component {
 
                             <Grid item xs={3} md={3} align='right'>
                                 <Button id="addNewHouse" href='/addhouse' style={{
-                                    background: '#3A6351',
+                                    background: '#005CC8',
                                     textTransform: 'none',
                                     color: '#F2EDD7',
                                     borderRadius: '5px',

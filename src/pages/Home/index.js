@@ -16,6 +16,10 @@ import Filter from './Filter'
 import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Collapse from "@material-ui/core/Collapse/Collapse";
+import {useHistory} from 'react-router-dom';
+import {load} from "dotenv";
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -26,8 +30,6 @@ const useStyles = makeStyles((theme) => ({
             padding: 0,
             margin:0,
         },
-
-
 
     },
     contentRoot: {
@@ -127,38 +129,63 @@ function MainBody(props) {
     const local = 'http://localhost:5000';
     const classes = useStyles();
     const theme = useTheme();
+    let history = useHistory();
+
     const isMobile = useMediaQuery( theme.breakpoints.down("sm"));
     const [showFilter, setShowFilter] = React.useState(false);
 
     const [houseDocs, setHouseDocs] = useState([]);
-    const [images, setImages] = useState([]);
     const [keyword, setkeyword] = useState('');
 
+    const [payment, setPayment] = useState([]);
+    const [bedroom, setBedRooms] = useState([]);
+    const [location, setLocation] = useState([]);
+    const [guestHouse, setGuestHouse] = useState(false);
+
     useEffect(()=>{
-        const loadPage =async ()=> {
-            console.log(props.match.params.q);
-            let q = new URLSearchParams(props.history.location.search).get('q');
-            setkeyword(q);
-            const {data} = await backEndApi.get('./search', {params: {q: q}});
-            console.log(data);
-            setHouseDocs(data);
-        };
-        loadPage();
+        let q = new URLSearchParams(props.history.location.search).get('q');
+        setkeyword(q);
     },[]);
+
+    useEffect(()=>{
+        history.push({
+            pathname: '/search',
+            search: `?${keyword?'q':''}=${keyword}&${payment.length!==0?'payment':''}=${payment}&${bedroom.length!==0?'bedrooms':''}=${bedroom}&${location.length!==0?'locations':''}=${location}&${guestHouse?'Gh':''}=${guestHouse}`
+        });
+        const loadData = async () =>{
+            const {data} = await backEndApi.get('./search', {params: {q: keyword, location:location, bedroom:bedroom, payment:payment,guestHouse:guestHouse }});
+            setHouseDocs(data)
+        };
+        loadData()
+    },[payment, location, bedroom]);
+
     const onShowFilterClicked = () => {
         setShowFilter(!showFilter);
     };
 
+    const bedrooms = (bedroom) =>{
+        /*history.push(`/search?payment=${pay}&location=${locas}&bedrooms=${rooms}`);*/
+        setBedRooms(bedroom)
+    };
+    const payments = (payment) =>{
+        setPayment(payment)
+    };
+
+    const locations = (location) =>{
+        setLocation(location)
+    };
+    const guestHouses = (guest) =>{
+        setGuestHouse(guest)
+    };
     const onInputChange = (e) => {
         e.preventDefault();
         setkeyword(e.target.value)
     };
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        let q = keyword;
-        const {data} = await backEndApi.get('./search', {params: {q: q}});
+        const {data} = await backEndApi.get('./search', {params: {q: keyword, location:location, bedrooms:bedroom, payment:payment, guestHouse:guestHouse }});
         setHouseDocs(data)
-        props.history.push(`/search?q=${q}`)
+        props.history.push(`?${keyword?'q':''}=${keyword}&${payment.length!==0?'payment':''}=${payment}&${bedroom.length!==0?'bedrooms':''}=${bedroom}&${location.length!==0?'locations':''}=${location}&${guestHouse?'Gh':''}=${guestHouse}`)
 
     };
 
@@ -180,11 +207,10 @@ function MainBody(props) {
                 }
             </Container>
             {isMobile?<Collapse in={showFilter} timeout="auto" unmountOnExit>
-                <Filter/>
+                <Filter setLocation={locations} setPayment={payments} setBedrooms = {bedrooms} setGuestHouses={guestHouses} />
             </Collapse>:''}
             <Container maxWidth={'xl'} className={classes.lowerContainer}>
-                {isMobile?'':<Filter/>}
-
+                {isMobile?'':<Filter setLocation={locations} setPayment={payments} setBedrooms = {bedrooms} setGuestHouses={guestHouses}/>}
                 <Container maxWidth='lg' className={classes.contentRoot} >
 
 

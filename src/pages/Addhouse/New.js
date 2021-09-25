@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import backEndApi from '../../services/api'
 import moment from "moment";
 import {withStyles} from "@material-ui/styles";
+import Container from "@material-ui/core/Container";
 
 const useStyles = theme => ({
     root: {
@@ -164,7 +165,7 @@ class NewListing extends React.Component {
             bedRoom: parseInt(this.state.bedRoom),
             monthlyPayment: parseInt(this.state.monthlyPayment),
             floor: parseInt(this.state.floor),
-            squareMeter:this.state.squareMeter,
+            squareMeter: this.state.squareMeter,
             phoneNumber: parseInt(this.state.phoneNumber),
             guestHouse: this.state.guestHouse,
             description: this.state.description,
@@ -350,20 +351,23 @@ class NewListing extends React.Component {
             return <Redirect to='/dashboard'/>
         }
         return (
-            <div className={classes.root}>
-                <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>New House</Typography>
+            <Container>
+                <Container className={classes.root}>
+                <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>New
+                    House</Typography>
 
                 <Grid container className={classes.firstGrid} spacing={4}>
                     <Grid item xs={12} md={6}>
                         <form>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Location of the Condominium</Typography>
-                                <input type="text" list='locationOfCondominium' id="location" name='Myname' placeholder='Location of the condominium'
+                                <input type="text" list='locationOfCondominium' id="location" name='Myname'
+                                       placeholder='Location of the condominium'
                                        className={classes.input}
                                        onChange={this.onLocationChanged}
                                        value={this.state.location}
                                 />
-                                <datalist id="locationOfCondominium" >
+                                <datalist id="locationOfCondominium">
                                     <option value="Ayat Condominium"/>
                                     <option value="Yeka Abado Condominium"/>
                                     <option value="Submit Condominium"/>
@@ -381,7 +385,8 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Bed Rooms</Typography>
-                                <select className={classes.input} onChange={this.onBedroomChanged} name="selectNumberOfBedrooms">
+                                <select className={classes.input} onChange={this.onBedroomChanged}
+                                        name="selectNumberOfBedrooms">
                                     <option value="Select Bed Rooms" disabled selected>Select Bed Rooms
                                     </option>
                                     <option value='1'>0 (studio)</option>
@@ -398,7 +403,8 @@ class NewListing extends React.Component {
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Floor</Typography>
 
-                                <select name="selectNumberOfFloor" className={classes.input} onChange={this.onFloorchanged}>
+                                <select name="selectNumberOfFloor" className={classes.input}
+                                        onChange={this.onFloorchanged}>
                                     <option value="Select Floor" disabled selected>Select Floor
                                     </option>
                                     <option value='0'>ground</option>
@@ -416,7 +422,8 @@ class NewListing extends React.Component {
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>Monthly Payment</Typography>
-                                <input name="payment" type="number" min='0' placeholder='eg, 5000' className={[classes.input]}
+                                <input name="payment" type="number" min='0' placeholder='eg, 5000'
+                                       className={[classes.input]}
                                        onChange={this.onMonthlyPaymentChanged}
                                        value={this.state.monthlyPayment}
 
@@ -428,8 +435,10 @@ class NewListing extends React.Component {
 
                             </div>
                             <div className={classes.inputsContainer}>
-                                <Typography variant='body2'>Square meters <span style={{opacity:'0.5'}}>(optional)</span></Typography>
-                                <input name="SquareMeter" type="text" list='squareMetersInput' placeholder='Square meter of your house' className={classes.input}
+                                <Typography variant='body2'>Square meters <span
+                                    style={{opacity: '0.5'}}>(optional)</span></Typography>
+                                <input name="SquareMeter" type="text" list='squareMetersInput'
+                                       placeholder='Square meter of your house' className={classes.input}
                                        onChange={this.onSquareMeterChanged}
                                        value={this.state.editavailabilityDate}
 
@@ -455,19 +464,23 @@ class NewListing extends React.Component {
                                         value={moment(this.state.availabilityDate).format("DD-MM-YYYY")}
                                     />
                                 </div>
-                                <Typography variant='body2' id='availabilityError' className={classes.inputError}>You have
+                                <Typography variant='body2' id='availabilityError' className={classes.inputError}>You
+                                    have
                                     to
                                     Set Launch Data.</Typography>
 
                             </div>
                             <div className={classes.inputsContainer}>
                                 <Typography variant='body2'>phone number</Typography>
-                                <div style={{position:'relative'}}><input type="number" placeholder='eg, 925762589' name="phone" className={classes.input}
-                                                                          onChange={this.onPhoneNumberChanged}
-                                                                          value={this.state.phoneNumber}
-                                                                          style={{paddingLeft: '50px'}}
+                                <div style={{position: 'relative'}}><input type="number" placeholder='eg, 925762589'
+                                                                           name="phone" className={classes.input}
+                                                                           onChange={this.onPhoneNumberChanged}
+                                                                           value={this.state.phoneNumber}
+                                                                           style={{paddingLeft: '50px'}}
                                 />
-                                    <span style={{position: 'absolute', left: 7, top: "35%", opacity: '0.5'}}>+251</span></div>
+                                    <span
+                                        style={{position: 'absolute', left: 7, top: "35%", opacity: '0.5'}}>+251</span>
+                                </div>
 
                                 <Typography variant='body2' id='phoneNumberError' className={classes.inputError}>You
                                     have
@@ -483,7 +496,7 @@ class NewListing extends React.Component {
                             <Typography variant='body2'>Upload house image</Typography>
 
                             <Grid style={{marginTop: '5px'}}>
-                                <Grid itme xs={12} md={8} className={classes.dropZone} id="upload"  data-cy="content">
+                                <Grid itme xs={12} md={8} className={classes.dropZone} id="upload" data-cy="content">
 
                                     {/*Icon ={}*/}
                                     <DropzoneArea
@@ -521,8 +534,10 @@ class NewListing extends React.Component {
                         </div>
 
                         <div className={classes.inputsContainer}>
-                            <Typography variant='body2'>Short description <span style={{opacity:'0.5'}}>(optional)</span></Typography>
-                            <textarea name="shortDescription" className={classes.textarea} placeholder='Enter short description...'
+                            <Typography variant='body2'>Short description <span
+                                style={{opacity: '0.5'}}>(optional)</span></Typography>
+                            <textarea name="shortDescription" className={classes.textarea}
+                                      placeholder='Enter short description...'
                                       style={{marginTop: '5px',}} onChange={this.onDescriptionChanged}
                                       value={this.state.description}
                             />
@@ -545,7 +560,7 @@ class NewListing extends React.Component {
 
                 </Grid>
 
-            </div>
+            </Container></Container>
         );
     }
 

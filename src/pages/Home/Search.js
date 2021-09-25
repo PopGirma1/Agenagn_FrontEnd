@@ -58,7 +58,6 @@ function Search(props) {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         history.push(`/search?q=${keyword}`)
-
     };
 
 
@@ -76,8 +75,7 @@ function Search(props) {
             justifyContent: 'center',
         }}>
             <div className={classes.textAndInput}>
-                <h1 style={{fontSize: '40px'}}><span style={{color: '#ee662d'}}>A</span>genagn <HomeIcon
-                    style={{fontSize: '46px', marginBottom: '-10px', color: 'red'}}></HomeIcon></h1>
+                <h1 style={{fontSize: '40px'}}><span style={{color: '#ee662d'}}>A</span>genagn </h1>
 
                 <form className={classes.searchBarHolder} onSubmit={onFormSubmit}>
                     <input id="search" name="search" type="text" value={keyword} placeholder="Ayat Condominium"

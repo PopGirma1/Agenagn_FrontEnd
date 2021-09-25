@@ -16,7 +16,6 @@ const getToken = () => {
 const backEndApi = axios.create({
     baseURL : local,
     headers: {
-
         'x-access-token': getToken()
     }
 });

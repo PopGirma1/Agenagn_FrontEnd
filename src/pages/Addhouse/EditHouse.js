@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import backEndApi from '../../services/api';
 import moment from "moment";
+import Container from "@material-ui/core/Container";
 
 const useStyles = theme => ({
     root: {
@@ -26,7 +27,7 @@ const useStyles = theme => ({
         },
     },
     firstGrid: {
-        background: '#F2EDD7',
+        background: '#EEEEEE',
         boxShadow: '-9px 18px 16px rgba(0, 0, 0, 0.05)',
         borderRadius: '5px',
     },
@@ -37,8 +38,8 @@ const useStyles = theme => ({
         width: '100%',
         height: '40px',
         borderRadius: '5px',
-        border: '0.5px solid #E48257',
-        background: '#F2EDD7',
+        border: '0.5px solid #9e9e9e',
+        background: '#EEEEEE',
         "&::-webkit-input-placeholder": {
             color: 'rgba(57,50,50,0.3)'
         },
@@ -69,8 +70,8 @@ const useStyles = theme => ({
         padding: '10px',
         resize: 'none',
         width: '100%',
-        background: '#F2EDD7',
-        border: '0.5px solid rgba(228, 130, 87, 0.8)',
+        background: '#EEEEEE',
+        border: '0.5px solid #9e9e9e',
         borderRadius: '5px',
         height: '120px',
         "&::-webkit-input-placeholder": {
@@ -95,6 +96,35 @@ const useStyles = theme => ({
     },
     dropZone: {
         "& .MuiDropzoneArea-root": {
+            background: '#EEEEEE',
+            marginBottom: '30px',
+            maxHeight: '343',
+
+            border: '.5px solid #9e9e9e',
+
+        },
+        /*"& .MuiTypography-h5": {
+            fontSize: '14px',
+            fontWeight: 'normal'
+        },
+        "& .MuiDropzoneArea-text": {
+            marginTop: '130px',
+            color: '#9e9e9e'
+        },
+        "& .MuiSvgIcon-root": {
+            display: 'flex',
+            marginTop: '-100px',
+            marginLeft: '110px',
+            color: "#9e9e9e"
+        }*/
+    },
+    inputError: {
+        color: 'red',
+        fontSize: '14px',
+        display: 'none',
+    },
+    /*dropZone: {
+        "& .MuiDropzoneArea-root": {
             background: '#F2EDD7',
             marginBottom: '30px',
             maxHeight: '243',
@@ -109,20 +139,15 @@ const useStyles = theme => ({
         },
         "& .MuiDropzoneArea-text": {
             marginTop: '130px',
-            color: '#E48257'
+            color: '#005CC8'
         },
         "& .MuiSvgIcon-root": {
             display: 'flex',
             marginTop: '-100px',
             marginLeft: '110px',
-            color: "#E48257"
+            color: "#005CC8"
         }
-    },
-    inputError: {
-        color: 'red',
-        fontSize: '14px',
-        display: 'none',
-    },
+    },*/
 });
 let otherArray = [];
 
@@ -160,11 +185,11 @@ function EditHouse(props) {
             const {data} = await backEndApi.get('./edithouse', {params: {id: props.match.params.id}});
             console.log(data);
             setTheDocs(data);
-            const imagesImage =  () => {
+            const imagesImage = () => {
                 const files = data.files;
                 otherArray = [];
                 files.forEach((the) => {
-                const what = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/${the}`;
+                    const what = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/${the}`;
                     otherArray.push(what)
                 });
                 console.log(otherArray, 'what');
@@ -178,19 +203,19 @@ function EditHouse(props) {
             console.log(imagesImage(), 'and what')
             // eslint-disable-next-line no-unused-expressions
             setOwnerEmail(data.docs.ownerEmail),
-            setOriginalHouseId(data.docs._id),
-            setLocation(data.docs.location),
-            setSquareMeter(data.docs.squareMeter),
-            setBedRoom(parseInt(data.docs.bed_room)),
-            setMonthlyPayment(parseInt(data.docs.monthly_payment)),
-            setFloor(parseInt(data.docs.floor)),
-            setPhoneNumber(parseInt(data.docs.phone_number)),
-            setGuestHouse(data.docs.guest_house) ? 'yes' : 'no',
-            setDescription(data.docs.description),
-            setAvailabilityDate(data.docs.availabilityDate),
-            setListingStatus(data.docs.listingStatus),
-            setReviewStatus(data.docs.reviewStatus),
-            setEditedEncodedAvatarUrl(data.docs.encodedAvatarUrl)
+                setOriginalHouseId(data.docs._id),
+                setLocation(data.docs.location),
+                setSquareMeter(data.docs.squareMeter),
+                setBedRoom(parseInt(data.docs.bed_room)),
+                setMonthlyPayment(parseInt(data.docs.monthly_payment)),
+                setFloor(parseInt(data.docs.floor)),
+                setPhoneNumber(parseInt(data.docs.phone_number)),
+                setGuestHouse(data.docs.guest_house) ? 'yes' : 'no',
+                setDescription(data.docs.description),
+                setAvailabilityDate(data.docs.availabilityDate),
+                setListingStatus(data.docs.listingStatus),
+                setReviewStatus(data.docs.reviewStatus),
+                setEditedEncodedAvatarUrl(data.docs.encodedAvatarUrl)
 
         };
         loadData();
@@ -320,11 +345,11 @@ function EditHouse(props) {
                     return <React.Fragment>
 
                         <Button onClick={onFormSubmit} value='Approved' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -333,7 +358,7 @@ function EditHouse(props) {
                     return <React.Fragment>
 
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -341,11 +366,11 @@ function EditHouse(props) {
                 } else {
                     return <React.Fragment>
                         <Button onClick={onFormSubmit} value='' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
                         <Button onClick={onFormSubmit} value='' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -357,11 +382,11 @@ function EditHouse(props) {
                     return <React.Fragment>
 
                         <Button onClick={onFormSubmit} value='Approved' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -370,7 +395,7 @@ function EditHouse(props) {
                     return <React.Fragment>
 
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -378,11 +403,11 @@ function EditHouse(props) {
                 } else {
                     return <React.Fragment>
                         <Button onClick={onFormSubmit} value='' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
                         <Button onClick={onFormSubmit} value='' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -391,11 +416,11 @@ function EditHouse(props) {
             case 'Draft' :
                 return <React.Fragment>
                     <Button onClick={onFormSubmit} value='NA' variant='contained' style={{
-                        paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                        paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                         borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                     }}>Save As Draft</Button>
                     <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
-                        paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                        paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                         borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                     }}>Submit For Review</Button>
 
@@ -404,11 +429,11 @@ function EditHouse(props) {
                 if (reviewStatus === "Pending" || reviewStatus === "Rejected") {
                     return <React.Fragment>
                         <Button onClick={onFormSubmit} value='NA' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -416,7 +441,7 @@ function EditHouse(props) {
                 } else if (reviewStatus === "Approved") {
                     return <React.Fragment>
                         <Button onClick={onFormSubmit} value='Pending' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -424,11 +449,11 @@ function EditHouse(props) {
                 } else {
                     return <React.Fragment>
                         <Button onClick={onFormSubmit} value='Draft' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}>Cancel Review</Button>
                         <Button onClick={onFormSubmit} value='Submitted' variant='contained' style={{
-                            paddingLeft: '50px', paddingRight: '50px', background: '#E48257',
+                            paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                             borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                         }}> Update Detail</Button>
 
@@ -540,7 +565,8 @@ function EditHouse(props) {
         return <Redirect to='/dashboard'/>
     }
     return (
-        <div className={classes.root}>
+        <Container>
+            <Container className={classes.root}>
             <Typography variant='h5' style={{marginBottom: '30px', marginTop: '35px', marginLeft: '-15px'}}>Edit
                 House</Typography>
 
@@ -699,13 +725,12 @@ function EditHouse(props) {
                                     filesLimit={'6'}
                                     dropzoneText={"Drag and drop an image here or click"}
                                     onChange={onDropZoneChange}
-                                    initialFiles={[`http://localhost:5000/images/products/${theDocs?theDocs.docs.ownerEmail:''}/${theDocs?theDocs.docs._id:''}/${theDocs?theDocs.files[0]:''}`]
+                                    initialFiles={[`http://localhost:5000/images/products/${theDocs ? theDocs.docs.ownerEmail : ''}/${theDocs ? theDocs.docs._id : ''}/${theDocs ? theDocs.files[0] : ''}`]
                                     }
 
                                 />
-                                <input type="file"/>
                                 {console.log(theDocs.files, `and then`)}
-                                {console.log(`http://localhost:5000/images/products/${theDocs?theDocs.docs.ownerEmail:''}/${theDocs?theDocs.docs._id:''}/${theDocs?theDocs.files[0]:''}`, `why then`)}
+                                {console.log(`http://localhost:5000/images/products/${theDocs ? theDocs.docs.ownerEmail : ''}/${theDocs ? theDocs.docs._id : ''}/${theDocs ? theDocs.files[0] : ''}`, `why then`)}
                             </Grid>
                         </Grid>
                     </div>
@@ -749,7 +774,7 @@ function EditHouse(props) {
                 </Grid>
 
             </Grid>
-        </div>
+        </Container></Container>
 
     )
 
