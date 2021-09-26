@@ -47,7 +47,7 @@ function Detail(props) {
             <div className='image-grid'>
                 <div className='small-images'>
                     {files.map((file)=>{
-                        return(<button onClick={()=>setActiveImg(file)}><img src={`${local}/images/products/${data.ownerEmail}/${data._id}/${file}`}
+                        return(<button style={{outline:'none', border:'0 solid #eeeeee'}} onClick={()=>setActiveImg(file)}><img src={`${local}/images/products/${data.ownerEmail}/${data._id}/${file}`}
                                        alt={`${data.location}`} className='simg'/></button>)
                     })}
                 </div>

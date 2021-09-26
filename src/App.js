@@ -10,13 +10,16 @@ import LoginRegister from './pages/Authentication/Login'
 import Footer from './components/Footer'
 import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
+
 import Dashboard from "./pages/Dashboard/";
 import EditHouse from "./pages/Addhouse/EditHouse";
 import Search from "./pages/Home/Search";
 import AdminDetail from './pages/Dashboard/Admin-dashboard/AdminDetail'
+
 import About from "./pages/About/About";
-import Common from "./components/Common";
+/*import Common from "./components/Common";*/
 import Contact from "./pages/Contact/Contact";
+
 
 const useStyles = ((theme) => ({
     root: {},
@@ -53,7 +56,7 @@ class App extends React.Component {
 
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <NavTabs getToken={this.getToken}/>
-                    <Container className={classes.mainParts}>
+                    <Container className={classes.mainParts} maxWidth={'xl'}>
                         <Route path='/' exact> <Search/></Route>
                         <Route path='/search' exact component={(props) => <MainBody {...props} />}/>
                         <Route path={process.env.PUBLIC_URL + '/detail/:id'} component={Detail}/>
@@ -65,14 +68,16 @@ class App extends React.Component {
                         <Route path='/dashboard' exact> <Dashboard getToken={this.getToken}/></Route>
 
                         <Route path='/register' component={Signup}/>
+                        <Route path='/about' component={About}/>
                         <Route path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
                         <Route path='/edithouse/:id' exact
                                component={(props) => <EditHouse {...props} getToken={this.getToken}/>}/>
+
                         <Route path='/about' component={About}/>
                         <Route path='/contact' component={Contact}/>
+
                     </Container>
                 </BrowserRouter>
-                <Common></Common>
                 <Footer/>
 
             </div>

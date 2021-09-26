@@ -28,6 +28,8 @@ function Detail(props) {
     const [data, setData] = useState([]);
     const [files, setFiles] = useState([]);
 
+    const [isReload, setIsReload] = useState(false);
+
     const [activeImg, setActiveImg] = useState([]);
     useEffect(() => {
         const getData = async () => {
@@ -57,20 +59,23 @@ function Detail(props) {
             selectedButton: value,
         };
         const response = await backEndApi.post('/changeHomeStatus', {params: buttonClicked});
+        setIsReload(true)
 
     };
 
     if (!props.getToken()) {
         return <Redirect to='/login'/>
     }
-
+    if(isReload){
+        window.location.reload();
+    }
     return (
         <div className='root'>
             <div className='container'>
                 <div className='image-grid'>
                     <div className='small-images'>
                         {files.map((file) => {
-                            return (<button onClick={() => setActiveImg(file)}><img
+                            return (<button style={{outline:'none', border:'0 solid #eeeeee'}} onClick={() => setActiveImg(file)}><img
                                 src={`${local}/images/products/${data.ownerEmail}/${data._id}/${file}`}
                                 alt={`${data.location}`} className='simg'/></button>)
                         })}
@@ -100,7 +105,7 @@ function Detail(props) {
                     </div>
                     <div className='att'>
                         <span className='att-title'>Status</span>
-                        <span className='att-value'>{data.reviewStatus}</span>
+                        <span className={`att-value ${data.reviewStatus === 'Approved'?'success':'danger'}`} >{data.reviewStatus}</span>
                     </div>
                     <div className='att'  >
                         <span className='att-title'>Description</span>
@@ -108,12 +113,12 @@ function Detail(props) {
                     </div>
                     <div className='buttonHolder'>
                         {/*disabled={data.reviewStatus!=='Approved'}*/}
-                        <button className='actionButtons'
+                        <button className='actionButtons '
                                 onClick={() => onButtonClick("Rejected", data._id)}>
                             Reject
                         </button>
                         {/*disabled={data.reviewStatus==='Approved'}*/}
-                        <button className='actionButtons'
+                        <button className='actionButtons '
                                 onClick={() => onButtonClick("Approved", data._id)}>
                             Approve
                         </button>

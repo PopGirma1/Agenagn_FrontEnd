@@ -7,7 +7,7 @@ import backEndApi from "../../../services/api";
 const useStyles = theme => ({
     personIcon: {
         background: '#F2EDD7',
-        color: '#E48257',
+        color: '#005CC8',
         marginRight: '5px',
         marginBottom: '-3px',
         fontSize: '15px',
@@ -15,7 +15,7 @@ const useStyles = theme => ({
     },
     emailIcon: {
         background: '#F2EDD7',
-        color: '#E48257',
+        color: '#005CC8',
         marginRight: '5px',
         marginBottom: '-3px',
         fontSize: '15px',
@@ -23,7 +23,7 @@ const useStyles = theme => ({
     },
     accountInfoHolder: {
         marginTop: '-2px',
-        backgroundColor: '#f2edd7',
+        backgroundColor: '#eeeeee',
         boxShadow: '-9px 9px 16px rgba(0, 0, 0, 0.05)',
         borderRadius: '5px'
     },

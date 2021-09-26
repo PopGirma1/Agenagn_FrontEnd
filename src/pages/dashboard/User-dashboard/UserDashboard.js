@@ -29,7 +29,7 @@ const useStyles = theme => ({
     tableContainer: {
         padding: '12px',
         borderRadius: '5px',
-        backgroundColor: '#F2EDD7',
+        backgroundColor: '#eeeeee',
         overflow:'visible'
 
 
@@ -38,16 +38,16 @@ const useStyles = theme => ({
         margin: '5px',
         fontSize: '15px',
         borderRadius: '4px',
-        "&:hover": {backgroundColor: '#3A6351'},
+        "&:hover": {backgroundColor: 'rgba(58,99,81,0.2)'},
     },
     iconBackgroundRed: {
-        backgroundColor: 'rgba(228,130,87,0.21)'
+        /*backgroundColor: 'rgba(228,130,87,0.21)'*/
     },
     deleteIcon: {
-        color: '#F24545'
+        color: '#005CC8'
     },
     editIcon: {
-        color: '#E48257'
+        color: '#005CC8'
 
     },
     iconBackgroundBlack: {
@@ -66,7 +66,8 @@ class userDashboard extends React.Component {
                     style={{
                         textTransform: 'none',
                         borderRadius: '12.5px',
-                        backgroundColor: 'rgba(58,99,81,0.2)',
+                        backgroundColor:'rgba(29,104,7,0.74)',
+                        color:'#ffffff',
                         padding: '5px',
                         paddingRight: '20px',
                         paddingLeft: '20px'
@@ -76,7 +77,7 @@ class userDashboard extends React.Component {
                     style={{
                         textTransform: 'none',
                         borderRadius: '12.5px',
-                        backgroundColor: 'rgba(228,130,87,0.21)',
+                        backgroundColor: 'rgba(221,228,87,0.82)',
                         padding: '5px',
                         paddingRight: '20px',
                         paddingLeft: '20px'
@@ -198,14 +199,6 @@ class userDashboard extends React.Component {
         return row.listingStatus === "Active"
 
     };
-    handleHover = (id) => {
-        console.log(id);
-
-        this.setState({isHovering: true, hoveredLaunch: id})
-    };
-    closeHover = () => {
-        this.setState({isHovering: false})
-    }
     componentWillMount = async () => {
         const config = {
             headers: {
@@ -228,7 +221,8 @@ class userDashboard extends React.Component {
                         onClick={this.onSwitchChange}/*{handleChange}*/
                         name={row._id}
                         id={row._id}
-                        inputProps={{'aria-label': 'secondary checkbox'}}
+                        color={'primary'}
+                        inputProps={{'aria-label': 'primary checkbox'}}
 
 
                     /></Tooltip>
@@ -256,7 +250,7 @@ class userDashboard extends React.Component {
              return <Redirect to='/login'/>
          }*/
         const productRow = () => (this.state.homeDocs ? this.state.homeDocs.map((row) => (
-                    <TableRow key={row._id}>
+                    <TableRow key={row._id} >
                         <TableCell component="th" scope="row">
                             {row.location}
 
@@ -298,21 +292,6 @@ class userDashboard extends React.Component {
                                                     <ViewLaunchOnHover row={row}/> : ''}
                                             </span>
                                     </span>
-
-                                <IconButton style={{display: 'inline',}}
-                                            className={[classes.margin, classes.iconBackgroundBlack]}
-                                            onMouseEnter={() => {
-                                                this.handleHover(row._id)
-                                            }}
-                                            onMouseLeave={this.closeHover}
-
-
-                                            size='small'>
-                                    <span>
-                                        <VisibilityIcon fontSize="inherit"/>
-                                    </span>
-                                </IconButton>
-
                                 {/*onMouseLeave={()=>{this.handleHover(row._id)}}*/}
                                 {displaySwitch(row)}
 
@@ -335,9 +314,9 @@ class userDashboard extends React.Component {
                             <Grid item xs={6} sm={6} md={6}></Grid>
                             <Grid item xs={3} md={3} align='right'>
                                 <Button id="addNewHouse" href='/addhouse' style={{
-                                    background: '#3A6351',
+                                    background: '#005CC8',
                                     textTransform: 'none',
-                                    color: '#F2EDD7',
+                                    color: '#ffffff',
                                     borderRadius: '5px',
                                     paddingLeft: '20px',
                                     paddingRight: '20px',
@@ -365,7 +344,7 @@ class userDashboard extends React.Component {
                                             variant='h6' style={{fontSize: '16px'}}>Action</Typography></TableCell>
                                     </TableRow>
                                 </TableHead>
-                                <TableBody>
+                                <TableBody >
                                     {productRow()}
 
                                 </TableBody>

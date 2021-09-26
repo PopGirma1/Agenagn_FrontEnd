@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '5vh',
+        minHeight: '100vh',
 
     },
 

@@ -48,6 +48,7 @@
     max-width: 100%;
     height: 100%;
     margin-left: 10px;
+    padding: 10px;
     overflow: auto;
     background-color: #eeeeee;
 
@@ -78,8 +79,10 @@
 }
 .actionButtons {
     padding: 12px 40px;
-    background-color: #b6bcff;
+    background: #3F51B5;
     cursor:pointer;
+    border:0 solid #eeeeee;
+    color: #ffffff;
 }
 
 .userDetailRoot{
@@ -104,6 +107,13 @@
     justify-content: space-around;
     gap:10px;
 
+}
+
+.success {
+    color: #47ff11;
+}
+.danger {
+    color: #ff7471;
 }
 @media (max-width: 768px){
     .container {

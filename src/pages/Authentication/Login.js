@@ -201,11 +201,9 @@ class Login extends React.Component {
     }
 
     render() {
-
         if (this.state.redirect || this.props.getToken()) {
             console.log("welcome Mr ");
             return <Redirect to='/dashboard'/>
-
         }
         const {classes} = this.props;
         return (
