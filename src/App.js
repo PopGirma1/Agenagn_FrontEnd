@@ -19,7 +19,7 @@ import AdminDetail from './pages/Dashboard/Admin-dashboard/AdminDetail'
 import About from "./pages/About/About";
 /*import Common from "./components/Common";*/
 import Contact from "./pages/Contact/Contact";
-
+import UpperFooter from "./components/UpperFooter";
 
 const useStyles = ((theme) => ({
     root: {},
@@ -68,7 +68,7 @@ class App extends React.Component {
                         <Route path='/dashboard' exact> <Dashboard getToken={this.getToken}/></Route>
 
                         <Route path='/register' component={Signup}/>
-                        <Route path='/about' component={About}/>
+
                         <Route path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
                         <Route path='/edithouse/:id' exact
                                component={(props) => <EditHouse {...props} getToken={this.getToken}/>}/>
@@ -76,8 +76,10 @@ class App extends React.Component {
                         <Route path='/about' component={About}/>
                         <Route path='/contact' component={Contact}/>
 
+
                     </Container>
                 </BrowserRouter>
+                <UpperFooter></UpperFooter>
                 <Footer/>
 
             </div>

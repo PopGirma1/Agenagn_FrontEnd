@@ -74,11 +74,11 @@ function Detail(props) {
             <div className='container'>
                 <div className='image-grid'>
                     <div className='small-images'>
-                        {files.map((file) => {
+                        {files?files.map((file) => {
                             return (<button style={{outline:'none', border:'0 solid #eeeeee'}} onClick={() => setActiveImg(file)}><img
                                 src={`${local}/images/products/${data.ownerEmail}/${data._id}/${file}`}
                                 alt={`${data.location}`} className='simg'/></button>)
-                        })}
+                        }):''}
                     </div>
                     <div className='one-big-image'>
                         <img src={`${local}/images/products/${data.ownerEmail}/${data._id}/${activeImg}`}

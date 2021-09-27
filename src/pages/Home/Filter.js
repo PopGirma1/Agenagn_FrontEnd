@@ -167,6 +167,7 @@ function Filter(props) {
                 <div className={classes.row} onClick={onEmonthlyRentClick}>
                     <span>Monthly Payment</span>
                     <button
+                        name="payment"
                         className={clsx(classes.showButton, classes.expand, {
                             [classes.expandOpen]: emonthlyRent,
                         })}
@@ -208,6 +209,7 @@ function Filter(props) {
                         return (
                             <div key={index}>
                                 <label><input
+                                    data-cy="content1"
                                     type="checkbox"
                                     id={`location-${index}`}
                                     name={name}
@@ -238,6 +240,7 @@ function Filter(props) {
                         return (
                             <div key={index}>
                                 <label><input
+                                    data-cy="content"
                                     type="checkbox"
                                     id={`location-${index}`}
                                     name={name}

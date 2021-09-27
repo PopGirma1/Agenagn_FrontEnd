@@ -1,9 +1,5 @@
 describe("renders Authentication login page",()=>{
-    it("renders correctly",()=> {
 
-        cy.visit('/Login');
-        cy.contains("Agenagn Background!");
-    });
 
     it("accepts user input",()=>{
         cy.visit("/Login")

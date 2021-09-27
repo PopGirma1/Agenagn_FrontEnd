@@ -457,6 +457,7 @@ class NewListing extends React.Component {
                                    onChange={this.onAvailabilityChanged}/>*/}
                                 <div className={classes.dataPicker} id="date">
                                     <DatePicker
+                                        name="date"
                                         dateFormat="dd-MM-yyyy"
                                         selected={this.state.productLaunchDate}
                                         className={[classes.input]}
@@ -551,7 +552,7 @@ class NewListing extends React.Component {
                                 borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                             }}>Save As Draft</Button>
 
-                            <Button onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
+                            <Button id="submit" onClick={this.onFormSubmit} value='Pending' variant='contained' style={{
                                 paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                                 borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
                             }}> Submit For Review</Button>

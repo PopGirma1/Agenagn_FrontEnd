@@ -1,8 +1,5 @@
-import {
-    withStyles,
-    Typography,
-} from "@material-ui/core";
-import React, { Component } from "react";
+import {Typography, withStyles,} from "@material-ui/core";
+import React, {Component} from "react";
 import FeedBack from "./FeedBack";
 import Avatar from "@material-ui/core/Avatar";
 
@@ -11,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 
 const useStyles = (theme) => ({
     root: {
-        width:'auto',
+        width: 'auto',
         display: "grid",
         margin: "2em",
         gridTemplateColumns: "4fr 2fr",
@@ -19,46 +16,47 @@ const useStyles = (theme) => ({
     },
 
     paragraphStyling: {
-        padding:'0 3%',
-        lineHeight:'1.5',
+        padding: '0 3%',
+        lineHeight: '1.5',
         textTransform: "full-width",
-        fontSize:'20px',
+        fontSize: '20px',
         textIndent: '50px',
         textAlign: 'justify',
         letterSpacing: '2px',
     },
 
 
-    Developers:{
+    Developers: {
         display: "flex",
         margin: "3em",
         gridTemplateColumns: "13fr 13fr",
         gridColumnGap: "280px",
     },
-    large:{
+    large: {
         width: '100px',
         height: "100px",
     },
-    developer:{
-        marginLeft:"-10px",
-        marginRight:'-10px'
+    developer: {
+        marginLeft: "-10px",
+        marginRight: '-10px'
     }
 
 });
+
 class About extends Component {
     onSubmit = (email, feedback) => {
         console.log(email, feedback);
     };
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
         return (
-            <Card  id={'container'}>
+            <Card id={'container'}>
                 <Card className={classes.root}>
-                    <div style={{ background: "#eee" }}>
+                    <div style={{background: "#eee"}}>
                         <div
                             className="aboutContent"
-                            style={{ textAlign: "center", margin: "2em " }}>
+                            style={{textAlign: "center", margin: "2em "}}>
                             <Typography variant="h4">Agenagn</Typography>
                             <Card><CardContent>
                                 <Typography>
@@ -84,7 +82,7 @@ class About extends Component {
                         </div>
                     </div>
                     <div className="feedback">
-                        <FeedBack onSubmit={this.onSubmit} />
+                        <FeedBack onSubmit={this.onSubmit}/>
                     </div>
                 </Card>
                 <div className={classes.developer}>
@@ -102,8 +100,8 @@ class About extends Component {
                             </CardContent></Card>
                             <Card><CardContent>
                                 <div>
-                                    <Typography variant="h6" >Desalegn </Typography>
-                                    <Avatar alt="Remy Sharp" src="/asset/Img/cmd.jpg"  className={classes.large}/>
+                                    <Typography variant="h6">Desalegn </Typography>
+                                    <Avatar alt="Remy Sharp" src="/asset/Img/cmd.jpg" className={classes.large}/>
                                     <Card>
                                         Software Engineer (web developer and designer)
                                     </Card>
@@ -116,7 +114,8 @@ class About extends Component {
                                     <Card>
                                         Software Engineer (web developer and designer)
                                     </Card>
-                                </div></CardContent></Card>
+                                </div>
+                            </CardContent></Card>
                         </div>
                     </CardContent></Card>
                 </div>
@@ -125,4 +124,4 @@ class About extends Component {
     }
 }
 
-export default withStyles(useStyles, { withTheme: true })(About);
+export default withStyles(useStyles, {withTheme: true})(About);

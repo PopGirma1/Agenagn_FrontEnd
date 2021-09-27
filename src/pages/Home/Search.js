@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {withStyles} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
-import HomeIcon from '@material-ui/icons/Home'
 
 
 const useStyles = ((theme) => ({

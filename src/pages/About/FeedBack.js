@@ -112,7 +112,7 @@ class FeedBack extends Component {
                         </div>
                         <TextareaAutosize
                             id="feedback"
-                            minRows={15}
+                            minRows={5}
                             aria-label="maximum height"
                             placeholder="write a comment"
                             name="feedback"

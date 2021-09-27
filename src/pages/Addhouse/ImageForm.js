@@ -2,21 +2,12 @@
 import React from "react";
 //Card
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 
 import Fab from "@material-ui/core/Fab";
 import Grid from "@material-ui/core/Grid";
-import Avatar from "@material-ui/core/Avatar";
-
-import red from "@material-ui/core/colors/red";
-import blue from "@material-ui/core/colors/blue";
-import SearchIcon from "@material-ui/icons/Search";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
-import CollectionsIcon from "@material-ui/icons/Collections";
 // Search
-import IconButton from "@material-ui/core/IconButton";
-import ReplayIcon from "@material-ui/icons/Replay";
 //Tabs
 import {withStyles} from "@material-ui/core/styles";
 import backEndApi from "../../services/api";
@@ -31,6 +22,7 @@ const styles = theme => ({
     },
 
 });
+
 class EditHose extends React.Component {
     state = {
 
@@ -96,6 +88,7 @@ class EditHose extends React.Component {
 
 
 }
+
 class ImageUploadCard extends React.Component {
     state = {
         mainState: "initial", // initial, search, gallery, uploaded
@@ -113,7 +106,7 @@ class ImageUploadCard extends React.Component {
             this.setState({
                 selectedFile: [reader.result]
 
-        });
+            });
 
         }.bind(this);
         console.log(event.target.files);
@@ -123,7 +116,6 @@ class ImageUploadCard extends React.Component {
             imageUploaded: 3
         });
     };
-
 
 
     renderInitialState() {
@@ -171,6 +163,7 @@ class ImageUploadCard extends React.Component {
         );
     }
 }
+
 class EditHose extends React.Component {
     state = {
 
