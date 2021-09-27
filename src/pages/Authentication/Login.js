@@ -1,9 +1,8 @@
 import React from 'react';
-import {Checkbox, Container, div, FormControlLabel, withStyles} from "@material-ui/core";
+import {div, withStyles} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
 
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
@@ -44,10 +43,10 @@ const useStyles = theme => ({
     form: {
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', height: '40vh',
         width: '100%',
-        [theme.breakpoints.down('sm')]: {
-        }
+        [theme.breakpoints.down('sm')]: {}
     },
-    submit: {background: '#3F51B5',
+    submit: {
+        background: '#3F51B5',
         borderRadius:
             '5px',
         width:
@@ -99,13 +98,13 @@ const useStyles = theme => ({
                 display: 'none'
             }
     },
-    formHolder:{
+    formHolder: {
         display: 'flex', flexDirection: 'column',
-        width:'35%',
-        marginTop:40,
-        [theme.breakpoints.down('sm')]:{
-            width:'100%',
-            marginTop:10,
+        width: '35%',
+        marginTop: 40,
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            marginTop: 10,
 
         }
     }
@@ -215,12 +214,12 @@ class Login extends React.Component {
 
                     </div>
 
-                    <div className={classes.formHolder} >
+                    <div className={classes.formHolder}>
 
                         <Typography align='center' component="h1" variant="h5" style={{padding: 10}}>
                             Login
                         </Typography>
-                        <form className={classes.form} noValidate >
+                        <form className={classes.form} noValidate>
 
                             <TextField
                                 variant="outlined"
@@ -252,14 +251,15 @@ class Login extends React.Component {
                                 className={classes.textField}
 
                             />
-                           {/* <FormControlLabel
+                            {/* <FormControlLabel
                                 control={<Checkbox value="remember" color="primary"
                                                    onChange={this.onCheckboxChange}/>}
                                 label="I have read and agreed to Privacy Policy  & TOU"
                             />*/}
-                            <Box align='right'><Link href="/resetPassword" variant="body2">
-                                Forgot password?
-                            </Link>
+                            <Box align='right'>
+                                <Link href="/resetPassword" variant="body2">
+                                    Forgot password?
+                                </Link>
                             </Box>
                             {this.errorcheck()}
 
