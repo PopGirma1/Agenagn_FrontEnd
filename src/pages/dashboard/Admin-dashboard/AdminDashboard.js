@@ -131,8 +131,8 @@ class AdminDashboard extends React.Component {
                         borderRadius: '12.5px',
                         backgroundColor: 'rgba(58,99,81,0.2)',
                         padding: '5px',
-                        paddingRight: '20px',
-                        paddingLeft: '20px'
+                        paddingRight: '40px',
+                        paddingLeft: '40px'
                     }}>Approved</span>;
             case 'Pending' :
                 return <span

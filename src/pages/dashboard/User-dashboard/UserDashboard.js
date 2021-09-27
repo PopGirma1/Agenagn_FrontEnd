@@ -73,8 +73,8 @@ class userDashboard extends React.Component {
                         backgroundColor: 'rgba(29,104,7,0.74)',
                         color: '#ffffff',
                         padding: '5px',
-                        paddingRight: '20px',
-                        paddingLeft: '20px'
+                        paddingRight: '40px',
+                        paddingLeft: '40px',
                     }}>Approved</span>;
             case 'Pending' :
                 return <span
