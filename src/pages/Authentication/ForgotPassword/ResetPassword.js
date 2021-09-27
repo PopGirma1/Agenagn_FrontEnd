@@ -11,7 +11,7 @@ import backEndApi from '../../../services/api'
 
 import {Redirect} from "react-router-dom";
 
-const loginImage = process.env.PUBLIC_URL + '/img/login.png';
+const loginImage = process.env.PUBLIC_URL + '/img/99.png';
 const useStyles = theme => ({
     root: {
 
@@ -41,14 +41,15 @@ const useStyles = theme => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        background: '#3A6351',
+        background: '#3F51B5',
         borderRadius: '5px',
         width: '406px',
         height: '50px',
         fontSize: '18px',
         margin: theme.spacing(3, 0, 2),
         "&:hover": {
-            background: 'rgba(64,98,64,0.8)',
+            background: '#2c3980',
+
         }
     },
     textField: {
@@ -60,9 +61,9 @@ const useStyles = theme => ({
         width: '406px',
         border: '0px solid #FFF',
         borderLeftWidth: '7px',
-        borderLeftColor: '#E48257',
+        borderLeftColor: '#eeeeee',
         "& input": {
-            background: '#F2EDD7',
+            background: '#eeeeee',
             border: '0px solid red',
             borderRadius: '5px'
         }
@@ -70,7 +71,7 @@ const useStyles = theme => ({
     },
 
     inputAdornment: {
-        background: '#E48257',
+        background: '#eeeeee',
         borderRadius: '7px 0px 0px 7px',
 
     },
@@ -81,7 +82,7 @@ const useStyles = theme => ({
         marginBottom: '-20px'
     },
     loginImgHolder: {
-        backgroundColor: "rgba(228,130,87,0.21)",
+        backgroundColor: "rgba(238,238,238,0.34)",
 
         borderRadius: '15px', marginBottom: 'auto'
     }

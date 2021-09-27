@@ -74,6 +74,10 @@ function Detail(props) {
                     <span className='att-title'>Floor</span>
                     <span className='att-value'>{renFloor(data)} Floor</span>
                 </div>
+                <div className='att' style={data.description?{display:'flex'}:{display:'none'}}>
+                    <span className='att-title'>{data.description?'Description':''}</span>
+                    <span className='att-value'>{data.description?data.description:''}</span>
+                </div>
                 <div className='att'>
                     <span className='att-title'>Phone Number</span>
                     <span className='att-value'>+251 925191919</span>

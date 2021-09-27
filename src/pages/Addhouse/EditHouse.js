@@ -25,6 +25,12 @@ const useStyles = theme => ({
         "& .MuiTypography-body2": {
             fontWeight: 800
         },
+        "& form":{
+           padding:'40px',
+            [theme.breakpoints.down('sm')]:{
+               padding:'0'
+            }
+        }
     },
     firstGrid: {
         background: '#EEEEEE',
@@ -197,9 +203,9 @@ function EditHouse(props) {
             };
 
             /*firstImg2.current = `http://localhost:5000/images/products/${data.docs.ownerEmail}/${data.docs._id}/${data.files[0]}`;*/
-            firstImg2.current = imagesImage();
+            /*firstImg2.current = imagesImage();
 
-            let newVar = setFile(imagesImage());
+            let newVar = setFile(imagesImage());*/
             console.log(imagesImage(), 'and what')
             // eslint-disable-next-line no-unused-expressions
             setOwnerEmail(data.docs.ownerEmail),
@@ -282,14 +288,10 @@ function EditHouse(props) {
             document.getElementById('bedRoomError').style.display = 'block';
 
         }
-        if (!availabilityDate) {
-            document.getElementById('availabilityError').style.display = 'block';
-
-        }
-        if (!guestHouse) {
+        /*if (!guestHouse) {
             document.getElementById('guestHouseError').style.display = 'block';
 
-        }
+        }*/
         /* if (!phoneNumber) {
              document.getElementById('phoneNumber').style.display = 'block';
 
@@ -299,12 +301,10 @@ function EditHouse(props) {
             document.getElementById('dropZoneImage').style.display = 'block';
         }*/
 
-        if (location && description &&
+        if (location &&
             floor && monthlyPayment
-            && guestHouse
             && bedRoom
-            && availabilityDate
-            && phoneNumber && description.length > 1) {
+            && phoneNumber) {
 
             submitEditHouseApiRequest(product);
 
@@ -329,10 +329,10 @@ function EditHouse(props) {
         };
 
         let response = await backEndApi.post('/editHouseUpdate', {params: newLaunchDetails});
-        let resImage = await backEndApi.post('/uploadProductImage', formData, config);
+        /*let resImage = await backEndApi.post('/uploadProductImage', formData, config);*/
 
 
-        console.log("The files and Image success fully uploaded" + response + resImage);
+        console.log("The files and Image success fully uploaded" + response);
         setIsRedirectToHomepage(true)
 
     };
@@ -466,7 +466,6 @@ function EditHouse(props) {
 
     const onLocationChanged = (e) => {
         console.log(file);
-        console.log(firstImg2, 'this 2');
         if (e.target.value.length === 0) {
 
             document.getElementById('locationError').style.display = 'block';
@@ -650,6 +649,42 @@ function EditHouse(props) {
                                 enter monthly payment.</Typography>
 
                         </div>
+
+                        <div className={classes.inputsContainer}>
+                            <Typography variant='body2'>Short description <span
+                                style={{opacity: '0.5'}}>(optional)</span></Typography>
+                            <textarea className={classes.textarea} placeholder='Enter short description...'
+                                      style={{marginTop: '5px',}} onChange={onDescriptionChanged}
+                                      value={description}
+                            />
+
+
+                        </div>
+
+                    </form>
+                </Grid>
+                <Grid item xs={12} md={6} >
+                    <form>
+                        {/*<div className={classes.inputsContainer}>
+                        <Typography variant='body2'>Upload house image</Typography>
+
+                        <Grid style={{marginTop: '5px'}}>
+                            <Grid itme xs={12} md={6} className={classes.dropZone}>
+                                <DropzoneArea
+                                    acceptedFiles={['image/*']}
+                                    maxFileSize={2000000}
+                                    filesLimit={'6'}
+                                    dropzoneText={"Drag and drop an image here or click"}
+                                    onChange={onDropZoneChange}
+                                    initialFiles={[`http://localhost:5000/images/products/${theDocs ? theDocs.docs.ownerEmail : ''}/${theDocs ? theDocs.docs._id : ''}/${theDocs ? theDocs.files[0] : ''}`]
+                                    }
+
+                                />
+                                {console.log(theDocs.files, `and then`)}
+                                {console.log(`http://localhost:5000/images/products/${theDocs ? theDocs.docs.ownerEmail : ''}/${theDocs ? theDocs.docs._id : ''}/${theDocs ? theDocs.files[0] : ''}`, `why then`)}
+                            </Grid>
+                        </Grid>
+                    </div>*/}
                         <div className={classes.inputsContainer}>
                             <Typography variant='body2'>Square meters <span
                                 style={{opacity: '0.5'}}>(optional)</span></Typography>
@@ -709,68 +744,34 @@ function EditHouse(props) {
 
 
                         </div>
+                        <div className={classes.inputsContainer}>
+                            <Typography variant='body2'>is it Guest House</Typography>
+                            <label htmlFor="guestYes">Yes</label>
+                            <input type="radio" value='yes' id='guestYes' checked={guestHouse === 'yes'}
+                                   name='guestRadio' placeholder='is it Guest House'
+                                   onChange={onGuestHouseChanged}
 
-                    </form>
-                </Grid>
-                <Grid item xs={12} md={6}>
+                            />
+                            <label htmlFor="guestNo">No</label>
 
-                    <div className={classes.inputsContainer}>
-                        <Typography variant='body2'>Upload house image</Typography>
+                            <input type="radio" value='no' id='guestNo' name='guestRadio'
+                                   onChange={onGuestHouseChanged}
+                                   checked={guestHouse === 'no'}
 
-                        <Grid style={{marginTop: '5px'}}>
-                            <Grid itme xs={12} md={6} className={classes.dropZone}>
-                                <DropzoneArea
-                                    acceptedFiles={['image/*']}
-                                    maxFileSize={2000000}
-                                    filesLimit={'6'}
-                                    dropzoneText={"Drag and drop an image here or click"}
-                                    onChange={onDropZoneChange}
-                                    initialFiles={[`http://localhost:5000/images/products/${theDocs ? theDocs.docs.ownerEmail : ''}/${theDocs ? theDocs.docs._id : ''}/${theDocs ? theDocs.files[0] : ''}`]
-                                    }
-
-                                />
-                                {console.log(theDocs.files, `and then`)}
-                                {console.log(`http://localhost:5000/images/products/${theDocs ? theDocs.docs.ownerEmail : ''}/${theDocs ? theDocs.docs._id : ''}/${theDocs ? theDocs.files[0] : ''}`, `why then`)}
-                            </Grid>
-                        </Grid>
-                    </div>
-                    <div className={classes.inputsContainer}>
-                        <Typography variant='body2'>is it Guest House</Typography>
-                        <label htmlFor="guestYes">Yes</label>
-                        <input type="radio" value='yes' id='guestYes' checked={guestHouse === 'yes'}
-                               name='guestRadio' placeholder='is it Guest House'
-                               onChange={onGuestHouseChanged}
-
-                        />
-                        <label htmlFor="guestNo">No</label>
-
-                        <input type="radio" value='no' id='guestNo' name='guestRadio'
-                               onChange={onGuestHouseChanged}
-                               checked={guestHouse === 'no'}
-
-                        />
-                        <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
-                            specific if it is guesthouse.</Typography>
+                            />
+                            <Typography variant='body2' id='guestHouseError' className={classes.inputError}>You have
+                                specific if it is guesthouse.</Typography>
 
 
-                    </div>
-
-                    <div className={classes.inputsContainer}>
-                        <Typography variant='body2'>Short description <span
-                            style={{opacity: '0.5'}}>(optional)</span></Typography>
-                        <textarea className={classes.textarea} placeholder='Enter short description...'
-                                  style={{marginTop: '5px',}} onChange={onDescriptionChanged}
-                                  value={description}
-                        />
-
-
-                    </div>
+                        </div>
 
 
                     <br/><br/><br/><br/>
                     <div align='right'>
                         {choseButton()}
                     </div>
+                    </form>
+
                 </Grid>
 
             </Grid>

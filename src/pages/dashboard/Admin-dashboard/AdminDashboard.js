@@ -16,12 +16,27 @@ import {Redirect} from "react-router-dom";
 
 const useStyles = theme => ({
     root: {
+        display:'flex',
+        flexWrap:'warp',
+        flexDirection:'row',
+        justifyContent:'space-around',
+        gap:'20px',
         marginTop: '20px',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection:'column'
+        },
+        '& span': {fontSize:'clamp(0.8rem, -0.075rem + 1.533vw, 1.2rem)'},
+
+        '& th':{
+            fontSize:'clamp(0.7rem, -0.075rem + 1.533vw, 1rem)',
+        },
     },
     table: {
-        minWidth: 650,
     },
     tableContainer: {
+        display:'flex',
+        width:'100%',
+        justifyContent:'space-around',
         padding: '10px',
         borderRadius: '5px',
         backgroundColor: '#eeeeee',
@@ -89,6 +104,19 @@ const useStyles = theme => ({
             border: '0px solid #393232'
         }
     },
+
+    submittedDateF: {
+        [theme.breakpoints.down('sm')]: {
+            display: 'none'
+        }
+    },
+    listingFilters:{
+        minWidth:'350px',
+        [theme.breakpoints.down('xs')]: {
+            minWidth: '100%'
+        }
+
+    }
 });
 
 
@@ -139,11 +167,10 @@ class AdminDashboard extends React.Component {
                     style={{
                         textTransform: 'none',
                         borderRadius: '12.5px',
-                        backgroundColor: 'rgba(228,130,87,0.21)',
-                        padding: '5px',
-                        paddingRight: '20px',
-                        paddingLeft: '20px'
-                    }}>Pending Review</span>;
+                        backgroundColor: 'rgba(243,251,96,0.28)',
+                        padding: '5px 25px',
+
+                    }}>Pending</span>;
             case 'Rejected':
                 return <span
                     style={{
@@ -153,7 +180,7 @@ class AdminDashboard extends React.Component {
                         padding: '5px',
                         paddingRight: '20px',
                         paddingLeft: '20px'
-                    }}>Action Required
+                    }}>Rejected
                 </span>
             default:
                 return <div>Something occur</div>
@@ -179,15 +206,14 @@ class AdminDashboard extends React.Component {
 
         }
         return (
-            <Grid container className={classes.root} spacing={4}>
-                <Grid item md={9}>
-                    <Box>
-                        <Grid container >
-                            <Grid item xs={3} md={3}>
-                                <Typography variant='h5' style={{marginBottom:'20px'}}>All Listing Reviews</Typography>
-                            </Grid>
-
-                            <Grid item xs={3} md={3} align='right'>
+            <div  className={classes.root} spacing={4}>
+                <div  style={{width:'100%'}} >
+                    <div>
+                        <div style={{display:'flex', justifyContent:'space-between', marginBottom:'10px'}}>
+                            <div style={{alignSelf:'center'}}>
+                                <span style={{marginBottom:'20px'}}>All Listing Reviews</span>
+                            </div>
+                            <div >
                                 <Button id="addNewHouse" href='/addhouse' style={{
                                     background: '#005CC8',
                                     textTransform: 'none',
@@ -196,26 +222,27 @@ class AdminDashboard extends React.Component {
                                     paddingLeft: '20px',
                                     paddingRight: '20px',
                                 }}>+ Add new house</Button>
-                            </Grid>
+                            </div>
 
-                        </Grid>
-                        <Box><TableContainer component={Paper} className={classes.tableContainer}>
+                        </div>
+                        <Box>
+                            <TableContainer component={Paper} className={classes.tableContainer}>
                             <Table className={classes.table} size="small" aria-label="a dense table">
                                 <TableHead>
                                     <TableRow id="userInfo">
                                         <TableCell>
-                                            <Typography variant='h6' style={{fontSize:'16px'}}>Product name</Typography>
+                                            <span  >Product name</span>
+                                        </TableCell>
+                                        <TableCell style={{textAlign:'center'}} className={classes.submittedDateF} >
+                                            <span  >Submitted Date</span>
                                         </TableCell>
                                         <TableCell style={{textAlign:'center'}}>
-                                            <Typography variant='h6' style={{fontSize:'16px'}}>Submitted Date</Typography>
-                                        </TableCell>
-                                        <TableCell style={{textAlign:'center'}}>
-                                            <Typography variant='h6' style={{fontSize:'16px'}}>Review
-                                            status</Typography>
+                                            <span >Review
+                                            status</span>
                                         </TableCell>{/*Fat&nbsp;(g)*/}
                                         <TableCell style={{textAlign:'center'}}  >
-                                            <Typography
-                                            variant='h6' style={{fontSize:'16px'}}>Action</Typography>
+                                            <span
+                                             >Action</span>
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -227,7 +254,7 @@ class AdminDashboard extends React.Component {
                                                     {row.location}
                                                 </TableCell>
 
-                                                <TableCell style={{textAlign:'center', width:'20%'}}>
+                                                <TableCell style={{textAlign:'center', width:'20%'}} className={classes.submittedDateF}>
                                                     {moment(row.dateCreated).format("D/M/yyyy")}
 
                                                 </TableCell>
@@ -256,18 +283,19 @@ class AdminDashboard extends React.Component {
                                         )):""}
                                 </TableBody>
                             </Table>
-                        </TableContainer></Box>
-                    </Box>
-                </Grid>
-                <Grid item md={3} >
-                    <Grid container>
-                        <Grid item >
-                            <Typography variant='h5' style={{marginBottom:'9px'
-                            }}> Listing Filters</Typography>
-                        </Grid>
+                        </TableContainer>
+                        </Box>
+                    </div>
+                </div>
+                <div className={classes.listingFilters}>
+                    <div >
+                        <div item >
+                            <span  style={{marginBottom:'9px'
+                            }}> Listing Filters</span>
+                        </div>
 
-                    </Grid>
-                    <Box container style={{
+                    </div>
+                    <div  style={{
                         marginTop: '10px',
                         backgroundColor: '#eeeeee',
 
@@ -309,7 +337,7 @@ class AdminDashboard extends React.Component {
                                         control={<Radio name="Construction" color='primary'
                                                         className={classes.myCheckbox}/>}
                                         value="Rejected"
-                                        label="Action Required"
+                                        label="Rejected"
                                         labelPlacement='start'
                                         className={classes.formControlLabel}
 
@@ -358,11 +386,10 @@ class AdminDashboard extends React.Component {
                             </FormControl>
 
                         </div>
-                    </Box>
-                </Grid>
+                    </div>
+                </div>
 
-
-            </Grid>
+            </div>
         );
     }
 

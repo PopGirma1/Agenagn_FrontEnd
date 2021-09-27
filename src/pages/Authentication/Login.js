@@ -31,10 +31,14 @@ const useStyles = theme => ({
         height: '100vh',
         padding: 10,
         "& a": {
-            color: '#3A6351',
+            color: '#5066e4',
         },
 
-
+        [theme.breakpoints.down('sm')]: {
+            "& form":{
+                padding:0
+            }
+        }
     },
     avatar: {
         margin: theme.spacing(1),
@@ -248,6 +252,7 @@ class Login extends React.Component {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+
                                 className={classes.textField}
 
                             />

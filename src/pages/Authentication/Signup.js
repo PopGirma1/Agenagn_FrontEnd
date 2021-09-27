@@ -7,6 +7,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography'
 
 import backEndApi from '../../services/api'
+import {Redirect} from "react-router-dom";
 
 const SignupImage = process.env.PUBLIC_URL + '/img/image.png';
 
@@ -25,7 +26,7 @@ const useStyles = theme => ({
             display: 'flex',
             justifyContent: 'space-around',
             flexWrap: 'nowrap',
-            background: 'rgba(241,231,231,0.87)',
+            background: '#eeeeee',
             borderRadius: '15px',
             height:'600px',
             padding: 10,
@@ -33,7 +34,11 @@ const useStyles = theme => ({
                 color: '#3A6351',
             },
 
-
+            [theme.breakpoints.down('sm')]: {
+                "& form":{
+                    padding:0
+                }
+            }
         },
         avatar: {
             margin: theme.spacing(1),
@@ -144,7 +149,10 @@ class Signup extends React.Component {
         if (this.state.name && this.state.email && this.state.password && this.state.confirmPassword) {
             if (this.state.password !== this.state.confirmPassword) {
                 this.setState({errorMessage: "The passwords that you have entered does not match."})
-            } else if (!mailformat.test(this.state.email)) {
+            }else if (this.state.password.length<6){
+                this.setState({errorMessage: "Password should be more than 6 characters"})
+            }
+            else if (!mailformat.test(this.state.email)) {
 
                 this.setState({errorMessage: "The email that you have provided is invalid."})
 
@@ -208,7 +216,10 @@ class Signup extends React.Component {
     };
 
     render() {
-        /*if (this.state.redirect || this.props.getToken()) {
+        if (this.state.redirect) {
+            return <Redirect to='/login'/>
+
+        }/* if (this.state.redirect || this.props.getToken()) {
             return <Redirect to='/login'/>
 
         }*/
@@ -267,11 +278,13 @@ class Signup extends React.Component {
                                 fullWidth
                                 name="password"
                                 onChange={this.onPasswordChange}
-
                                 label="Password"
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                inputProps={{
+                                    minLength: 8,
+                                }}
                                 className={classes.textField}
 
                             />

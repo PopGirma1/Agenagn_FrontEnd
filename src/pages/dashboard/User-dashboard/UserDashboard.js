@@ -95,7 +95,7 @@ class userDashboard extends React.Component {
                         padding: '5px',
                         paddingRight: '20px',
                         paddingLeft: '20px'
-                    }}>Action Required
+                    }}>Rejected
                 </span>
             case 'NA':
                 return <span
@@ -267,23 +267,24 @@ class userDashboard extends React.Component {
 
                         <TableCell style={{textAlign: 'center'}}>{this.ReviewStatusFilter(row.reviewStatus)}</TableCell>
                         <TableCell style={{textAlign: 'center'}}>
-                            <div>
-                                <IconButton aria-label="delete"
-                                            className={[classes.margin, classes.iconBackgroundRed]}
-                                            size="small"
-                                            href={"/editHouse/" + row._id}
+                            <IconButton aria-label="delete"
+                                        className={[classes.margin, classes.iconBackgroundRed]}
+                                        style={{padding:'5px' +
+                                                ''}}
+                                        size="small"
+                                        href={"/editHouse/" + row._id}
 
-                                >
-                                    <EditIcon fontSize="inherit" className={classes.editIcon}/>
-                                </IconButton>
-                                {/*<IconButton aria-label="delete"
+                            >
+                                <EditIcon fontSize="inherit" className={classes.editIcon}/>
+                            </IconButton>
+                            {/*<IconButton aria-label="delete"
                                     className={[classes.margin, classes.iconBackgroundRed]}
                                     size="small">
                             <DeleteIcon fontSize="inherit" className={classes.deleteIcon}/>
                         </IconButton>*/}
 
 
-                                <span style={{position: 'relative', top: 'auto', zIndex: 9,}}>
+                            <span style={{position: 'relative', top: 'auto', zIndex: 9,}}>
                                             <span
                                                 style={{
                                                     position: 'absolute',
@@ -295,11 +296,10 @@ class userDashboard extends React.Component {
                                                     <ViewLaunchOnHover row={row}/> : ''}
                                             </span>
                                     </span>
-                                {/*onMouseLeave={()=>{this.handleHover(row._id)}}*/}
-                                {displaySwitch(row)}
+                            {/*onMouseLeave={()=>{this.handleHover(row._id)}}*/}
+                            {/*{displaySwitch(row)}*/}
 
 
-                            </div>
                             {/* {row.protein}*/}
                         </TableCell>
                     </TableRow>)) :

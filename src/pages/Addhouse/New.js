@@ -26,6 +26,18 @@ const useStyles = theme => ({
         "& .MuiTypography-body2": {
             fontWeight: 800
         },
+        "& form":{
+            padding:'40px',
+
+            /*[theme.breakpoints.down('sm')]:{
+                padding:'0'
+            }*/
+        },
+        "@media (max-width:600px)":{
+            "& form":{
+                padding:'0px',
+            }
+        },
     },
     firstGrid: {
         background: '#EEEEEE',
@@ -546,7 +558,11 @@ class NewListing extends React.Component {
                         </div>
 
                         <br/><br/><br/><br/>
-                        <div align='right'>
+                        <div style={{
+                            display:'flex',
+                            justifyContent:'flex-end',
+                            gap:'5px',
+                        }}>
                             <Button onClick={this.onFormSubmit} value='NA' variant='contained' style={{
                                 paddingLeft: '50px', paddingRight: '50px', background: '#005CC8',
                                 borderRadius: '5px', marginRight: '15px', color: '#fff', textTransform: 'none'
@@ -561,7 +577,8 @@ class NewListing extends React.Component {
 
                 </Grid>
 
-            </Container></Container>
+            </Container>
+            </Container>
         );
     }
 

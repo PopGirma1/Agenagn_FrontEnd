@@ -157,7 +157,7 @@ function MainBody(props) {
             setHouseDocs(data)
         };
         loadData()
-    },[payment, location, bedroom]);
+    },[payment, location, bedroom, guestHouse]);
 
     const onShowFilterClicked = () => {
         setShowFilter(!showFilter);
