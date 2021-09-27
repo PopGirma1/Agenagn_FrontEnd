@@ -5,14 +5,21 @@ import Avatar from "@material-ui/core/Avatar";
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-
+import ContactCard from "./ContactCard";
+import Link from "@material-ui/core/Link";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import TelegramIcon from "@material-ui/icons/Telegram";
 const useStyles = (theme) => ({
     root: {
         width: 'auto',
         display: "grid",
         margin: "2em",
-        gridTemplateColumns: "4fr 2fr",
-        gridColumnGap: "80px",
+        gridTemplateColumns: "3fr 2fr",
+        gridColumnGap: "70px",
     },
 
     paragraphStyling: {
@@ -39,6 +46,32 @@ const useStyles = (theme) => ({
     developer: {
         marginLeft: "-10px",
         marginRight: '-10px'
+    },
+    footer1:{
+        display:'flex',
+        flexDirection:'row',
+        marginTop:'40px',
+        width:'100%',
+
+    },
+
+    contactInfo:{
+        marginTop:'-30px',
+        maxWidth: '60%',
+        padding: '60px'
+    }
+    ,
+
+    card1:{
+        marginTop:'16px',
+        marginRight:'30px',
+        marginLeft:'40px',
+        maxWidth:'50%'
+    },
+
+    contact:{
+        marginTop:'20px',
+        marginBottom:'30px'
     }
 
 });
@@ -51,14 +84,14 @@ class About extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <Card id={'container'}>
+            <div>
                 <Card className={classes.root}>
-                    <div style={{background: "#eee"}}>
+                    <div>
                         <div
                             className="aboutContent"
                             style={{textAlign: "center", margin: "2em "}}>
                             <Typography variant="h4">Agenagn</Typography>
-                            <Card><CardContent>
+
                                 <Typography>
                                     <p className={classes.paragraphStyling}>
                                         Agenagn is a solution for looking for house available for rent.
@@ -78,48 +111,84 @@ class About extends Component {
                                         Ethiopia.
                                     </p>
                                 </Typography>
-                            </CardContent></Card>
+
                         </div>
                     </div>
                     <div className="feedback">
                         <FeedBack onSubmit={this.onSubmit}/>
                     </div>
                 </Card>
-                <div className={classes.developer}>
-                    <Card><CardContent>
-                        <Typography variant="h5">Developers : </Typography>
-                        <div className={classes.Developers}>
-                            <Card><CardContent>
-                                <div>
-                                    <Typography variant="h6">Girmay</Typography>
-                                    <Avatar alt="Remy Sharp" src="/asset/Img/wow.jpg" className={classes.large}/>
-                                    <Card>
-                                        Software Engineer (web developer and designer)
-                                    </Card>
-                                </div>
-                            </CardContent></Card>
-                            <Card><CardContent>
-                                <div>
-                                    <Typography variant="h6">Desalegn </Typography>
-                                    <Avatar alt="Remy Sharp" src="/asset/Img/cmd.jpg" className={classes.large}/>
-                                    <Card>
-                                        Software Engineer (web developer and designer)
-                                    </Card>
-                                </div>
-                            </CardContent></Card>
-                            <Card><CardContent>
-                                <div>
-                                    <Typography variant="h6">Kalab </Typography>
-                                    <Avatar alt="Remy Sharp" src="/asset/Img/kalab.jpg" className={classes.large}/>
-                                    <Card>
-                                        Software Engineer (web developer and designer)
-                                    </Card>
-                                </div>
-                            </CardContent></Card>
-                        </div>
-                    </CardContent></Card>
+                <Card><div className={classes.footer1}>
+                    <div className={classes.card1}>
+                        <ContactCard></ContactCard>
+                    </div>
+                    <div className={classes.contactInfo}>
+
+                                Contact Information
+                                <Card>
+                                    <CardContent>
+                                        Company: Agenagn Trading P.L;C Address: Firdu
+                                        Commercial Building, 3rd Floor Office no 308. P.O.box:
+                                        54178 Tel: 1 +251-974 082036 Tel: 2 +251-974 082037
+                                    </CardContent>
+                                </Card>
+                                <Card className={classes.contact}>
+                                    <CardContent>
+                                        Email:
+                                        <Link
+                                            component="button"
+                                            variant="body2"
+                                            onClick={() => {
+                                                console.info("I'm a button.");
+                                            }}
+                                        >
+                                            girmaytadese@gmail.com
+                                        </Link>
+                                        <Link
+                                            component="button"
+                                            variant="body2"
+                                            onClick={() => {
+                                                console.info("I'm a button.");
+                                            }}
+                                        >
+                                            girmaytadese@gmail.com
+                                        </Link>
+                                        <Typography>What’s up No: +251 974082037</Typography>
+                                        <Link
+                                            component="button"
+                                            variant="body2"
+                                            onClick={() => {
+                                                console.info("I'm a button.");
+                                            }}
+                                        >
+                                            girmaytadese@gmail.com
+                                        </Link>
+                                    </CardContent>
+                                </Card>
+                                <Card>
+                                    <CardContent>
+                                        <Typography>Follow us on: </Typography>
+
+                                        <FacebookIcon color="primary"></FacebookIcon>
+
+                                        <TelegramIcon color="primary"></TelegramIcon>
+
+
+                                        <LinkedInIcon color="primary"></LinkedInIcon>
+
+                                        <TwitterIcon color="primary"></TwitterIcon>
+
+
+                                        <InstagramIcon color="primary"></InstagramIcon>
+
+                                    </CardContent>
+                                </Card>
+
+                    </div>
                 </div>
-            </Card>
+                </Card>
+
+        </div>
         );
     }
 }
