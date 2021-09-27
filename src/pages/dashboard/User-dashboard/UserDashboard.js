@@ -1,7 +1,6 @@
 import React from 'react';
 import {Box, Button, Grid, IconButton, Typography, withStyles} from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -30,9 +29,14 @@ const useStyles = theme => ({
         padding: '12px',
         borderRadius: '5px',
         backgroundColor: '#eeeeee',
-        overflow:'visible'
+        overflow: 'visible'
 
 
+    },
+    listingStatusF: {
+        [theme.breakpoints.down('md')]: {
+            display: 'none'
+        }
     },
     margin: {
         margin: '5px',
@@ -66,8 +70,8 @@ class userDashboard extends React.Component {
                     style={{
                         textTransform: 'none',
                         borderRadius: '12.5px',
-                        backgroundColor:'rgba(29,104,7,0.74)',
-                        color:'#ffffff',
+                        backgroundColor: 'rgba(29,104,7,0.74)',
+                        color: '#ffffff',
                         padding: '5px',
                         paddingRight: '20px',
                         paddingLeft: '20px'
@@ -250,19 +254,18 @@ class userDashboard extends React.Component {
              return <Redirect to='/login'/>
          }*/
         const productRow = () => (this.state.homeDocs ? this.state.homeDocs.map((row) => (
-                    <TableRow key={row._id} >
+                    <TableRow key={row._id}>
                         <TableCell component="th" scope="row">
                             {row.location}
 
                         </TableCell>
 
-                        <TableCell style={{textAlign: 'center'}}>
+                        <TableCell style={{textAlign: 'center'}} className={classes.listingStatusF}>
 
                             {this.ListingStatusFilter(row.listingStatus, row._id)}
                         </TableCell>
 
                         <TableCell style={{textAlign: 'center'}}>{this.ReviewStatusFilter(row.reviewStatus)}</TableCell>
-                        <TableCell style={{textAlign: 'center'}}>{row.listingType}</TableCell>
                         <TableCell style={{textAlign: 'center'}}>
                             <div>
                                 <IconButton aria-label="delete"
@@ -280,7 +283,7 @@ class userDashboard extends React.Component {
                         </IconButton>*/}
 
 
-                                <span style={{position: 'relative', top:'auto', zIndex: 9,}}>
+                                <span style={{position: 'relative', top: 'auto', zIndex: 9,}}>
                                             <span
                                                 style={{
                                                     position: 'absolute',
@@ -330,21 +333,19 @@ class userDashboard extends React.Component {
                                         <TableCell>
                                             <Typography variant='h6' style={{fontSize: '16px'}}>Location</Typography>
                                         </TableCell>
-                                        <TableCell style={{textAlign: 'center'}}>
-                                            <Typography variant='h6' style={{fontSize: '16px'}}>Listing
+                                        <TableCell style={{textAlign: 'center'}} className={classes.listingStatusF}>
+                                            <Typography variant='h6' style={{fontSize: '16px'}} >Listing
                                                 status</Typography>
                                         </TableCell>
                                         <TableCell style={{textAlign: 'center'}}><Typography variant='h6'
                                                                                              style={{fontSize: '16px'}}>Review
                                             status</Typography></TableCell>{/*Fat&nbsp;(g)*/}
-                                        <TableCell style={{textAlign: 'center'}}><Typography variant='h6'
-                                                                                             style={{fontSize: '16px'}}>Listing
-                                            Type</Typography></TableCell>
+
                                         <TableCell style={{textAlign: 'center'}} align='justify'><Typography
                                             variant='h6' style={{fontSize: '16px'}}>Action</Typography></TableCell>
                                     </TableRow>
                                 </TableHead>
-                                <TableBody >
+                                <TableBody>
                                     {productRow()}
 
                                 </TableBody>

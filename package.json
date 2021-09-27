@@ -36,7 +36,6 @@
     "react-sequence-animator": "^1.0.44",
     "react-spring": "^9.2.4",
     "react-transition-group": "^4.4.2",
-    "react-transition-group-v1": "npm:react-transition-group@^1.2.1",
     "recompose": "^0.30.0",
     "sprite-animator": "^1.11.5",
     "styled-components": "^5.3.1",

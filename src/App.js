@@ -16,6 +16,8 @@ import Search from "./pages/Home/Search";
 import AdminDetail from './pages/Dashboard/Admin-dashboard/AdminDetail'
 import About from "./pages/About/About";
 import UpperFooter from "./components/UpperFooter";
+import ForgotPassword from "./pages/Authentication/ForgotPassword";
+import ResetPassword from "./pages/Authentication/ForgotPassword/ResetPassword";
 
 const useStyles = ((theme) => ({
     root: {},
@@ -66,9 +68,11 @@ class App extends React.Component {
                         <Route path='/register' component={Signup}/>
 
                         <Route path='/addhouse'> <RegisterHouse getToken={this.getToken}/></Route>
+                        <Route path='/resetPassword' exact> <ForgotPassword getToken={this.getToken}/></Route>
                         <Route path='/edithouse/:id' exact
                                component={(props) => <EditHouse {...props} getToken={this.getToken}/>}/>
-
+                        <Route path='/resetPassword/:id' exact
+                               component={(props) => <ResetPassword {...props} setToken={this.setToken}/>}/>
                         <Route path='/about' component={About}/>
 
                     </Container>
