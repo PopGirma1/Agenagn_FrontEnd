@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     },
     expand: {
         transform: 'rotate(0deg)',
-        marginLeft: 'auto',
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
         }),
@@ -45,15 +44,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ContactCard() {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(true);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     return (
-        <Card className={classes.root}>
-            <CardHeader className={classes.titile}
+        <div className={classes.root}>
+            <div className={classes.titile}
                 title="Agenagn!"
                 subheader="Agenagn is a solution for looking for house available for rent.!                                                             "
             />
@@ -100,6 +99,6 @@ export default function ContactCard() {
                     </Typography>
                 </CardContent>
             </Collapse>
-        </Card>
+        </div>
     );
 }

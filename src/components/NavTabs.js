@@ -103,7 +103,6 @@ class NavTabs extends React.Component {
                     <ListItem><Button href={process.env.PUBLIC_URL + '/'}>Home</Button> </ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/register'}>Register</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/about'}>About</Button></ListItem>
-                    <ListItem><Button href={process.env.PUBLIC_URL + '/contact'}>Contact</Button></ListItem>
                     <ListItem><Button href={process.env.PUBLIC_URL + '/login'}>login</Button></ListItem>
                 </React.Fragment>
 

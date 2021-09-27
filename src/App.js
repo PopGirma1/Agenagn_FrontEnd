@@ -10,15 +10,11 @@ import LoginRegister from './pages/Authentication/Login'
 import Footer from './components/Footer'
 import Signup from "./pages/Authentication/Signup";
 import RegisterHouse from './pages/Addhouse/New'
-
 import Dashboard from "./pages/Dashboard/";
 import EditHouse from "./pages/Addhouse/EditHouse";
 import Search from "./pages/Home/Search";
 import AdminDetail from './pages/Dashboard/Admin-dashboard/AdminDetail'
-
 import About from "./pages/About/About";
-/*import Common from "./components/Common";*/
-import Contact from "./pages/Contact/Contact";
 import UpperFooter from "./components/UpperFooter";
 import ForgotPassword from "./pages/Authentication/ForgotPassword";
 import ResetPassword from "./pages/Authentication/ForgotPassword/ResetPassword";
@@ -78,8 +74,6 @@ class App extends React.Component {
                         <Route path='/resetPassword/:id' exact
                                component={(props) => <ResetPassword {...props} setToken={this.setToken}/>}/>
                         <Route path='/about' component={About}/>
-                        <Route path='/contact' component={Contact}/>
-
 
                     </Container>
                 </BrowserRouter>
